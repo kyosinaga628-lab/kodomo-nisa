@@ -1,0 +1,398 @@
+@import "tailwindcss";
+
+/* ===================================
+   こどもNISA研究所 - Design System
+   Sophisticated & Trustworthy
+   =================================== */
+
+:root {
+  /* Primary Colors */
+  --color-bg: #FDFBF7;
+  --color-bg-secondary: #F7F5F0;
+  --color-royal-blue: #1E3A8A;
+  --color-royal-blue-light: #3B5CB8;
+  --color-royal-blue-dark: #152a66;
+  --color-emerald: #059669;
+  --color-emerald-light: #10B981;
+  --color-emerald-dark: #047857;
+
+  /* Text Colors */
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+  --color-text-inverse: #FFFFFF;
+
+  /* Shadows - Physically Correct & Atmospheric */
+  --shadow-sm: 0 1px 2px 0 rgba(30, 58, 138, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(30, 58, 138, 0.08), 0 2px 4px -2px rgba(30, 58, 138, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(30, 58, 138, 0.1), 0 4px 6px -4px rgba(30, 58, 138, 0.06);
+  --shadow-xl: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 8px 10px -6px rgba(30, 58, 138, 0.05);
+  --shadow-card: 0 1px 3px 0 rgba(30, 58, 138, 0.08), 0 1px 2px -1px rgba(30, 58, 138, 0.08);
+
+  /* Glassmorphism Refined */
+  --glass-bg: rgba(253, 251, 247, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shine: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 700ms;
+
+  /* Spacing */
+  --header-height: 72px;
+  --banner-height: 44px;
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-noto-sans);
+  --font-serif: var(--font-noto-serif);
+}
+
+/* ===================================
+   Base Styles
+   =================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-noto-sans), 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "palt" 1;
+  /* Typography refinement */
+  letter-spacing: 0.03em;
+}
+
+/* ===================================
+   Typography
+   =================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  font-feature-settings: "palt" 1;
+  text-wrap: balance;
+  /* Balance refinement */
+}
+
+.heading-hero {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.heading-section {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.heading-card {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.text-body {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+.text-caption {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* ===================================
+   Animations
+   =================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-subtle {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s var(--ease-smooth) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.4s var(--ease-smooth) forwards;
+}
+
+@keyframes aurora {
+  0% {
+    transform: rotate(0deg) scale(1.5);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1.5);
+  }
+}
+
+@keyframes aurora-reverse {
+  0% {
+    transform: rotate(0deg) scale(1.2);
+  }
+
+  50% {
+    transform: rotate(-180deg) scale(1.5);
+  }
+
+  100% {
+    transform: rotate(-360deg) scale(1.2);
+  }
+}
+
+.animate-aurora {
+  animation: aurora 20s linear infinite;
+}
+
+.animate-aurora-reverse {
+  animation: aurora-reverse 25s linear infinite;
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+
+.container-width {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.card-base {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(31, 41, 55, 0.06);
+  transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.card-base:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--color-royal-blue);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  background: var(--color-royal-blue-light);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: transparent;
+  color: var(--color-royal-blue);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 2px solid var(--color-royal-blue);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-secondary:hover {
+  background: var(--color-royal-blue);
+  color: var(--color-text-inverse);
+}
+
+/* ===================================
+   Form Elements (Stripe-like)
+   =================================== */
+
+.input-field {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  background: #FFFFFF;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  outline: none;
+}
+
+.input-field:hover {
+  border-color: #D1D5DB;
+}
+
+.input-field:focus {
+  border-color: var(--color-royal-blue);
+  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ===================================
+   Editorial Typography (NYT/FT-like)
+   =================================== */
+
+.editorial-heading {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.editorial-subhead {
+  font-family: var(--font-noto-sans), 'Noto Sans JP', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.editorial-body {
+  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
+  font-size: 1.125rem;
+  line-height: 1.9;
+  color: var(--color-text-primary);
+}
+
+.editorial-caption {
+  font-family: var(--font-noto-sans), 'Noto Sans JP', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+/* ===================================
+   Selection
+   =================================== */
+
+::selection {
+  background: rgba(30, 58, 138, 0.15);
+  color: var(--color-text-primary);
+}
+
+/* ===================================
+   Scrollbar
+   =================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
