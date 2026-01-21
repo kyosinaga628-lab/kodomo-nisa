@@ -105,21 +105,6 @@ export default function FAQSection() {
                         </motion.div>
                     ))}
                 </div>
-
-                {/* Structured Data Hint */}
-                <div className="hidden">
-                    {/* This helps AI agents understand the FAQ structure */}
-                    <div itemScope itemType="https://schema.org/FAQPage">
-                        {KODOMO_NISA_FAQ.map((faq, index) => (
-                            <div key={index} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                                <h3 itemProp="name">{faq.question}</h3>
-                                <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                                    <p itemProp="text">{faq.answer}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
         </section>
     );

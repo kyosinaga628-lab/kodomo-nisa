@@ -1,13 +1,15 @@
+import dynamic from 'next/dynamic';
 import HeroSection from "@/components/home/HeroSection";
-import StorySection from "@/components/home/StorySection";
 import PersonaSelector from "@/components/home/PersonaSelector";
-import NewsSection from "@/components/home/NewsSection";
-import CTASection from "@/components/home/CTASection";
-import AuthorProfile from "@/components/home/AuthorProfile";
-import KidsBanner from "@/components/home/KidsBanner";
-import FuturePrediction from "@/components/common/FuturePrediction";
-import AffiliateBanner from "@/components/common/AffiliateBanner";
-import FAQSection from "@/components/common/FAQSection";
+
+// Dynamic imports for below-the-fold components
+const StorySection = dynamic(() => import("@/components/home/StorySection"));
+const NewsSection = dynamic(() => import("@/components/home/NewsSection"));
+const CTASection = dynamic(() => import("@/components/home/CTASection"));
+const FuturePrediction = dynamic(() => import("@/components/common/FuturePrediction"));
+const AffiliateBanner = dynamic(() => import("@/components/common/AffiliateBanner"));
+const FAQSection = dynamic(() => import("@/components/common/FAQSection"));
+
 import { generateWebPageSchema, generateWebSiteSchema, SITE_INFO } from "@/lib/seo";
 import { generateFAQPageSchema, generateHowToSchema } from "@/lib/ai-optimization";
 

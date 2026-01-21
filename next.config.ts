@@ -50,6 +50,11 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // Optimized imports
+  experimental: {
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
+  },
+
   // Redirect www to non-www (optional, can be handled at DNS level)
   async redirects() {
     return [];
