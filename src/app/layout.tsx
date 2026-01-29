@@ -37,11 +37,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "こどもNISA研究所 | 子どもの未来のための資産形成",
-    template: "%s | こどもNISA研究所",
+    default: "こども（子供）NISA研究所 | 子どもの未来のための資産形成シミュレーター",
+    template: "%s | こども（子供）NISA研究所",
   },
-  description: "こどもNISA制度を徹底解説。シミュレーターで将来の資産を可視化し、政策動向をキュレーション。お子様の未来のための資産形成をサポートします。",
-  keywords: ["こどもNISA", "NISA", "資産形成", "子育て", "教育資金", "投資", "税制優遇", "2027年", "非課税投資"],
+  description: "こども（子供）NISA制度を徹底解説。シミュレーターで将来の資産を可視化し、お子様（お子さま）の18歳時点での資産額を試算。2027年開始予定の新制度に向けた資産形成をサポートします。",
+  keywords: ["こどもNISA", "子供NISA", "子どもNISA", "NISA", "資産形成", "子育て", "教育資金", "投資", "シミュレーション", "税制優遇", "2027年", "非課税投資"],
   authors: [{ name: "こどもNISA研究所 編集部" }],
   creator: "こどもNISA研究所",
   publisher: "こどもNISA研究所",
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "こどもNISA研究所 | 子どもの未来のための資産形成",
-    description: "2027年開始予定のこどもNISA制度を徹底解説。シミュレーターで将来の資産を可視化し、お子様の未来のための資産形成をサポートします。",
+    title: "こども（子供）NISA研究所 | 子どもの未来のための資産形成シミュレーター",
+    description: "2027年開始予定のこども（子供）NISA制度を徹底解説。シミュレーターで0歳〜17歳のお子様の将来資産を可視化。何歳でいくら貯まる？",
     url: BASE_URL,
     siteName: "こどもNISA研究所",
     type: "website",
@@ -71,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "こどもNISA研究所 | 子どもの未来のための資産形成",
-    description: "2027年開始予定のこどもNISA制度を徹底解説。シミュレーターで将来の資産を可視化。",
+    title: "こども（子供）NISA研究所 | 子どもの未来のための資産形成シミュレーター",
+    description: "2027年開始予定のこども（子供）NISA制度を徹底解説。シミュレーターで将来の資産を可視化。何歳でいくら貯まる？",
     images: ["/og-image.png"],
   },
   robots: {

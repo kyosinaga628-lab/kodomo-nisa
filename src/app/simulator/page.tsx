@@ -72,7 +72,7 @@ export default function SimulatorPage() {
                         SIMULATOR
                     </p>
                     <h1 className="heading-section mb-2 md:mb-4 text-2xl md:text-4xl">
-                        こどもNISA シミュレーター
+                        こども（子供）NISA シミュレーター
                     </h1>
                     <p className="text-body max-w-2xl mx-auto text-sm md:text-base px-4">
                         お子様の年齢と積立額を設定して、<br className="md:hidden" />
@@ -100,7 +100,7 @@ export default function SimulatorPage() {
                                     こどもNISAとは？
                                 </h2>
                                 <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">
-                                    2027年から始まる、0〜17歳のお子様のための非課税投資制度です。
+                                    2027年から始まる、0〜17歳のお子様（子供・子ども）のための非課税投資制度です。
                                     年間60万円、最大600万円まで投資でき、運用益が非課税になります。
                                     18歳で成人NISAに自動移行し、非課税のまま運用を継続できます。
                                 </p>

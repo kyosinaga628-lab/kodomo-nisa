@@ -36,7 +36,7 @@ export default function HeroSection() {
                         {/* Main Heading */}
                         <h1 className="heading-hero mb-4 md:mb-8 max-w-4xl mx-auto text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                             <span className="block text-[var(--color-text-primary)]">
-                                こどもNISAで
+                                こども<span className="text-[0.7em] opacity-70">（子供）</span>NISAで
                             </span>
                             <span className="block bg-gradient-to-r from-[var(--color-royal-blue)] to-[var(--color-emerald)] bg-clip-text text-transparent">
                                 未来を設計する

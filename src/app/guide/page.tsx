@@ -286,6 +286,106 @@ export default function GuidePage() {
                     </div>
                 </motion.section>
 
+                {/* Featured Articles - 注目記事 */}
+                <motion.section
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="mb-12 md:mb-24"
+                >
+                    <div className="text-center mb-8 md:mb-12">
+                        <h2 className="editorial-caption mb-2 md:mb-4 text-xs md:text-sm">FEATURED ARTICLES</h2>
+                        <h3 className="font-serif text-2xl md:text-3xl font-semibold">注目記事</h3>
+                        <p className="text-[var(--color-text-secondary)] text-sm mt-2">こどもNISAに関連する最新情報</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* Article 1 - 財務省 */}
+                        <a
+                            href="https://www.mof.go.jp/tax_policy/tax_reform/outline/index.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="card-base p-6 group hover:shadow-lg transition-all"
+                        >
+                            <div className="flex items-center gap-2 mb-3">
+                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    財務省
+                                </span>
+                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
+                            </div>
+                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
+                                令和7年度税制改正大綱
+                            </h4>
+                            <p className="text-sm text-[var(--color-text-secondary)]">
+                                こどもNISA創設を含む税制改正の全容。正式な制度設計の根拠資料。
+                            </p>
+                        </a>
+
+                        {/* Article 2 - 金融庁 */}
+                        <a
+                            href="https://www.fsa.go.jp/policy/nisa2/about/index.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="card-base p-6 group hover:shadow-lg transition-all"
+                        >
+                            <div className="flex items-center gap-2 mb-3">
+                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    金融庁
+                                </span>
+                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
+                            </div>
+                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
+                                NISA特設サイト
+                            </h4>
+                            <p className="text-sm text-[var(--color-text-secondary)]">
+                                新しいNISA制度の公式情報ページ。こどもNISA情報も順次更新予定。
+                            </p>
+                        </a>
+
+                        {/* Article 3 - 金融庁つみたてNISA */}
+                        <a
+                            href="https://www.fsa.go.jp/policy/nisa2/know/index.html"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="card-base p-6 group hover:shadow-lg transition-all"
+                        >
+                            <div className="flex items-center gap-2 mb-3">
+                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    金融庁
+                                </span>
+                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
+                            </div>
+                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
+                                つみたてNISA対象商品について
+                            </h4>
+                            <p className="text-sm text-[var(--color-text-secondary)]">
+                                こどもNISAでも投資可能なつみたて投資枠対象商品の解説。
+                            </p>
+                        </a>
+
+                        {/* Article 4 - J-FLEC */}
+                        <a
+                            href="https://www.j-flec.go.jp/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="card-base p-6 group hover:shadow-lg transition-all"
+                        >
+                            <div className="flex items-center gap-2 mb-3">
+                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                    J-FLEC
+                                </span>
+                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
+                            </div>
+                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
+                                金融経済教育推進機構
+                            </h4>
+                            <p className="text-sm text-[var(--color-text-secondary)]">
+                                子どもから大人まで、金融リテラシーを高めるための情報。
+                            </p>
+                        </a>
+                    </div>
+                </motion.section>
+
                 {/* Sources Reference */}
                 <div className="mb-12 md:mb-24">
                     <SourcesReference categories={['policy', 'legislation', 'guideline']} />
