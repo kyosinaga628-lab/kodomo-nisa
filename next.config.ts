@@ -1,15 +1,15 @@
 import type { NextConfig } from "next";
 
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+const isExport = process.env.NEXT_EXPORT === 'true';
 
 const nextConfig: NextConfig = {
   // Performance optimizations
-  output: isGithubActions ? "export" : undefined,
+  output: isExport ? "export" : undefined,
   compress: true,
 
   // Image optimization
   images: {
-    unoptimized: isGithubActions,
+    unoptimized: isExport,
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
