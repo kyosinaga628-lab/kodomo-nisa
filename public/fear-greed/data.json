@@ -1,7 +1,7 @@
 {
-  "updated": "2026年02月16日 11:51",
+  "updated": "2026年02月16日 08:05",
   "overall": {
-    "score": 62.4,
+    "score": 63.4,
     "label": "貪欲",
     "previous_close": 59.6,
     "week_ago": 58.3,
@@ -10,14 +10,14 @@
   },
   "market": {
     "nikkei225": {
-      "value": 56790.7,
-      "change": -151.27,
-      "change_pct": -0.27
+      "value": 56806.41,
+      "change": -135.56,
+      "change_pct": -0.24
     },
     "topix": {
-      "value": 3979.0,
-      "change": -33.0,
-      "change_pct": -0.82
+      "value": 3981.0,
+      "change": -31.0,
+      "change_pct": -0.77
     }
   },
   "indicators": [
@@ -535,7 +535,7 @@
           57650.54,
           57639.84,
           56941.97,
-          56790.7
+          56806.41
         ],
         "ma125": [
           38391.8,
@@ -789,13 +789,13 @@
           48591.91,
           48726.67,
           48853.73,
-          48973.49
+          48973.62
         ]
       },
       "detail": {
-        "current": 56790.7,
-        "ma125": 48973.49,
-        "deviation": 15.96
+        "current": 56806.41,
+        "ma125": 48973.62,
+        "deviation": 15.99
       }
     },
     {
@@ -807,8 +807,8 @@
       "description": "東証主要銘柄の52週高値・安値近辺にある銘柄数の比率を分析します。高値圏の銘柄が多いほど貪欲、安値圏が多いほど恐怖を示します。",
       "chart": {},
       "detail": {
-        "highs": 12,
-        "lows": 3,
+        "highs": 11,
+        "lows": 2,
         "total": 30,
         "ratio": 0.3
       }
@@ -831,20 +831,20 @@
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 68.7,
+      "score": 68.8,
       "label": "貪欲",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
         "estimated_pc_ratio": 0.81,
-        "avg_5d_return": 0.935
+        "avg_5d_return": 0.941
       }
     },
     {
       "id": "volatility",
       "name": "市場ボラティリティ",
       "name_en": "Market Volatility",
-      "score": 13.4,
+      "score": 13.5,
       "label": "極度の恐怖",
       "description": "日経VIおよびその50日移動平均を使い、市場の変動性を測定します。ボラティリティが高いほど投資家の不安が大きいことを示します。",
       "chart": {
@@ -1298,7 +1298,7 @@
           25.16,
           24.85,
           25.31,
-          25.29
+          25.28
         ],
         "ma50": [
           32.83,
@@ -1479,37 +1479,37 @@
         ]
       },
       "detail": {
-        "current": 25.29,
+        "current": 25.28,
         "ma50": 22.06,
-        "deviation": 14.64
+        "deviation": 14.61
       }
     },
     {
       "id": "safe_haven",
       "name": "安全資産需要",
       "name_en": "Safe Haven Demand",
-      "score": 93.0,
+      "score": 96.2,
       "label": "極度の貪欲",
       "description": "日本国債と株式の直近20日間のリターンを比較します。国債のリターンが株式を上回る場合、投資家がリスク資産から安全資産へ逃避していることを示します。",
       "chart": {},
       "detail": {
-        "bond_20d_return": -0.07,
-        "stock_20d_return": 5.3,
-        "diff": 5.37
+        "bond_20d_return": -0.37,
+        "stock_20d_return": 5.4,
+        "diff": 5.78
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 56.5,
+      "score": 60.1,
       "label": "貪欲",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": 0.58,
-        "safe_20d_return": -0.07,
-        "diff": 0.65
+        "hy_20d_return": 0.64,
+        "safe_20d_return": -0.37,
+        "diff": 1.01
       }
     }
   ],
