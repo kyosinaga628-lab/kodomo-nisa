@@ -1,0 +1,48 @@
+name: Update Fear & Greed Index Data
+
+on:
+  schedule:
+    # 毎営業日 JST 16:30 (UTC 07:30) に実行（東京市場閉場後）
+    - cron: '30 7 * * 1-5'
+  workflow_dispatch:
+    # 手動実行可能
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install yfinance numpy
+
+      - name: Run Fear & Greed data fetch
+        run: |
+          python public/fear-greed/fetch_data.py
+        env:
+          PYTHONUNBUFFERED: '1'
+
+      - name: Update JSON-LD dateModified
+        run: |
+          # Update dateModified in index.html to today's date
+          TODAY=$(date +%Y-%m-%d)
+          sed -i "s/\"dateModified\": \"[0-9-]*\"/\"dateModified\": \"$TODAY\"/" public/fear-greed/index.html
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/fear-greed/data.json public/fear-greed/index.html
+          git diff --staged --quiet || git commit -m "chore: update Fear & Greed Index data $(date +%Y-%m-%d)"
+          git push

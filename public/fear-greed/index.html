@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: https://ogp.me/ns#">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fear & Greed Index 日本版 | 日本市場の恐怖と貪欲指数 - 投資家心理指標</title>
+    <meta name="description"
+        content="日本市場のFear & Greed Index（恐怖と貪欲指数）。日経225、TOPIX、日経VI等の7つの指標から日本の株式市場の投資家心理を0〜100で毎日評価。投資判断の参考に。">
+    <meta name="keywords" content="Fear and Greed Index,恐怖と貪欲指数,日本市場,日経225,投資家心理,市場センチメント,ボラティリティ,日経VI,TOPIX,株式市場,投資指標">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.kodomo-nisa.jp/fear-greed/">
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="ja" href="https://www.kodomo-nisa.jp/fear-greed/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fear & Greed Index 日本版 | 日本市場の恐怖と貪欲指数">
+    <meta property="og:description" content="日本市場の投資家心理を7つの指標でリアルタイム評価。日経225、日経VI、騰落レシオ等から算出する0〜100のスコアで市場センチメントを可視化。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.kodomo-nisa.jp/fear-greed/">
+    <meta property="og:site_name" content="こどもNISA研究所">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://www.kodomo-nisa.jp/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Fear & Greed Index 日本版 - 日本市場の投資家心理指標">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fear & Greed Index 日本版 | 日本市場の恐怖と貪欲指数">
+    <meta name="twitter:description" content="日本市場の投資家心理を7つの指標で毎日評価。0〜100のスコアで市場センチメントを可視化。">
+    <meta name="twitter:image" content="https://www.kodomo-nisa.jp/og-image.png">
+
+    <!-- AI Search / Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- JSON-LD: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Fear & Greed Index 日本版",
+        "description": "日本市場のFear & Greed Index（恐怖と貪欲指数）。日経225、TOPIX、日経VI等の7つの市場指標から投資家心理を0〜100のスコアで評価する無料ツール。",
+        "url": "https://www.kodomo-nisa.jp/fear-greed/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "JPY"
+        },
+        "inLanguage": "ja",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "こどもNISA研究所",
+            "url": "https://www.kodomo-nisa.jp"
+        },
+        "about": {
+            "@type": "FinancialProduct",
+            "name": "日本市場投資家心理指標"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "こどもNISA研究所"
+        },
+        "dateModified": "2026-02-16"
+    }
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Fear & Greed Index 日本版とは？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Fear & Greed Index 日本版は、米国で広く知られる恐怖・貪欲指数の考え方を日本市場に応用した、独自の投資家心理指標です。7つの市場指標を分析し、投資家が「恐怖（Fear）」と「貪欲（Greed）」のどちらにより強く動かされているかを0〜100のスコアで表します。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "どのように算出されていますか？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "7つの指標を個別にスコアリングし、均等加重平均で総合スコアを算出しています。指標は市場モメンタム、株価の強さ、騰落レシオ、プット・コール比率、市場ボラティリティ、安全資産需要、社債需要の7つです。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "スコアの読み方は？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "0〜25は極度の恐怖（投資家が過度に悲観的）、25〜45は恐怖、45〜55は中立、55〜75は貪欲、75〜100は極度の貪欲（市場が過熱）を示します。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "データソースは何ですか？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yahoo Finance APIを通じて取得した日本市場のデータを使用しています。主なデータソースは日経225指数、日経VIボラティリティ指数、東証上場主要銘柄30社の株価データ、国内債券ETF、社債ETFです。"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "こどもNISA研究所",
+                "item": "https://www.kodomo-nisa.jp"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Fear & Greed Index 日本版",
+                "item": "https://www.kodomo-nisa.jp/fear-greed/"
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-text">Fear & Greed Index <span class="logo-jp">日本版</span></span>
+            </div>
+            <div class="ticker-bar" id="ticker-bar">
+                <div class="ticker-item" id="ticker-nikkei">
+                    <span class="ticker-name">日経225</span>
+                    <span class="ticker-value" id="nikkei-value">--</span>
+                    <span class="ticker-change" id="nikkei-change">--</span>
+                </div>
+                <div class="ticker-divider"></div>
+                <div class="ticker-item" id="ticker-topix">
+                    <span class="ticker-name">TOPIX</span>
+                    <span class="ticker-value" id="topix-value">--</span>
+                    <span class="ticker-change" id="topix-change">--</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- パンくずリスト -->
+    <nav class="breadcrumb" aria-label="パンくずリスト">
+        <div class="container">
+            <ol class="breadcrumb-list">
+                <li><a href="https://www.kodomo-nisa.jp">こどもNISA研究所</a></li>
+                <li aria-current="page">Fear & Greed Index 日本版</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <h1 class="hero-title">Fear & Greed Index</h1>
+                    <div class="gauge-container">
+                        <canvas id="gauge-canvas" width="400" height="250"></canvas>
+                        <div class="gauge-info">
+                            <div class="gauge-label" id="gauge-label">読み込み中...</div>
+                            <div class="gauge-score" id="gauge-score">--</div>
+                        </div>
+                    </div>
+                    <p class="last-updated" id="last-updated">最終更新: --</p>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-description">
+                        <p id="gauge-description">日本市場の投資家心理を7つの指標で測定します。</p>
+                    </div>
+                    <div class="score-history">
+                        <div class="score-history-item">
+                            <span class="score-history-period">前日終値</span>
+                            <div class="score-history-row">
+                                <span class="score-history-value" id="score-prev">--</span>
+                                <span class="score-history-label" id="label-prev">--</span>
+                            </div>
+                        </div>
+                        <div class="score-history-item">
+                            <span class="score-history-period">1週間前</span>
+                            <div class="score-history-row">
+                                <span class="score-history-value" id="score-week">--</span>
+                                <span class="score-history-label" id="label-week">--</span>
+                            </div>
+                        </div>
+                        <div class="score-history-item">
+                            <span class="score-history-period">1ヶ月前</span>
+                            <div class="score-history-row">
+                                <span class="score-history-value" id="score-month">--</span>
+                                <span class="score-history-label" id="label-month">--</span>
+                            </div>
+                        </div>
+                        <div class="score-history-item">
+                            <span class="score-history-period">1年前</span>
+                            <div class="score-history-row">
+                                <span class="score-history-value" id="score-year">--</span>
+                                <span class="score-history-label" id="label-year">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- タブ切替 -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" data-tab="overview" id="tab-overview">概要</button>
+                <button class="tab" data-tab="timeline" id="tab-timeline">タイムライン</button>
+            </div>
+        </div>
+
+        <!-- 概要タブ -->
+        <section class="tab-content active" id="content-overview">
+            <div class="container">
+                <!-- Fear & Greed Indicators -->
+                <h2 class="section-title">Fear & Greed Indicators</h2>
+
+                <!-- 7指標 -->
+                <div class="indicators" id="indicators">
+                    <!-- JS で生成 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- タイムラインタブ -->
+        <section class="tab-content" id="content-timeline">
+            <div class="container">
+                <div class="timeline-chart-container">
+                    <h2 class="section-title">Fear & Greed Index の推移</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="timeline-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <h2 class="section-title">Fear & Greed Index FAQ</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q1">
+                            <span>Fear & Greed Index 日本版とは？</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-a1">
+                            <p>Fear & Greed Index
+                                日本版は、米国で広く知られる恐怖・貪欲指数の考え方を日本市場に応用した、独自の投資家心理指標です。本サイトは独立した個人プロジェクトであり、CNN等のメディア企業とは一切関係ありません。
+                            </p>
+                            <p>7つの市場指標を分析し、投資家が「恐怖（Fear）」と「貪欲（Greed）」のどちらにより強く動かされているかを 0〜100
+                                のスコアで表します。スコアが低いほど投資家の恐怖が強く、高いほど貪欲であることを示します。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q2">
+                            <span>どのように算出されていますか？</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-a2">
+                            <p>以下の7つの指標を個別にスコアリングし、均等加重平均で総合スコアを算出しています：</p>
+                            <ol>
+                                <li><strong>市場モメンタム</strong>：日経225と125日移動平均の乖離率</li>
+                                <li><strong>株価の強さ</strong>：52週高値/安値近辺にある銘柄数の比率</li>
+                                <li><strong>騰落レシオ</strong>：上昇銘柄数と下落銘柄数の比率</li>
+                                <li><strong>プット・コール比率</strong>：オプション市場から推計される弱気度</li>
+                                <li><strong>市場ボラティリティ</strong>：日経VIとその50日移動平均</li>
+                                <li><strong>安全資産需要</strong>：日本国債 vs 株式の20日リターン比較</li>
+                                <li><strong>社債需要</strong>：社債 vs 安全資産のリターン差</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q3">
+                            <span>スコアの読み方は？</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-a3">
+                            <table class="score-table">
+                                <thead>
+                                    <tr>
+                                        <th>スコア範囲</th>
+                                        <th>状態</th>
+                                        <th>意味</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0〜25</td>
+                                        <td class="extreme-fear">極度の恐怖</td>
+                                        <td>投資家が過度に悲観的。逆張りの買い機会の可能性</td>
+                                    </tr>
+                                    <tr>
+                                        <td>25〜45</td>
+                                        <td class="fear">恐怖</td>
+                                        <td>投資家が慎重。市場に不安感が漂う</td>
+                                    </tr>
+                                    <tr>
+                                        <td>45〜55</td>
+                                        <td class="neutral">中立</td>
+                                        <td>市場心理がバランスしている状態</td>
+                                    </tr>
+                                    <tr>
+                                        <td>55〜75</td>
+                                        <td class="greed">貪欲</td>
+                                        <td>投資家が楽観的。リスク選好が高まる</td>
+                                    </tr>
+                                    <tr>
+                                        <td>75〜100</td>
+                                        <td class="extreme-greed">極度の貪欲</td>
+                                        <td>市場が過熱。調整リスクに注意</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" id="faq-q4">
+                            <span>データソースについて</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer" id="faq-a4">
+                            <p>本指標は Yahoo Finance API (yfinance) を通じて取得した日本市場のデータを使用しています。主なデータソース：</p>
+                            <ul>
+                                <li>日経225指数 (^N225)</li>
+                                <li>日経VI ボラティリティ指数</li>
+                                <li>東証上場主要銘柄30社の株価データ</li>
+                                <li>国内債券ETF (2510.T)</li>
+                                <li>社債ETF (1496.T)</li>
+                            </ul>
+                            <p class="disclaimer">※
+                                本指標は情報提供を目的としたものであり、投資助言・勧誘を目的としたものではありません。データの正確性・完全性は保証されません。投資判断はご自身の責任で行ってください。本サイトは独立した個人プロジェクトであり、いかなる金融機関・メディア企業とも関係ありません。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Fear & Greed Index 日本版 | 日本市場の投資家心理を測定する独自指標</p>
+            <p class="footer-disclaimer">本サイトの情報は情報提供のみを目的としており、投資助言ではありません。データの正確性は保証されません。投資判断は自己責任で行ってください。</p>
+            <p class="footer-back"><a href="https://www.kodomo-nisa.jp">← こどもNISA研究所トップへ</a></p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

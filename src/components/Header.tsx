@@ -16,6 +16,7 @@ const navGroups: NavGroup[] = [
         items: [
             { href: "/simulator", label: "シミュレーター", description: "積立シミュレーション" },
             { href: "/education-gift", label: "金融教育ギフト", description: "お子様への資料作成" },
+            { href: "/fear-greed/", label: "Fear & Greed指数", description: "日本市場の投資家心理指標" },
         ],
     },
     {

@@ -60,6 +60,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'yearly' as const,
             priority: 0.2,
         },
+        {
+            url: `${baseUrl}/fear-greed/`,
+            lastModified,
+            changeFrequency: 'daily' as const,
+            priority: 0.8,
+        },
     ];
 
     // キッズページ
