@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { div as MotionDiv, span as MotionSpan } from "framer-motion/client";
 import AuthorityBadge from "@/components/common/AuthorityBadge";
 
 interface NavGroup {
@@ -75,7 +76,7 @@ export default function Header() {
                 {/* Logo + Authority Badge */}
                 <div className="flex items-center gap-4">
                     <Link href="/" className="flex items-center gap-3 group">
-                        <motion.div
+                        <MotionDiv
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.98 }}
                             className="flex items-center gap-3"
@@ -114,7 +115,7 @@ export default function Header() {
                             <span className="font-serif font-bold text-xl tracking-tight text-[var(--color-text-primary)]">
                                 こどもNISA研究所
                             </span>
-                        </motion.div>
+                        </MotionDiv>
                     </Link>
                     <div className="hidden lg:block">
                         <AuthorityBadge />
@@ -162,7 +163,7 @@ export default function Header() {
 
                             <AnimatePresence>
                                 {openDropdown === group.label && (
-                                    <motion.div
+                                    <MotionDiv
                                         initial={{ opacity: 0, y: 8, scale: 0.96 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: 8, scale: 0.96 }}
@@ -185,7 +186,7 @@ export default function Header() {
                                                 )}
                                             </Link>
                                         ))}
-                                    </motion.div>
+                                    </MotionDiv>
                                 )}
                             </AnimatePresence>
                         </div>
@@ -202,23 +203,23 @@ export default function Header() {
                     {/* CTA Buttons */}
                     <div className="flex items-center gap-2 ml-1 lg:ml-2">
                         <Link href="/kids">
-                            <motion.div
+                            <MotionDiv
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="flex items-center justify-center h-10 px-3 lg:px-4 rounded-full bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 shadow-md cursor-pointer"
                                 title="キッズページへ"
                             >
                                 <span className="text-white font-bold text-sm tracking-wide">キッズ</span>
-                            </motion.div>
+                            </MotionDiv>
                         </Link>
                         <Link href="/simulator">
-                            <motion.span
+                            <MotionSpan
                                 whileHover={{ scale: 1.02, boxShadow: "0 10px 20px -5px rgba(30, 58, 138, 0.2)" }}
                                 whileTap={{ scale: 0.98 }}
                                 className="btn-primary py-2.5 px-4 lg:px-6 text-sm inline-block whitespace-nowrap"
                             >
                                 シミュレーション開始
-                            </motion.span>
+                            </MotionSpan>
                         </Link>
                     </div>
                 </nav>
@@ -249,7 +250,7 @@ export default function Header() {
             {/* Mobile Menu */}
             <AnimatePresence>
                 {mobileMenuOpen && (
-                    <motion.div
+                    <MotionDiv
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
@@ -321,7 +322,7 @@ export default function Header() {
                                 <AuthorityBadge />
                             </div>
                         </nav>
-                    </motion.div>
+                    </MotionDiv>
                 )}
             </AnimatePresence>
         </header>
