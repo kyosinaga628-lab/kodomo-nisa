@@ -603,7 +603,7 @@
         setupFAQ();
 
         try {
-            const response = await fetch('data.json');
+            const response = await fetch('/fear-greed/data.json');
             if (!response.ok) throw new Error('データの取得に失敗しました');
             const data = await response.json();
 
