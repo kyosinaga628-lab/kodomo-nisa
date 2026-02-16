@@ -6,6 +6,13 @@ import Link from "next/link";
 import { use } from "react";
 import { articles, generateArticleSchema } from "@/lib/articles";
 
+// Generate static params for export
+export async function generateStaticParams() {
+    return articles.map((article) => ({
+        slug: article.slug,
+    }));
+}
+
 export default function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = use(params);
     const article = articles.find(a => a.slug === slug);
