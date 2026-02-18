@@ -398,6 +398,42 @@ def calc_historical_index(nikkei_close):
     return results
 
 # ============================================================
+# HTML更新 (dateModified)
+# ============================================================
+
+def update_html_timestamp():
+    """index.html の dateModified を更新する"""
+    html_path = os.path.join(SCRIPT_DIR, "index.html")
+    if not os.path.exists(html_path):
+        print("  ⚠ index.html が見つかりません。タイムスタンプ更新をスキップします。")
+        return
+
+    try:
+        with open(html_path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        import re
+        today = datetime.datetime.now().strftime("%Y-%m-%d")
+        
+        # JSON-LD内の dateModified を更新
+        # "dateModified": "2026-02-17" のようなパターン
+        new_content = re.sub(
+            r'"dateModified": "\d{4}-\d{2}-\d{2}"',
+            f'"dateModified": "{today}"',
+            content
+        )
+
+        if content != new_content:
+            with open(html_path, "w", encoding="utf-8") as f:
+                f.write(new_content)
+            print(f"  ✅ index.html の dateModified を更新しました: {today}")
+        else:
+            print("  ℹ index.html の日付は既に最新です。")
+
+    except Exception as e:
+        print(f"  ⚠ index.html の更新に失敗しました: {e}")
+
+# ============================================================
 # メイン
 # ============================================================
 
@@ -417,6 +453,9 @@ def main():
             with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
                 json.dump(existing, f, ensure_ascii=False, indent=2)
             print("  ⚠ 前回のデータを保持しました（タイムスタンプのみ更新）。")
+            
+            # HTMLのタイムスタンプ更新（UI上の更新時刻が変わるため）
+            update_html_timestamp()
         else:
             print("  ✗ フォールバック用の既存データもありません。")
         sys.exit(1)
@@ -589,6 +628,9 @@ def main():
             print(f"   - {err}")
 
     print(f"\n   完了時刻: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # HTMLのタイムスタンプ更新
+    update_html_timestamp()
 
 if __name__ == "__main__":
     main()

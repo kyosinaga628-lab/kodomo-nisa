@@ -135,7 +135,7 @@ export default function ComparisonChart({ data }: ComparisonChartProps) {
                         <div className="w-3 h-3 rounded-full bg-amber-600" />
                         <span className="font-semibold text-sm">ネット銀行（好金利）</span>
                     </div>
-                    <p className="text-xs text-amber-700">年利0.3%想定（一部のネット銀行など）</p>
+                    <p className="text-xs text-amber-700">年利0.5%想定（一部のネット銀行など）</p>
                 </div>
             </motion.div>
         </div>

@@ -46,7 +46,7 @@ const WITHDRAWAL_AGE = 12;          // 教育費払出し可能年齢
 // 銀行預金金利・参考利回り
 const BANK_RATE = 0.001;            // 銀行預金金利 0.001%
 const GLOBAL_STOCK_RATE = 5;        // 全世界株式平均リターン
-const HIGH_YIELD_BANK_RATE = 0.3;   // ネット銀行（高金利）預金金利
+const HIGH_YIELD_BANK_RATE = 0.5;   // ネット銀行（好金利）預金金利
 
 export function calculateNISA(input: SimulationInput): SimulationResult {
     const { monthlyAmount, childAge, expectedReturn } = input;
