@@ -1,0 +1,17 @@
+{
+  "name": "Fear & Greed Index 日本版",
+  "short_name": "F&G Index JP",
+  "description": "日本市場のFear & Greed Index（恐怖と貪欲指数）。7つの指標で投資家心理を可視化。",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1a1a2e",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -829,80 +829,161 @@ body {
     .faq-question {
         font-size: 0.88rem;
     }
-
-    .breadcrumb {
-        padding: 6px 12px;
-    }
 }
 
 /* ============================================================
-   Breadcrumb Navigation
+   Next Update Display
    ============================================================ */
 
-.breadcrumb {
-    background: var(--bg-secondary);
+.next-updated {
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    margin-top: 2px;
+}
+
+/* ============================================================
+   Error Panel
+   ============================================================ */
+
+.error-panel {
+    background: #fff3f3;
+    border: 1px solid #e53935;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    margin: 16px 0;
+}
+
+.error-panel-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.error-panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c62828;
+    margin-bottom: 4px;
+}
+
+.error-panel-message {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.error-panel-retry {
+    display: inline-block;
     padding: 8px 24px;
-    border-bottom: 1px solid var(--border-light);
+    border: 2px solid #1a1a2e;
+    border-radius: 4px;
+    background: #1a1a2e;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
 }
 
-.breadcrumb .container {
-    padding: 0;
-}
-
-.breadcrumb-list {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    margin: 0;
-    padding: 0;
-}
-
-.breadcrumb-list li {
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumb-list li:not(:last-child)::after {
-    content: "›";
-    margin: 0 8px;
-    color: var(--text-dim);
-}
-
-.breadcrumb-list a {
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.15s ease;
-}
-
-.breadcrumb-list a:hover {
-    color: var(--text);
-    text-decoration: underline;
-}
-
-.breadcrumb-list li[aria-current="page"] {
-    color: var(--text-secondary);
-    font-weight: 500;
+.error-panel-retry:hover {
+    opacity: 0.85;
 }
 
 /* ============================================================
-   Footer Back Link
+   Dark Mode
    ============================================================ */
 
-.footer-back {
-    margin-top: 8px;
-    font-size: 0.78rem;
-}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f0f1a;
+        --bg-secondary: #1a1a2e;
+        --bg-card: #1e1e32;
+        --text: #e8e8f0;
+        --text-secondary: #c0c0d0;
+        --text-muted: #8888a0;
+        --text-dim: #606078;
+        --border: #2a2a40;
+        --border-light: #222238;
 
-.footer-back a {
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.15s ease;
-}
+        /* Sentiment colors stay vibrant on dark */
+        --extreme-fear-bg: rgba(183, 28, 28, 0.15);
+        --fear-bg: rgba(230, 81, 0, 0.15);
+        --neutral-bg: rgba(117, 117, 117, 0.12);
+        --greed-bg: rgba(46, 125, 50, 0.15);
+        --extreme-greed-bg: rgba(27, 94, 32, 0.15);
+    }
 
-.footer-back a:hover {
-    color: var(--text);
-    text-decoration: underline;
+    body {
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    .header {
+        background: #0a0a18;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .footer {
+        background: var(--bg-secondary);
+        border-top-color: var(--border);
+    }
+
+    .tabs-container {
+        background: var(--bg);
+        border-bottom-color: var(--border);
+    }
+
+    .tab.active {
+        border-bottom-color: #93c5fd;
+    }
+
+    .hero {
+        border-bottom-color: var(--border);
+    }
+
+    .faq-section {
+        border-top-color: var(--border);
+    }
+
+    .faq-item {
+        border-bottom-color: var(--border);
+    }
+
+    .faq-item:first-child {
+        border-top-color: var(--border);
+    }
+
+    .score-table th,
+    .score-table td {
+        border-bottom-color: var(--border);
+    }
+
+    .timeline-chart-container {
+        background: var(--bg);
+    }
+
+    .detail-item {
+        background: var(--bg-secondary);
+        border-color: var(--border);
+    }
+
+    .error-panel {
+        background: rgba(183, 28, 28, 0.12);
+        border-color: #e53935;
+    }
+
+    .error-panel-title {
+        color: #ef5350;
+    }
+
+    .error-panel-message {
+        color: var(--text-muted);
+    }
+
+    .error-panel-retry {
+        background: #93c5fd;
+        border-color: #93c5fd;
+        color: #0a0a18;
+    }
 }

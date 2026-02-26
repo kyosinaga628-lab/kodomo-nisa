@@ -1,9 +1,32 @@
 /* ============================================================
-   Fear & Greed Index 日本版 - Application (Light Theme / CNN Style)
+   Fear & Greed Index 日本版 - Application (Dark/Light Theme / CNN Style)
    ============================================================ */
 
 (function () {
     'use strict';
+
+    // ============================================================
+    // Dark Mode Detection
+    // ============================================================
+
+    function isDarkMode() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+
+    function getChartColors() {
+        const dark = isDarkMode();
+        return {
+            text: dark ? '#c0c0d0' : '#666666',
+            textMuted: dark ? '#8888a0' : '#999999',
+            grid: dark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)',
+            border: dark ? '#2a2a40' : '#e0e0e0',
+            tooltipBg: dark ? '#1e1e32' : '#ffffff',
+            tooltipBorder: dark ? '#2a2a40' : '#e0e0e0',
+            tooltipTitle: dark ? '#e8e8f0' : '#1a1a1a',
+            tooltipBody: dark ? '#c0c0d0' : '#666666',
+            needle: dark ? '#e8e8f0' : '#1a1a2e',
+        };
+    }
 
     // ============================================================
     // Constants
@@ -104,10 +127,12 @@
         const nx = cx + Math.cos(needleAngle) * needleLen;
         const ny = cy + Math.sin(needleAngle) * needleLen;
 
+        const colors = getChartColors();
+
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(nx, ny);
-        ctx.strokeStyle = '#1a1a2e';
+        ctx.strokeStyle = colors.needle;
         ctx.lineWidth = 3;
         ctx.lineCap = 'round';
         ctx.stroke();
@@ -115,7 +140,7 @@
         // Center dot
         ctx.beginPath();
         ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
-        ctx.fillStyle = '#1a1a2e';
+        ctx.fillStyle = colors.needle;
         ctx.fill();
 
         ctx.beginPath();
@@ -139,7 +164,7 @@
             const a = startAngle + (l.value / 100) * Math.PI;
             const lx = cx + Math.cos(a) * (radius + 26);
             const ly = cy + Math.sin(a) * (radius + 26);
-            ctx.fillStyle = '#999999';
+            ctx.fillStyle = colors.textMuted;
             ctx.fillText(l.text, lx, ly + 4);
         });
 
@@ -300,6 +325,8 @@
             });
         }
 
+        const cc = getChartColors();
+
         new Chart(canvas, {
             type: 'line',
             data: { labels, datasets },
@@ -316,7 +343,7 @@
                         position: 'top',
                         align: 'start',
                         labels: {
-                            color: '#666666',
+                            color: cc.text,
                             font: { size: 11, family: 'Inter, Noto Sans JP' },
                             padding: 12,
                             usePointStyle: true,
@@ -324,11 +351,11 @@
                         },
                     },
                     tooltip: {
-                        backgroundColor: '#ffffff',
-                        borderColor: '#e0e0e0',
+                        backgroundColor: cc.tooltipBg,
+                        borderColor: cc.tooltipBorder,
                         borderWidth: 1,
-                        titleColor: '#1a1a1a',
-                        bodyColor: '#666666',
+                        titleColor: cc.tooltipTitle,
+                        bodyColor: cc.tooltipBody,
                         titleFont: { weight: '600' },
                         padding: 10,
                         displayColors: true,
@@ -339,21 +366,21 @@
                         display: true,
                         grid: { display: false },
                         ticks: {
-                            color: '#999999',
+                            color: cc.textMuted,
                             font: { size: 10 },
                             maxTicksLimit: 6,
                             maxRotation: 0,
                         },
-                        border: { color: '#e0e0e0' },
+                        border: { color: cc.border },
                     },
                     y: {
                         display: true,
                         position: 'right',
                         grid: {
-                            color: 'rgba(0, 0, 0, 0.06)',
+                            color: cc.grid,
                         },
                         ticks: {
-                            color: '#999999',
+                            color: cc.textMuted,
                             font: { size: 10 },
                             maxTicksLimit: 5,
                         },
@@ -376,6 +403,7 @@
 
         const labels = timeline.map(t => t.date);
         const data = timeline.map(t => t.score);
+        const tc = getChartColors();
 
         if (timelineChart) timelineChart.destroy();
 
@@ -414,11 +442,11 @@
                 plugins: {
                     legend: { display: false },
                     tooltip: {
-                        backgroundColor: '#ffffff',
-                        borderColor: '#e0e0e0',
+                        backgroundColor: tc.tooltipBg,
+                        borderColor: tc.tooltipBorder,
                         borderWidth: 1,
-                        titleColor: '#1a1a1a',
-                        bodyColor: '#666666',
+                        titleColor: tc.tooltipTitle,
+                        bodyColor: tc.tooltipBody,
                         titleFont: { weight: '600' },
                         padding: 12,
                         callbacks: {
@@ -434,21 +462,21 @@
                         display: true,
                         grid: { display: false },
                         ticks: {
-                            color: '#999999',
+                            color: tc.textMuted,
                             font: { size: 10 },
                             maxTicksLimit: 8,
                             maxRotation: 0,
                         },
-                        border: { color: '#e0e0e0' },
+                        border: { color: tc.border },
                     },
                     y: {
                         display: true,
                         min: 0,
                         max: 100,
                         position: 'right',
-                        grid: { color: 'rgba(0, 0, 0, 0.06)' },
+                        grid: { color: tc.grid },
                         ticks: {
-                            color: '#999999',
+                            color: tc.textMuted,
                             font: { size: 10 },
                             stepSize: 25,
                             callback: function (value) {
@@ -544,12 +572,15 @@
                 document.querySelectorAll('.faq-item').forEach(fi => {
                     fi.classList.remove('open');
                     fi.querySelector('.faq-answer').style.maxHeight = '0';
+                    const fBtn = fi.querySelector('.faq-question');
+                    if (fBtn) fBtn.setAttribute('aria-expanded', 'false');
                 });
 
                 // Toggle current
                 if (!isOpen) {
                     item.classList.add('open');
                     answer.style.maxHeight = answer.scrollHeight + 'px';
+                    btn.setAttribute('aria-expanded', 'true');
                 }
             });
         });
@@ -598,17 +629,57 @@
     // Main Init
     // ============================================================
 
+    function showErrorPanel(message) {
+        const heroLeft = document.querySelector('.hero-left');
+        if (!heroLeft) return;
+
+        // Remove existing error panel if any
+        const existing = heroLeft.querySelector('.error-panel');
+        if (existing) existing.remove();
+
+        const panel = document.createElement('div');
+        panel.className = 'error-panel';
+        panel.innerHTML = `
+            <div class="error-panel-icon">⚠️</div>
+            <div class="error-panel-title">データ取得エラー</div>
+            <div class="error-panel-message">${message}</div>
+            <button class="error-panel-retry" id="retry-btn">再読み込み</button>
+        `;
+        heroLeft.appendChild(panel);
+
+        document.getElementById('retry-btn').addEventListener('click', () => {
+            panel.remove();
+            document.getElementById('gauge-score').textContent = '--';
+            document.getElementById('gauge-label').textContent = '読み込み中...';
+            init();
+        });
+    }
+
     async function init() {
         setupTabs();
         setupFAQ();
 
         try {
             const response = await fetch('/fear-greed/data.json');
-            if (!response.ok) throw new Error('データの取得に失敗しました');
+            if (!response.ok) {
+                throw new Error(response.status === 404
+                    ? 'データがまだ生成されていません。'
+                    : `サーバーエラー (${response.status})`);
+            }
             const data = await response.json();
 
-            // Update timestamp
-            document.getElementById('last-updated').textContent = `最終更新: ${data.updated}`;
+            // Update timestamp (semantic <time>)
+            const timeEl = document.getElementById('last-updated');
+            timeEl.textContent = data.updated;
+            if (data.updated_iso) {
+                timeEl.setAttribute('datetime', data.updated_iso);
+            }
+
+            // Next update display
+            if (data.next_update) {
+                const nextEl = document.getElementById('next-updated');
+                if (nextEl) nextEl.textContent = `次回更新予定: ${data.next_update}`;
+            }
 
             // Update ticker
             updateTicker(data.market);
@@ -627,8 +698,14 @@
 
         } catch (error) {
             console.error('Error loading data:', error);
-            document.getElementById('gauge-score').textContent = 'ERROR';
-            document.getElementById('gauge-label').textContent = 'データ取得エラー';
+            document.getElementById('gauge-score').textContent = '--';
+            document.getElementById('gauge-label').textContent = 'エラー';
+
+            const isNetwork = error instanceof TypeError && error.message.includes('fetch');
+            const msg = isNetwork
+                ? 'ネットワークに接続できません。接続を確認してください。'
+                : error.message || 'データの取得に失敗しました。';
+            showErrorPanel(msg);
         }
     }
 
