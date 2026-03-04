@@ -1,25 +1,25 @@
 {
-  "updated": "2026年03月04日 04:46",
-  "updated_iso": "2026-03-04T04:46:16+09:00",
+  "updated": "2026年03月04日 08:25",
+  "updated_iso": "2026-03-04T08:25:18+09:00",
   "next_update": "03月04日 12:00",
   "overall": {
-    "score": 36.5,
+    "score": 39.2,
     "label": "恐怖",
-    "previous_close": 43.1,
+    "previous_close": 46.3,
     "week_ago": 61.1,
     "month_ago": 64.5,
     "year_ago": 24.2
   },
   "market": {
     "nikkei225": {
-      "value": 53868.98,
-      "change": -2410.07,
-      "change_pct": -4.28
+      "value": 54245.54,
+      "change": -2033.51,
+      "change_pct": -3.61
     },
     "topix": {
-      "value": 3795.0,
-      "change": -164.0,
-      "change_pct": -4.14
+      "value": 3818.0,
+      "change": -141.0,
+      "change_pct": -3.56
     }
   },
   "indicators": [
@@ -27,7 +27,7 @@
       "id": "momentum",
       "name": "市場モメンタム",
       "name_en": "Market Momentum",
-      "score": 86.2,
+      "score": 89.9,
       "label": "極度の貪欲",
       "description": "日経平均株価と125日移動平均線の乖離率を測定します。株価が移動平均線を上回っていると強気シグナル、下回っていると弱気シグナルとなります。",
       "chart": {
@@ -537,7 +537,7 @@
           58850.27,
           58057.24,
           56279.05,
-          53868.98
+          54245.54
         ],
         "ma125": [
           38677.63,
@@ -791,13 +791,13 @@
           49907.47,
           50030.86,
           50138.63,
-          50230.43
+          50233.44
         ]
       },
       "detail": {
-        "current": 53868.98,
-        "ma125": 50230.43,
-        "deviation": 7.24
+        "current": 54245.54,
+        "ma125": 50233.44,
+        "deviation": 7.99
       }
     },
     {
@@ -819,27 +819,27 @@
       "id": "breadth",
       "name": "騰落レシオ",
       "name_en": "Stock Price Breadth",
-      "score": 10.0,
+      "score": 13.3,
       "label": "極度の恐怖",
       "description": "上昇銘柄数と下落銘柄数の比率（騰落レシオ）を分析します。上昇銘柄が多いほど市場全体に買いが広がっていることを示します。",
       "chart": {},
       "detail": {
-        "advances": 3,
-        "declines": 27,
-        "ratio": 0.1
+        "advances": 4,
+        "declines": 26,
+        "ratio": 0.133
       }
     },
     {
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 17.1,
+      "score": 19.7,
       "label": "極度の恐怖",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
-        "estimated_pc_ratio": 1.33,
-        "avg_5d_return": -1.647
+        "estimated_pc_ratio": 1.3,
+        "avg_5d_return": -1.514
       }
     },
     {
@@ -1302,7 +1302,7 @@
           24.25,
           25.08,
           27.96,
-          32.03
+          30.79
         ],
         "ma50": [
           31.94,
@@ -1480,41 +1480,41 @@
           22.07,
           22.08,
           22.16,
-          22.3
+          22.28
         ]
       },
       "detail": {
-        "current": 32.03,
-        "ma50": 22.3,
-        "deviation": 43.6
+        "current": 30.79,
+        "ma50": 22.28,
+        "deviation": 38.22
       }
     },
     {
       "id": "safe_haven",
       "name": "安全資産需要",
       "name_en": "Safe Haven Demand",
-      "score": 55.1,
+      "score": 63.1,
       "label": "貪欲",
       "description": "日本国債と株式の直近20日間のリターンを比較します。国債のリターンが株式を上回る場合、投資家がリスク資産から安全資産へ逃避していることを示します。",
       "chart": {},
       "detail": {
-        "bond_20d_return": 1.53,
-        "stock_20d_return": 2.17,
-        "diff": 0.64
+        "bond_20d_return": 1.34,
+        "stock_20d_return": 2.98,
+        "diff": 1.64
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 38.7,
+      "score": 40.1,
       "label": "恐怖",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": 0.41,
-        "safe_20d_return": 1.53,
-        "diff": -1.13
+        "hy_20d_return": 0.35,
+        "safe_20d_return": 1.34,
+        "diff": -0.99
       }
     }
   ],
@@ -2973,7 +2973,7 @@
     },
     {
       "date": "2026-03-04",
-      "score": 43.1
+      "score": 46.3
     }
   ]
 }
