@@ -1,25 +1,25 @@
 {
-  "updated": "2026年03月24日 04:59",
-  "updated_iso": "2026-03-24T04:59:43+09:00",
+  "updated": "2026年03月24日 08:37",
+  "updated_iso": "2026-03-24T08:37:42+09:00",
   "next_update": "03月24日 12:00",
   "overall": {
-    "score": 35.8,
+    "score": 38.2,
     "label": "恐怖",
-    "previous_close": 27.6,
+    "previous_close": 29.3,
     "week_ago": 38.0,
     "month_ago": 60.6,
     "year_ago": 32.4
   },
   "market": {
     "nikkei225": {
-      "value": 51898.95,
-      "change": 383.46,
-      "change_pct": 0.74
+      "value": 52252.28,
+      "change": 736.79,
+      "change_pct": 1.43
     },
     "topix": {
-      "value": 3719.0,
-      "change": 60.0,
-      "change_pct": 1.64
+      "value": 3743.0,
+      "change": 84.0,
+      "change_pct": 2.3
     }
   },
   "indicators": [
@@ -27,7 +27,7 @@
       "id": "momentum",
       "name": "市場モメンタム",
       "name_en": "Market Momentum",
-      "score": 55.3,
+      "score": 58.7,
       "label": "貪欲",
       "description": "日経平均株価と125日移動平均線の乖離率を測定します。株価が移動平均線を上回っていると強気シグナル、下回っていると弱気シグナルとなります。",
       "chart": {
@@ -537,7 +537,7 @@
           55239.4,
           53372.53,
           51515.49,
-          51898.95
+          52252.28
         ],
         "ma125": [
           38606.65,
@@ -791,55 +791,55 @@
           51166.7,
           51242.98,
           51300.12,
-          51357.17
+          51359.99
         ]
       },
       "detail": {
-        "current": 51898.95,
-        "ma125": 51357.17,
-        "deviation": 1.05
+        "current": 52252.28,
+        "ma125": 51359.99,
+        "deviation": 1.74
       }
     },
     {
       "id": "strength",
       "name": "株価の強さ",
       "name_en": "Stock Price Strength",
-      "score": 50.0,
+      "score": 51.7,
       "label": "中立",
       "description": "東証主要銘柄の52週高値・安値近辺にある銘柄数の比率を分析します。高値圏の銘柄が多いほど貪欲、安値圏が多いほど恐怖を示します。",
       "chart": {},
       "detail": {
-        "highs": 1,
+        "highs": 2,
         "lows": 1,
         "total": 30,
-        "ratio": 0.0
+        "ratio": 0.033
       }
     },
     {
       "id": "breadth",
       "name": "騰落レシオ",
       "name_en": "Stock Price Breadth",
-      "score": 80.0,
+      "score": 86.7,
       "label": "極度の貪欲",
       "description": "上昇銘柄数と下落銘柄数の比率（騰落レシオ）を分析します。上昇銘柄が多いほど市場全体に買いが広がっていることを示します。",
       "chart": {},
       "detail": {
-        "advances": 24,
-        "declines": 6,
-        "ratio": 0.8
+        "advances": 26,
+        "declines": 4,
+        "ratio": 0.867
       }
     },
     {
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 36.6,
+      "score": 39.4,
       "label": "恐怖",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
-        "estimated_pc_ratio": 1.13,
-        "avg_5d_return": -0.669
+        "estimated_pc_ratio": 1.11,
+        "avg_5d_return": -0.531
       }
     },
     {
@@ -1302,7 +1302,7 @@
           33.47,
           35.13,
           36.68,
-          36.87
+          37.24
         ],
         "ma50": [
           23.95,
@@ -1484,9 +1484,9 @@
         ]
       },
       "detail": {
-        "current": 36.87,
+        "current": 37.24,
         "ma50": 25.91,
-        "deviation": 42.31
+        "deviation": 43.69
       }
     },
     {
@@ -1499,22 +1499,22 @@
       "chart": {},
       "detail": {
         "bond_20d_return": -1.16,
-        "stock_20d_return": -8.7,
-        "diff": -7.54
+        "stock_20d_return": -8.01,
+        "diff": -6.85
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 28.4,
+      "score": 30.6,
       "label": "恐怖",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": -3.32,
+        "hy_20d_return": -3.09,
         "safe_20d_return": -1.16,
-        "diff": -2.16
+        "diff": -1.94
       }
     }
   ],
@@ -2969,7 +2969,7 @@
     },
     {
       "date": "2026-03-24",
-      "score": 27.6
+      "score": 29.3
     }
   ]
 }
