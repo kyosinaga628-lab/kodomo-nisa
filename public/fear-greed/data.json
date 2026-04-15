@@ -1,9 +1,9 @@
 {
-  "updated": "2026年04月15日 05:29",
-  "updated_iso": "2026-04-15T05:29:53+09:00",
+  "updated": "2026年04月15日 09:08",
+  "updated_iso": "2026-04-15T09:08:19+09:00",
   "next_update": "04月15日 12:00",
   "overall": {
-    "score": 65.7,
+    "score": 64.7,
     "label": "貪欲",
     "previous_close": 50.0,
     "week_ago": 42.9,
@@ -12,14 +12,14 @@
   },
   "market": {
     "nikkei225": {
-      "value": 58372.42,
-      "change": 495.03,
-      "change_pct": 0.86
+      "value": 58134.24,
+      "change": 256.85,
+      "change_pct": 0.44
     },
     "topix": {
-      "value": 400.2,
-      "change": 2.0,
-      "change_pct": 0.5
+      "value": 399.6,
+      "change": 1.4,
+      "change_pct": 0.35
     }
   },
   "indicators": [
@@ -537,7 +537,7 @@
           56924.11,
           56502.77,
           57877.39,
-          58372.42
+          58134.24
         ],
         "ma125": [
           38565.05,
@@ -791,13 +791,13 @@
           52251.71,
           52320.17,
           52399.58,
-          52484.68
+          52482.78
         ]
       },
       "detail": {
-        "current": 58372.42,
-        "ma125": 52484.68,
-        "deviation": 11.22
+        "current": 58134.24,
+        "ma125": 52482.78,
+        "deviation": 10.77
       }
     },
     {
@@ -833,13 +833,13 @@
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 64.6,
+      "score": 63.0,
       "label": "貪欲",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
-        "estimated_pc_ratio": 0.85,
-        "avg_5d_return": 0.731
+        "estimated_pc_ratio": 0.87,
+        "avg_5d_return": 0.649
       }
     },
     {
@@ -1302,7 +1302,7 @@
           39.99,
           39.82,
           40.51,
-          40.5
+          40.47
         ],
         "ma50": [
           13.6,
@@ -1484,9 +1484,9 @@
         ]
       },
       "detail": {
-        "current": 40.5,
+        "current": 40.47,
         "ma50": 31.73,
-        "deviation": 27.65
+        "deviation": 27.54
       }
     },
     {
@@ -1498,23 +1498,23 @@
       "description": "日本国債と株式の直近20日間のリターンを比較します。国債のリターンが株式を上回る場合、投資家がリスク資産から安全資産へ逃避していることを示します。",
       "chart": {},
       "detail": {
-        "bond_20d_return": -0.8,
-        "stock_20d_return": 9.44,
-        "diff": 10.24
+        "bond_20d_return": -0.18,
+        "stock_20d_return": 9.07,
+        "diff": 9.25
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 73.5,
+      "score": 67.9,
       "label": "貪欲",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": 1.55,
-        "safe_20d_return": -0.8,
-        "diff": 2.35
+        "hy_20d_return": 1.61,
+        "safe_20d_return": -0.18,
+        "diff": 1.79
       }
     }
   ],
