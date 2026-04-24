@@ -1,9 +1,9 @@
 {
-  "updated": "2026年04月24日 05:41",
-  "updated_iso": "2026-04-24T05:41:07+09:00",
+  "updated": "2026年04月24日 09:21",
+  "updated_iso": "2026-04-24T09:21:25+09:00",
   "next_update": "04月24日 12:00",
   "overall": {
-    "score": 65.0,
+    "score": 66.2,
     "label": "貪欲",
     "previous_close": 50.0,
     "week_ago": 50.0,
@@ -12,14 +12,14 @@
   },
   "market": {
     "nikkei225": {
-      "value": 59593.34,
-      "change": 453.11,
-      "change_pct": 0.77
+      "value": 59716.18,
+      "change": 575.95,
+      "change_pct": 0.97
     },
     "topix": {
-      "value": 394.2,
-      "change": 0.6,
-      "change_pct": 0.15
+      "value": 393.7,
+      "change": 0.1,
+      "change_pct": 0.03
     }
   },
   "indicators": [
@@ -537,7 +537,7 @@
           59349.17,
           59585.86,
           59140.23,
-          59593.34
+          59716.18
         ],
         "ma125": [
           38264.81,
@@ -791,13 +791,13 @@
           52842.61,
           52933.08,
           53025.54,
-          53108.8
+          53109.79
         ]
       },
       "detail": {
-        "current": 59593.34,
-        "ma125": 53108.8,
-        "deviation": 12.21
+        "current": 59716.18,
+        "ma125": 53109.79,
+        "deviation": 12.44
       }
     },
     {
@@ -819,34 +819,34 @@
       "id": "breadth",
       "name": "騰落レシオ",
       "name_en": "Stock Price Breadth",
-      "score": 36.7,
+      "score": 43.3,
       "label": "恐怖",
       "description": "上昇銘柄数と下落銘柄数の比率（騰落レシオ）を分析します。上昇銘柄が多いほど市場全体に買いが広がっていることを示します。",
       "chart": {},
       "detail": {
-        "advances": 11,
-        "declines": 19,
-        "ratio": 0.367
+        "advances": 13,
+        "declines": 17,
+        "ratio": 0.433
       }
     },
     {
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 57.6,
+      "score": 58.5,
       "label": "貪欲",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
         "estimated_pc_ratio": 0.92,
-        "avg_5d_return": 0.381
+        "avg_5d_return": 0.423
       }
     },
     {
       "id": "volatility",
       "name": "市場ボラティリティ",
       "name_en": "Market Volatility",
-      "score": 42.1,
+      "score": 42.0,
       "label": "恐怖",
       "description": "日経VIおよびその50日移動平均を使い、市場の変動性を測定します。ボラティリティが高いほど投資家の不安が大きいことを示します。",
       "chart": {
@@ -1302,7 +1302,7 @@
           35.4,
           34.43,
           34.62,
-          34.45
+          34.47
         ],
         "ma50": [
           13.93,
@@ -1484,9 +1484,9 @@
         ]
       },
       "detail": {
-        "current": 34.45,
+        "current": 34.47,
         "ma50": 33.4,
-        "deviation": 3.14
+        "deviation": 3.21
       }
     },
     {
@@ -1498,23 +1498,23 @@
       "description": "日本国債と株式の直近20日間のリターンを比較します。国債のリターンが株式を上回る場合、投資家がリスク資産から安全資産へ逃避していることを示します。",
       "chart": {},
       "detail": {
-        "bond_20d_return": -0.21,
-        "stock_20d_return": 12.33,
-        "diff": 12.54
+        "bond_20d_return": -0.22,
+        "stock_20d_return": 12.45,
+        "diff": 12.67
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 68.8,
+      "score": 69.5,
       "label": "貪欲",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": 1.68,
-        "safe_20d_return": -0.21,
-        "diff": 1.88
+        "hy_20d_return": 1.74,
+        "safe_20d_return": -0.22,
+        "diff": 1.95
       }
     }
   ],
