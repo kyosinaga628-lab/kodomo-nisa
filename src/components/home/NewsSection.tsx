@@ -64,7 +64,8 @@ export default function NewsSection() {
                     viewport={{ once: true, margin: "-50px" }}
                     className="grid grid-cols-1 md:grid-cols-3 gap-8"
                 >
-                    {newsItems.map((item) => (
+                    {/* 自動追加で件数が増えても最新6件のみ表示 */}
+                    {newsItems.slice(0, 6).map((item) => (
                         <a
                             key={item.id}
                             href={item.href}
