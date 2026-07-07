@@ -2,9 +2,9 @@ name: Auto Update News
 
 on:
   schedule:
-    # 毎日 JST 21:00 (UTC 12:00) に官公庁RSSをチェックしてニュース欄を自動更新
+    # 毎週月曜 JST 21:00 (UTC 12:00) に官公庁RSSをチェックしてニュース欄を自動更新
     # （翌朝PC起動時に結果を確認する運用）
-    - cron: '0 12 * * *'
+    - cron: '0 12 * * 1'
   workflow_dispatch:
     # 手動実行可能
 

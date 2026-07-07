@@ -32,7 +32,7 @@ npm run lint
 | ワークフロー | 頻度 | 内容 |
 |---|---|---|
 | `update-fear-greed.yml` | 毎営業日2回 | 日本版 Fear & Greed Index のデータ更新（`scripts/fetch_data.py` → `public/fear-greed/data.json`） |
-| `auto-update-news.yml` | 毎日 21:00 JST | 金融庁・財務省・日銀の公式RSSからNISA関連の新着を検出し、`src/data/news.ts` に自動追加して直接コミット（`scripts/auto_update_news.py`）。LLM不使用・公式タイトルとリンクのみ追加するため無課金かつ誤情報リスクなし。型チェック通過時のみpush |
+| `auto-update-news.yml` | 毎週月曜 21:00 JST | 金融庁・財務省・日銀の公式RSSからNISA関連の新着を検出し、`src/data/news.ts` に自動追加して直接コミット（`scripts/auto_update_news.py`）。LLM不使用・公式タイトルとリンクのみ追加するため無課金かつ誤情報リスクなし。型チェック通過時のみpush |
 | `check-news-sources.yml` | 毎週月曜 9:00 JST | 金融庁・財務省・日銀の監視ページの更新を検知し、変更があれば Issue を起票（`scripts/check_news_sources.py`）。RSSに乗らないページ改訂の検知用 |
 
 ## コンテンツの更新手順
