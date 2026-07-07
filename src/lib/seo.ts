@@ -25,7 +25,7 @@ export const SITE_INFO = {
     name: "こどもNISA研究所",
     alternateName: "KODOMO-NISA.JP",
     alternateNameVariants: ["こども（子供）NISA研究所", "子供NISA研究所", "子どもNISA研究所"],
-    url: "https://kodomo-nisa.jp",
+    url: "https://www.kodomo-nisa.jp",
     description: "民間専門家による、こども（子供）NISA制度の本音の解説と資産形成シミュレーション支援サイト",
     tagline: "政府公認ではないからこそ言える、本音の解説",
     foundingDate: "2025",

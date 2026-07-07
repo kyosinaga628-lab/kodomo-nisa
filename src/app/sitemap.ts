@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { articles } from '@/lib/articles';
 
 export const dynamic = 'force-static';
 
@@ -104,5 +105,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    return [...mainPages, ...kidsPages];
+    // 記事詳細ページ（articles.ts から自動生成）
+    const articlePages = articles.map((article) => ({
+        url: `${baseUrl}/policy-curation/${article.slug}`,
+        lastModified: new Date((article.dateModified ?? article.date).replace(/\./g, '-')),
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+    }));
+
+    return [...mainPages, ...kidsPages, ...articlePages];
 }

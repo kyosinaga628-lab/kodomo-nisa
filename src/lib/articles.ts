@@ -4,6 +4,7 @@ export interface Article {
     id: number;
     slug: string;
     date: string;
+    dateModified?: string; // 内容を更新した日（JSON-LDのdateModifiedに使用）
     category: string;
     title: string;
     excerpt: string;
@@ -27,16 +28,136 @@ export type ArticleTag = "速報" | "深掘り" | "政府資料" | "データ分
 
 // サンプル記事データ
 export const articles: Article[] = [
+    // === 2026年7月 最新状況まとめ ===
+    {
+        id: 105,
+        slug: "kodomo-nisa-2026-july-update",
+        date: "2026.07.07",
+        category: "制度解説",
+        title: "【2026年7月最新】こどもNISAは2027年1月開始が確定 — 成立した制度内容と今からの準備",
+        excerpt: "2026年3月31日に令和8年度税制改正法が成立し、こどもNISAの2027年1月開始が法律上確定しました。確定した制度スペック、払出しルール、口座開設までのスケジュールを整理します。",
+        content: `
+        <p class="lead">2026年3月31日、令和8年度税制改正法（所得税法等の一部を改正する法律）が参議院本会議で可決・成立しました。これにより、こどもNISA（未成年者特定累積投資勘定）の<strong>2027年1月1日開始が法律上確定</strong>しています。本記事では、成立した制度の内容と、2026年後半に向けた準備のポイントを整理します。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">1. 「大綱」から「法律」へ — 何が変わったのか</h2>
+        <p class="mb-4">2025年12月26日に閣議決定された令和8年度税制改正大綱の内容は、2026年2月20日に法案として国会に提出され、3月13日に衆議院を通過、<strong>3月31日に参議院本会議で可決・成立</strong>しました。これまで「予定」だった制度が、法律上の確定事項になったという点が最大の変化です。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">2. 確定した制度スペック</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse my-4">
+                <tbody>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">開始時期</th>
+                        <td class="border border-gray-300 px-4 py-3"><strong>2027年1月1日</strong>（確定）</td>
+                    </tr>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">対象年齢</th>
+                        <td class="border border-gray-300 px-4 py-3">0歳〜17歳の日本居住者</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">年間投資上限</th>
+                        <td class="border border-gray-300 px-4 py-3">60万円（月5万円相当）</td>
+                    </tr>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">非課税保有限度額</th>
+                        <td class="border border-gray-300 px-4 py-3">600万円</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">対象商品</th>
+                        <td class="border border-gray-300 px-4 py-3">つみたて投資枠の対象商品（金融庁基準を満たす投資信託）のみ</td>
+                    </tr>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">買付方法</th>
+                        <td class="border border-gray-300 px-4 py-3"><strong>定時・定額の積立買付に限定</strong>（スポット購入は不可）</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">払出し</th>
+                        <td class="border border-gray-300 px-4 py-3">原則不可。中学入学前は災害等のやむを得ない事由がある場合のみ。<strong>中学入学年以降は子ども本人の教育費・生活費のための払出しが可能</strong></td>
+                    </tr>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-3 text-left font-semibold">18歳到達時</th>
+                        <td class="border border-gray-300 px-4 py-3">成人NISAのつみたて投資枠へ自動移行（非課税のまま継続）</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-yellow-50 p-5 rounded-lg my-6 border-l-4 border-yellow-500">
+            <h4 class="font-bold text-yellow-800 mb-2">払出しルールの注意点</h4>
+            <p class="text-yellow-900 text-sm">払出しには税務署の確認や書類の提出などの手続きが必要とされています。「12歳になれば自由に引き出せる」制度ではない点に注意してください。教育費の全額をこどもNISAに依存せず、現預金とのバランスを取ることが引き続き重要です。</p>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">3. 口座開設はいつから？ — 2026年後半のスケジュール</h2>
+        <p class="mb-4">2026年7月時点では、こどもNISA口座の開設受付はまだ始まっていません。制度の細目（政省令や金融機関の取扱い）は2026年中に順次固まり、<strong>口座開設の受付は2026年秋頃から各金融機関で始まる見込み</strong>です。</p>
+        <p class="mb-4">主要ネット証券は、制度開始と同時にスムーズに投資を始められるよう、<strong>お子様名義の「未成年口座」を先行して開設しておくこと</strong>を案内しています。未成年口座の開設には親権者の口座が必要になるのが一般的なため、親御さん自身の口座がまだの方はそちらが先です。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">4. 金利1.0%時代の「預金か、投資か」</h2>
+        <p class="mb-4">2026年6月16日、日本銀行は政策金利を0.75%から<strong>1.0%へ引き上げ</strong>ました。1995年以来31年ぶりの水準です。これを受けてメガバンクは2026年8月から普通預金金利を0.40%へ引き上げます。</p>
+        <p class="mb-4">「預金にも利息が付く時代」になりましたが、それでも長期の資産形成では複利運用の差は大きなままです。月3万円を18年間積み立てた場合の単純比較では：</p>
+        <div class="grid grid-cols-2 gap-4 my-6">
+            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                <p class="text-sm text-blue-600 mb-1">普通預金（年0.4%）</p>
+                <p class="text-2xl font-bold text-blue-800">約672万円</p>
+            </div>
+            <div class="bg-emerald-50 p-4 rounded-lg text-center">
+                <p class="text-sm text-emerald-600 mb-1">全世界株式（年5%想定）</p>
+                <p class="text-2xl font-bold text-emerald-800">約1,047万円</p>
+            </div>
+        </div>
+        <p class="text-sm text-gray-500 text-center mt-2">※元本648万円。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
+        <p class="mb-4">一方で、金利上昇により「当面使う予定のあるお金は預金に置く」合理性も高まっています。教育資金の時期と金額を整理した上で、<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>で預金と投資の比較を確認してみてください。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">5. 2026年後半にやっておくべきこと</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+            <li>親御さん自身の新NISA枠（年間360万円）の活用状況を確認する</li>
+            <li>金融機関を比較し、お子様の未成年口座を先行開設しておく</li>
+            <li>児童手当等を原資にした無理のない積立額を家計から試算する</li>
+            <li>投資先候補（低コストのインデックスファンド）を絞り込んでおく</li>
+            <li>2026年秋頃の口座開設受付開始の発表をチェックする</li>
+        </ul>
+
+        <div class="bg-yellow-50 p-5 rounded-lg my-6 border-l-4 border-yellow-500">
+            <h4 class="font-bold text-yellow-800 mb-2">ご注意</h4>
+            <p class="text-yellow-900 text-sm">本記事は2026年7月7日時点の情報に基づいています。払出し手続きの詳細や金融機関ごとの取扱いは、今後公表される政省令・各社の発表をご確認ください。</p>
+        </div>
+
+        <hr class="my-8 border-gray-200">
+
+        <h3 class="text-lg font-bold mb-2">参考資料</h3>
+        <ul class="text-sm text-gray-600 space-y-1">
+            <li><a href="https://www.mof.go.jp/tax_policy/tax_reform/outline/fy2026/index.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">令和8年度税制改正 - 財務省</a></li>
+            <li><a href="https://www.dir.co.jp/report/research/law-research/tax/20260526_025774.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">2027年1月開始「こどもNISA」の概要 - 大和総研（2026年5月26日）</a></li>
+            <li><a href="https://www.boj.or.jp/mopo/mpmdeci/index.htm" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">金融政策決定会合の決定内容 - 日本銀行</a></li>
+        </ul>
+        `,
+        featured: true,
+        importance: 5,
+        tags: ["速報", "制度解説", "初心者向け"],
+        tldr: "2026年3月31日に令和8年度税制改正法が成立し、こどもNISAの2027年1月1日開始が確定。年間60万円・限度額600万円、つみたて投資枠商品への定時定額買付に限定。払出しは中学入学年以降に教育費・生活費で可能。口座開設受付は2026年秋頃見込み。",
+        keyTakeaways: [
+            "2026年3月31日に改正法成立、2027年1月1日開始が法律上確定",
+            "買付は定時・定額の積立に限定、払出しは中学入学年以降（教育費・生活費）",
+            "口座開設受付は2026年秋頃見込み。未成年口座の先行開設が推奨されている"
+        ],
+        author: {
+            name: "こどもNISA研究所",
+            title: "編集部"
+        },
+        readTime: 8,
+        thumbnail: "/images/articles/official.png"
+    },
+
     // === こどもNISA概要解説 ===
     {
         id: 100,
         slug: "kodomo-nisa-overview",
         date: "2025.12.01",
+        dateModified: "2026.07.07",
         category: "制度解説",
         title: "こどもNISAとは？2026年スタート予定の新制度を徹底解説",
         excerpt: "子どもの資産形成を支援する新NISA制度「こどもNISA」の概要と活用ポイントを詳しく解説します。",
         content: `
-        <p class="lead">「こどもNISA」は、2027年1月からスタートが予定されている、未成年者向けの少額投資非課税制度です。子どもの将来のための資産形成を、税制面から支援します。</p>
+        <p class="lead">「こどもNISA」は、2027年1月からスタートする未成年者向けの少額投資非課税制度です。2026年3月31日に令和8年度税制改正法が成立し、開始が正式に確定しました。子どもの将来のための資産形成を、税制面から支援します。</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">こどもNISAの基本スペック</h2>
         
@@ -65,7 +186,7 @@ export const articles: Article[] = [
                     </tr>
                     <tr>
                         <th class="border border-gray-300 px-4 py-3 text-left font-semibold">払出し</th>
-                        <td class="border border-gray-300 px-4 py-3">12歳以降可能（検討中）</td>
+                        <td class="border border-gray-300 px-4 py-3">原則不可。中学入学年以降は教育費・生活費のための払出しが可能（中学入学前は災害等のみ）</td>
                     </tr>
                     <tr class="bg-gray-100">
                         <th class="border border-gray-300 px-4 py-3 text-left font-semibold">18歳到達時</th>
@@ -112,13 +233,13 @@ export const articles: Article[] = [
 
         <div class="bg-yellow-50 p-5 rounded-lg my-6 border-l-4 border-yellow-500">
             <h4 class="font-bold text-yellow-800 mb-2">ご注意</h4>
-            <p class="text-yellow-900 text-sm">本記事は2025年12月時点の情報に基づいています。制度の詳細は今後の法改正により変更される可能性があります。最新情報は金融庁の公式発表をご確認ください。</p>
+            <p class="text-yellow-900 text-sm">本記事は2026年7月時点の情報に基づいています（2026年3月31日成立の令和8年度税制改正法を反映）。払出し手続き等の細目は今後公表される政省令をご確認ください。</p>
         </div>
         `,
         featured: true,
         importance: 5,
         tags: ["制度解説", "初心者向け"],
-        tldr: "こどもNISAは2027年1月開始予定の未成年向け非課税投資制度。年間60万円、非課税保有限度額600万円。0歳から18年運用で複利効果を最大化。12歳からの払出しも検討中。",
+        tldr: "こどもNISAは2027年1月開始の未成年向け非課税投資制度（2026年3月成立の改正法で確定）。年間60万円、非課税保有限度額600万円。0歳から18年運用で複利効果を最大化。中学入学年以降は教育費等での払出しが可能。",
         keyTakeaways: [
             "年間投資上限60万円（月5万円相当）",
             "非課税保有限度額600万円（10年分）",
@@ -664,15 +785,17 @@ export const articles: Article[] = [
 ];
 
 // Article Schema（JSON-LD）の生成
+const BASE_URL = "https://www.kodomo-nisa.jp";
+
 export function generateArticleSchema(article: Article) {
     return {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": article.title,
         "description": article.excerpt,
-        "image": `https://kodomo-nisa-lab.jp/og-images/${article.slug}.jpg`,
+        "image": `${BASE_URL}${article.thumbnail ?? "/og-image.png"}`,
         "datePublished": new Date(article.date.replace(/\./g, '-')).toISOString(),
-        "dateModified": new Date(article.date.replace(/\./g, '-')).toISOString(),
+        "dateModified": new Date((article.dateModified ?? article.date).replace(/\./g, '-')).toISOString(),
         "author": {
             "@type": "Person",
             "name": article.author.name,
@@ -683,12 +806,12 @@ export function generateArticleSchema(article: Article) {
             "name": "こどもNISA研究所",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://kodomo-nisa-lab.jp/logo.png"
+                "url": `${BASE_URL}/icon-512x512.png`
             }
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://kodomo-nisa-lab.jp/policy-curation/${article.slug}`
+            "@id": `${BASE_URL}/policy-curation/${article.slug}`
         }
     };
 }

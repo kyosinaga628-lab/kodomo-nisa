@@ -2,47 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-// 最新のニュースは外部リンクまたは内部記事へのリンクを設定
-// isExternal: true の場合は外部リンク、false の場合は内部記事
-const newsItems = [
-    {
-        id: 1,
-        date: "2026.01.20",
-        category: "税制改正",
-        title: "【2026年最新】こどもNISA創設が正式決定、2027年1月スタートへ",
-        excerpt: "令和7年度税制改正法案が成立。年間60万円、最大600万円の非課税投資枠が確定。",
-        href: "https://www.mof.go.jp/tax_policy/tax_reform/outline/index.html",
-        isExternal: true,
-    },
-    {
-        id: 2,
-        date: "2026.01.15",
-        category: "金融庁",
-        title: "金融庁：新NISA利用状況（2025年12月末時点）",
-        excerpt: "新NISA口座数が2,500万口座を突破。つみたて投資枠の利用率が7割超え。",
-        href: "https://www.fsa.go.jp/policy/nisa2/about/index.html",
-        isExternal: true,
-    },
-    {
-        id: 3,
-        date: "2026.01.10",
-        category: "証券会社",
-        title: "各証券会社、こどもNISA口座の事前受付を発表",
-        excerpt: "SBI証券・楽天証券など大手ネット証券が2026年秋からの事前受付開始を発表。",
-        href: "https://www.sbisec.co.jp/",
-        isExternal: true,
-    },
-    {
-        id: 4,
-        date: "2026.01.05",
-        category: "解説記事",
-        title: "【徹底比較】こどもNISAと旧ジュニアNISAの違いを解説",
-        excerpt: "新制度は払出し制限が緩和され、使い勝手が大幅に向上。主な変更点を詳しく比較。",
-        href: "/guide",
-        isExternal: false,
-    },
-];
+import { newsItems } from "@/data/news";
 
 const containerVariants = {
     hidden: { opacity: 0 },

@@ -1,0 +1,51 @@
+name: Check News Sources
+
+on:
+  schedule:
+    # 毎週月曜 JST 09:00 (UTC 00:00) に官公庁ページの更新をチェック
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    # 手動実行可能
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  check-sources:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check watched sources for changes
+        id: check
+        run: |
+          CHANGED=$(python scripts/check_news_sources.py)
+          echo "changed<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Create issue if sources changed
+        if: steps.check.outputs.changed != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHANGED: ${{ steps.check.outputs.changed }}
+        run: |
+          gh issue create \
+            --title "📰 情報源ページに更新あり ($(date +%Y-%m-%d))" \
+            --body "$(printf '以下の監視対象ページが前回チェック時から更新されています。\n内容を確認し、必要なら src/data/news.ts と src/lib/articles.ts を更新してください。\n\n%s\n\n---\n更新手順:\n1. 変更されたページを開いて新着情報を確認\n2. src/data/news.ts の先頭に新しいニュース項目を追加\n3. 大きな制度変更の場合は src/lib/articles.ts に記事を追加し、AI_CONTENT_SUMMARY の Last Verified も更新\n' "$CHANGED")"
+
+      - name: Commit updated state
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add scripts/news_watch_state.json
+          git diff --staged --quiet || git commit -m "chore: update news watch state $(date +%Y-%m-%d)"
+          git push

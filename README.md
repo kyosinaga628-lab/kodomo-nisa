@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# こどもNISA研究所
 
-## Getting Started
+2027年1月開始の「こどもNISA（未成年者特定累積投資勘定）」を解説する情報サイト。
+本番: https://www.kodomo-nisa.jp （apex ドメインは www へリダイレクト）
 
-First, run the development server:
+## 技術構成
+
+- Next.js 16 (App Router) + TypeScript + Tailwind CSS 4 + framer-motion
+- グラフ: recharts / PDF出力: jspdf + html2canvas / メール送信: Resend
+
+## 開発
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev    # http://localhost:3000
+npm run build  # 本番ビルド
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## デプロイ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **本番は Vercel**（GitHub 連携で main への push ごとに自動デプロイ）。
+  お問い合わせフォームの API ルート（`src/app/api/contact/route.ts`）は Vercel 上でのみ動作する。
+  環境変数 `RESEND_API_KEY` が必要。
+- `.github/workflows/deploy.yml` は GitHub Pages への静的エクスポートデプロイ（`NEXT_EXPORT=true`）。
+  **本番ドメインは Vercel が配信しているため現在は冗長**で、github.io 上に複製サイトが公開され
+  重複コンテンツの SEO リスクがある。不要ならこのワークフローを削除し、リポジトリの
+  Settings → Pages で公開を停止すること。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 自動化（GitHub Actions）
 
-## Learn More
+| ワークフロー | 頻度 | 内容 |
+|---|---|---|
+| `update-fear-greed.yml` | 毎営業日2回 | 日本版 Fear & Greed Index のデータ更新（`scripts/fetch_data.py` → `public/fear-greed/data.json`） |
+| `check-news-sources.yml` | 毎週月曜 9:00 JST | 金融庁・財務省・日銀の監視ページの更新を検知し、変更があれば Issue を起票（`scripts/check_news_sources.py`） |
 
-To learn more about Next.js, take a look at the following resources:
+## コンテンツの更新手順
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **ホームのニュース欄**: `src/data/news.ts` の配列の先頭に項目を追加する。
+- **記事**: `src/lib/articles.ts` に追加する。`slug` を追加すると
+  `/policy-curation/[slug]` の静的ページと sitemap に自動反映される。
+  既存記事を改訂したら `dateModified` を設定する（JSON-LD の dateModified に使われる）。
+- **AI向けサマリー**: 制度情報を更新したら `src/app/page.tsx` の `AI_CONTENT_SUMMARY` にある
+  `Last Verified` と、`src/lib/ai-optimization.ts` の `CALCULATOR_METADATA.lastUpdated` も更新する。
+- **金利などの市況前提**: `src/lib/calculator.ts` の定数（`BANK_RATE` など）と
+  `src/components/simulator/ComparisonChart.tsx` の表示ラベルをセットで更新する。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 正規ドメインの注意
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+構造化データ・sitemap・canonical はすべて `https://www.kodomo-nisa.jp` に統一している。
+新しくURLをハードコードする場合も必ず www 付きを使うこと。

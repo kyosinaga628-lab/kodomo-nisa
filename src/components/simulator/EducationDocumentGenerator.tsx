@@ -848,7 +848,7 @@ export default function EducationDocumentGenerator({
                                 {/* Footer */}
                                 <div className="text-center text-gray-400 text-xs pt-8 border-t">
                                     <p>Created with こどもNISA研究所</p>
-                                    <p>https://kodomo-nisa-lab.jp</p>
+                                    <p>https://www.kodomo-nisa.jp</p>
                                 </div>
                             </div>
                         </div>

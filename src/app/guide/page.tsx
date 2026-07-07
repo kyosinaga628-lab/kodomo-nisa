@@ -59,7 +59,7 @@ export default function GuidePage() {
                             </div>
                         </div>
                         <p className="text-center text-[var(--color-text-secondary)] text-sm md:text-base">
-                            ※2026年度税制改正大綱に基づく情報です。正式な制度開始は2027年1月予定。
+                            ※2026年3月31日成立の令和8年度税制改正法に基づく情報です。制度開始は2027年1月1日（確定）。
                         </p>
                     </div>
                 </motion.section>
@@ -314,10 +314,10 @@ export default function GuidePage() {
                                 <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
                             </div>
                             <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
-                                令和7年度税制改正大綱
+                                令和8年度税制改正
                             </h4>
                             <p className="text-sm text-[var(--color-text-secondary)]">
-                                こどもNISA創設を含む税制改正の全容。正式な制度設計の根拠資料。
+                                こどもNISA創設を含む税制改正の全容。正式な制度設計の根拠資料（2026年3月31日改正法成立）。
                             </p>
                         </a>
 
