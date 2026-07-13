@@ -14,6 +14,33 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 8,
+        date: "2026.07.13",
+        category: "金融庁",
+        title: "金融経済教育イベント「ワニーサと学ぶ 未来のためのお金の教室 in旭川」の開催について公表しました。",
+        excerpt: "金融経済教育イベント「ワニーサと学ぶ 未来のためのお金の教室 in旭川」の開催について公表しました。詳しくは特設サイトをご覧ください。",
+        href: "https://www.fsa.go.jp/news/r8/sonota/20260713/20260713.html",
+        isExternal: true,
+    },
+    {
+        id: 9,
+        date: "2026.07.09",
+        category: "財務省",
+        title: "令和８年度　税制改正の解説",
+        excerpt: "財務省の公式発表です。詳細はリンク先をご確認ください。",
+        href: "https://www.mof.go.jp/tax_policy/tax_reform/outline/fy2026/explanation/index.html",
+        isExternal: true,
+    },
+    {
+        id: 10,
+        date: "2026.07.08",
+        category: "財務省",
+        title: "「令和８年度税制改正」（令和８年４月発行）",
+        excerpt: "財務省の公式発表です。詳細はリンク先をご確認ください。",
+        href: "https://www.mof.go.jp/tax_policy/publication/brochure/zeisei26.html",
+        isExternal: true,
+    },
+    {
         id: 7,
         date: "2026.06.16",
         category: "金融政策",
