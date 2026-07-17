@@ -1,25 +1,25 @@
 {
-  "updated": "2026年07月17日 05:46",
-  "updated_iso": "2026-07-17T05:46:23+09:00",
+  "updated": "2026年07月17日 09:43",
+  "updated_iso": "2026-07-17T09:43:13+09:00",
   "next_update": "07月17日 12:00",
   "overall": {
-    "score": 33.4,
+    "score": 37.4,
     "label": "恐怖",
-    "previous_close": 38.6,
+    "previous_close": 41.8,
     "week_ago": 50.0,
     "month_ago": 50.0,
     "year_ago": 54.6
   },
   "market": {
     "nikkei225": {
-      "value": 63355.88,
-      "change": -3479.66,
-      "change_pct": -5.21
+      "value": 64141.12,
+      "change": -2694.42,
+      "change_pct": -4.03
     },
     "topix": {
-      "value": 404.6,
-      "change": -15.1,
-      "change_pct": -3.6
+      "value": 407.9,
+      "change": -11.8,
+      "change_pct": -2.81
     }
   },
   "indicators": [
@@ -27,7 +27,7 @@
       "id": "momentum",
       "name": "市場モメンタム",
       "name_en": "Market Momentum",
-      "score": 77.2,
+      "score": 83.7,
       "label": "極度の貪欲",
       "description": "日経平均株価と125日移動平均線の乖離率を測定します。株価が移動平均線を上回っていると強気シグナル、下回っていると弱気シグナルとなります。",
       "chart": {
@@ -537,7 +537,7 @@
           67743.5,
           68751.51,
           66835.54,
-          63355.88
+          64141.12
         ],
         "ma125": [
           37660.76,
@@ -791,13 +791,13 @@
           59772.71,
           59907.21,
           60013.5,
-          60085.62
+          60091.9
         ]
       },
       "detail": {
-        "current": 63355.88,
-        "ma125": 60085.62,
-        "deviation": 5.44
+        "current": 64141.12,
+        "ma125": 60091.9,
+        "deviation": 6.74
       }
     },
     {
@@ -819,34 +819,34 @@
       "id": "breadth",
       "name": "騰落レシオ",
       "name_en": "Stock Price Breadth",
-      "score": 40.0,
+      "score": 43.3,
       "label": "恐怖",
       "description": "上昇銘柄数と下落銘柄数の比率（騰落レシオ）を分析します。上昇銘柄が多いほど市場全体に買いが広がっていることを示します。",
       "chart": {},
       "detail": {
-        "advances": 12,
-        "declines": 18,
-        "ratio": 0.4
+        "advances": 13,
+        "declines": 17,
+        "ratio": 0.433
       }
     },
     {
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 19.3,
+      "score": 24.0,
       "label": "極度の恐怖",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
-        "estimated_pc_ratio": 1.31,
-        "avg_5d_return": -1.536
+        "estimated_pc_ratio": 1.26,
+        "avg_5d_return": -1.301
       }
     },
     {
       "id": "volatility",
       "name": "市場ボラティリティ",
       "name_en": "Market Volatility",
-      "score": 4.2,
+      "score": 16.7,
       "label": "極度の恐怖",
       "description": "日経VIおよびその50日移動平均を使い、市場の変動性を測定します。ボラティリティが高いほど投資家の不安が大きいことを示します。",
       "chart": {
@@ -1300,7 +1300,7 @@
           33.24,
           33.6,
           34.29,
-          38.33
+          36.68
         ],
         "ma50": [
           19.05,
@@ -1477,13 +1477,13 @@
           32.02,
           32.19,
           32.25,
-          32.4
+          32.37
         ]
       },
       "detail": {
-        "current": 38.33,
-        "ma50": 32.4,
-        "deviation": 18.3
+        "current": 36.68,
+        "ma50": 32.37,
+        "deviation": 13.33
       }
     },
     {
@@ -1495,23 +1495,23 @@
       "description": "日本国債と株式の直近20日間のリターンを比較します。国債のリターンが株式を上回る場合、投資家がリスク資産から安全資産へ逃避していることを示します。",
       "chart": {},
       "detail": {
-        "bond_20d_return": -0.22,
-        "stock_20d_return": -11.11,
-        "diff": -10.89
+        "bond_20d_return": -0.17,
+        "stock_20d_return": -9.24,
+        "diff": -9.07
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 39.8,
+      "score": 40.5,
       "label": "恐怖",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": -1.24,
-        "safe_20d_return": -0.22,
-        "diff": -1.02
+        "hy_20d_return": -1.12,
+        "safe_20d_return": -0.17,
+        "diff": -0.95
       }
     }
   ],
@@ -2970,7 +2970,7 @@
     },
     {
       "date": "2026-07-17",
-      "score": 38.6
+      "score": 41.8
     }
   ]
 }
