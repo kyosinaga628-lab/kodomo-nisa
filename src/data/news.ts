@@ -14,6 +14,15 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 11,
+        date: "2026.07.15",
+        category: "日本銀行",
+        title: "金融政策決定会合議事録等（2016年1月～6月開催分）",
+        excerpt: "日本銀行の公式発表です。詳細はリンク先をご確認ください。",
+        href: "http://www.boj.or.jp/mopo/mpmsche_minu/record_2016/gjrk.htm",
+        isExternal: true,
+    },
+    {
         id: 8,
         date: "2026.07.13",
         category: "金融庁",
