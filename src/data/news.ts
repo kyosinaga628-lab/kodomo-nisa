@@ -14,6 +14,24 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 16,
+        date: "2026.08.10",
+        category: "日本銀行",
+        title: "金融政策決定会合における主な意見（7月30、31日開催分）",
+        excerpt: "日本銀行の公式発表です。詳細はリンク先をご確認ください。",
+        href: "http://www.boj.or.jp/mopo/mpmsche_minu/opinion_2026/opi260731.pdf",
+        isExternal: true,
+    },
+    {
+        id: 17,
+        date: "2026.08.05",
+        category: "日本銀行",
+        title: "金融政策決定会合議事要旨（6月15、16日開催分）",
+        excerpt: "日本銀行の公式発表です。詳細はリンク先をご確認ください。",
+        href: "http://www.boj.or.jp/mopo/mpmsche_minu/minu_2026/g260616.pdf",
+        isExternal: true,
+    },
+    {
         id: 12,
         date: "2026.08.03",
         category: "日本銀行",
