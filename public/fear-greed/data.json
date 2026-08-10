@@ -1,25 +1,25 @@
 {
-  "updated": "2026年08月10日 04:42",
-  "updated_iso": "2026-08-10T04:42:54+09:00",
+  "updated": "2026年08月10日 09:04",
+  "updated_iso": "2026-08-10T09:04:04+09:00",
   "next_update": "08月10日 12:00",
   "overall": {
-    "score": 54.8,
-    "label": "中立",
-    "previous_close": 47.3,
+    "score": 55.7,
+    "label": "貪欲",
+    "previous_close": 47.5,
     "week_ago": 37.0,
     "month_ago": 50.0,
     "year_ago": 53.4
   },
   "market": {
     "nikkei225": {
-      "value": 66908.83,
-      "change": 1302.12,
-      "change_pct": 1.98
+      "value": 66970.22,
+      "change": 1363.51,
+      "change_pct": 2.08
     },
     "topix": {
-      "value": 427.5,
-      "change": 2.4,
-      "change_pct": 0.56
+      "value": 427.6,
+      "change": 2.5,
+      "change_pct": 0.59
     }
   },
   "indicators": [
@@ -27,7 +27,7 @@
       "id": "momentum",
       "name": "市場モメンタム",
       "name_en": "Market Momentum",
-      "score": 94.6,
+      "score": 95.1,
       "label": "極度の貪欲",
       "description": "日経平均株価と125日移動平均線の乖離率を測定します。株価が移動平均線を上回っていると強気シグナル、下回っていると弱気シグナルとなります。",
       "chart": {
@@ -537,7 +537,7 @@
           66300.44,
           65683.26,
           65606.71,
-          66908.83
+          66970.22
         ],
         "ma125": [
           37770.18,
@@ -791,62 +791,62 @@
           61141.07,
           61245.29,
           61332.38,
-          61433.31
+          61433.8
         ]
       },
       "detail": {
-        "current": 66908.83,
-        "ma125": 61433.31,
-        "deviation": 8.91
+        "current": 66970.22,
+        "ma125": 61433.8,
+        "deviation": 9.01
       }
     },
     {
       "id": "strength",
       "name": "株価の強さ",
       "name_en": "Stock Price Strength",
-      "score": 61.7,
+      "score": 63.3,
       "label": "貪欲",
       "description": "東証主要銘柄の52週高値・安値近辺にある銘柄数の比率を分析します。高値圏の銘柄が多いほど貪欲、安値圏が多いほど恐怖を示します。",
       "chart": {},
       "detail": {
-        "highs": 7,
+        "highs": 8,
         "lows": 0,
         "total": 30,
-        "ratio": 0.233
+        "ratio": 0.267
       }
     },
     {
       "id": "breadth",
       "name": "騰落レシオ",
       "name_en": "Stock Price Breadth",
-      "score": 53.3,
-      "label": "中立",
+      "score": 56.7,
+      "label": "貪欲",
       "description": "上昇銘柄数と下落銘柄数の比率（騰落レシオ）を分析します。上昇銘柄が多いほど市場全体に買いが広がっていることを示します。",
       "chart": {},
       "detail": {
-        "advances": 16,
-        "declines": 14,
-        "ratio": 0.533
+        "advances": 17,
+        "declines": 13,
+        "ratio": 0.567
       }
     },
     {
       "id": "put_call",
       "name": "プット・コール比率",
       "name_en": "Put and Call Options",
-      "score": 69.7,
+      "score": 70.0,
       "label": "貪欲",
       "description": "日経225オプション市場の弱気度合いを推計します。プット（売る権利）の比率が高いほど投資家が下落を警戒していることを示します。",
       "chart": {},
       "detail": {
         "estimated_pc_ratio": 0.8,
-        "avg_5d_return": 0.984
+        "avg_5d_return": 1.002
       }
     },
     {
       "id": "volatility",
       "name": "市場ボラティリティ",
       "name_en": "Market Volatility",
-      "score": 32.4,
+      "score": 32.1,
       "label": "恐怖",
       "description": "日経VIおよびその50日移動平均を使い、市場の変動性を測定します。ボラティリティが高いほど投資家の不安が大きいことを示します。",
       "chart": {
@@ -1298,7 +1298,7 @@
           37.42,
           36.82,
           36.42,
-          36.92
+          36.97
         ],
         "ma50": [
           21.77,
@@ -1478,37 +1478,37 @@
         ]
       },
       "detail": {
-        "current": 36.92,
+        "current": 36.97,
         "ma50": 34.5,
-        "deviation": 7.03
+        "deviation": 7.17
       }
     },
     {
       "id": "safe_haven",
       "name": "安全資産需要",
       "name_en": "Safe Haven Demand",
-      "score": 30.2,
+      "score": 30.7,
       "label": "恐怖",
       "description": "日本国債と株式の直近20日間のリターンを比較します。国債のリターンが株式を上回る場合、投資家がリスク資産から安全資産へ逃避していることを示します。",
       "chart": {},
       "detail": {
-        "bond_20d_return": -0.17,
-        "stock_20d_return": -2.64,
-        "diff": -2.47
+        "bond_20d_return": -0.12,
+        "stock_20d_return": -2.53,
+        "diff": -2.41
       }
     },
     {
       "id": "junk_bond",
       "name": "社債需要",
       "name_en": "Junk Bond Demand",
-      "score": 41.5,
+      "score": 42.2,
       "label": "恐怖",
       "description": "社債と安全資産のリターン差を分析します。社債が好調な場合はリスク選好（貪欲）、不調な場合はリスク回避（恐怖）を示します。",
       "chart": {},
       "detail": {
-        "hy_20d_return": -1.03,
-        "safe_20d_return": -0.17,
-        "diff": -0.85
+        "hy_20d_return": -0.91,
+        "safe_20d_return": -0.12,
+        "diff": -0.78
       }
     }
   ],
@@ -2955,7 +2955,7 @@
     },
     {
       "date": "2026-08-10",
-      "score": 47.3
+      "score": 47.5
     }
   ]
 }
