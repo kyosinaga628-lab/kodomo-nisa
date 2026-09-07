@@ -14,6 +14,15 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 24,
+        date: "2026.09.07",
+        category: "財務省",
+        title: "令和９年度税制改正要望",
+        excerpt: "財務省の公式発表です。詳細はリンク先をご確認ください。",
+        href: "https://www.mof.go.jp/tax_policy/tax_reform/outline/fy2027/request/index.html",
+        isExternal: true,
+    },
+    {
         id: 18,
         date: "2026.08.10",
         category: "日本銀行",
