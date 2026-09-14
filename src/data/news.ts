@@ -14,6 +14,15 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 25,
+        date: "2026.09.09",
+        category: "金融庁",
+        title: "～将来を見据えたおかねのキホン～NISAとiDeCoで始める資産形成セミナーの開催について公表しました。",
+        excerpt: "金融庁の公式発表です。詳細はリンク先をご確認ください。",
+        href: "https://www.fsa.go.jp/news/r8/sonota/20261028/20260909.html",
+        isExternal: true,
+    },
+    {
         id: 24,
         date: "2026.09.07",
         category: "財務省",
