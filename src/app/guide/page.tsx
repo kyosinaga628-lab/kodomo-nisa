@@ -59,7 +59,7 @@ export default function GuidePage() {
                             </div>
                         </div>
                         <p className="text-center text-[var(--color-text-secondary)] text-sm md:text-base">
-                            ※2026年3月31日成立の令和8年度税制改正法に基づく情報です。制度開始は2027年1月1日（確定）。
+                            ※2026年3月31日成立の令和8年度税制改正法に基づく情報です。制度開始は2027年1月1日（確定）。口座開設の受付は2026年10月1日から主要ネット証券で始まります。
                         </p>
                     </div>
                 </motion.section>

@@ -31,7 +31,7 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
             'こどもNISA（未成年者特定累積投資勘定）の創設',
             '年間投資上限60万円、非課税保有限度額600万円',
         ],
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'policy',
     },
     {
@@ -42,7 +42,7 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
         publishDate: '2025-12-26',
         pdfUrl: 'https://www.mof.go.jp/tax_policy/tax_reform/outline/fy2026/08taikou_gaiyou.pdf',
         description: '税制改正大綱の概要版。こどもNISA制度のポイントをわかりやすくまとめた資料',
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'policy',
     },
 
@@ -55,7 +55,7 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
         publishDate: '2024-01-01',
         url: 'https://www.fsa.go.jp/policy/nisa2/index.html',
         description: 'NISA制度の公式解説サイト。制度概要、対象商品、口座開設方法を掲載',
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'guideline',
     },
     {
@@ -71,7 +71,7 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
             'インデックスファンド',
             'アクティブファンド',
         ],
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'guideline',
     },
 
@@ -88,7 +88,7 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
             '上場株式等に係る譲渡所得等の税率',
             '所得税15% + 復興特別所得税0.315% + 住民税5%',
         ],
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'legislation',
     },
     {
@@ -102,7 +102,7 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
         relevantSections: [
             '暦年課税の基礎控除額：110万円',
         ],
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'legislation',
     },
 
@@ -113,24 +113,24 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
         publisher: '年金積立金管理運用独立行政法人（GPIF）',
         publisherType: 'agency',
         publishDate: '2025-07-01',
-        url: 'https://www.gpif.go.jp/operation/results.html',
+        url: 'https://www.gpif.go.jp/operation/the-latest-results.html',
         description: '世界最大級の機関投資家の長期運用実績。分散投資の参考データ',
         relevantSections: [
             '2001年度以降の収益率',
             '年率平均約3.99%（2001-2024年度）',
         ],
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'statistics',
     },
     {
         id: 'boj-statistics',
-        title: '金融経済統計月報',
+        title: '統計（金利・預金・マネー等）',
         publisher: '日本銀行',
         publisherType: 'agency',
-        publishDate: '2025-12-01',
-        url: 'https://www.boj.or.jp/statistics/pub/sk/index.htm/',
+        publishDate: '2026-09-01',
+        url: 'https://www.boj.or.jp/statistics/index.htm',
         description: '金利・為替・株価等の金融統計データ',
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'statistics',
     },
 
@@ -141,9 +141,9 @@ export const OFFICIAL_SOURCES: OfficialSource[] = [
         publisher: 'OECD',
         publisherType: 'international',
         publishDate: '2024-03-01',
-        url: 'https://www.oecd.org/financial/education/',
+        url: 'https://www.oecd.org/en/topics/sub-issues/financial-education.html',
         description: '若年層向け金融教育の国際的ガイドライン',
-        lastVerified: '2026-01-15',
+        lastVerified: '2026-09-18',
         category: 'report',
     },
 ];

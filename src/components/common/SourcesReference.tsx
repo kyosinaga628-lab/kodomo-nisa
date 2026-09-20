@@ -209,7 +209,7 @@ export default function SourcesReference({
                         <circle cx="12" cy="12" r="10" />
                         <path d="M12 16v-4M12 8h.01" />
                     </svg>
-                    最終検証日: 2026年1月15日 | 情報の正確性を定期的に確認しています
+                    最終検証日: 2026年9月20日 | 情報の正確性を定期的に確認しています
                 </p>
             </div>
         </motion.section>

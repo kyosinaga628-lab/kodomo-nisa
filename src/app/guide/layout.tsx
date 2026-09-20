@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: "こどもNISAとは | 制度の概要を詳しく解説",
-        description: "2027年開始予定のこどもNISA制度を詳しく解説。年間60万円・最大600万円の非課税投資の仕組みを説明。",
+        description: "2027年1月開始（確定）のこどもNISA制度を詳しく解説。年間60万円・最大600万円の非課税投資の仕組みを説明。",
         url: "https://www.kodomo-nisa.jp/guide",
         type: "article",
     },

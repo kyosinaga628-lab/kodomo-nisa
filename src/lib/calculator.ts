@@ -43,10 +43,10 @@ const MAX_AGE = 17;                 // 最大投資可能年齢（18歳未満）
 const ADULT_TRANSITION_AGE = 18;    // 成人NISA移行年齢
 const WITHDRAWAL_AGE = 12;          // 教育費払出し可能年齢
 
-// 銀行預金金利・参考利回り（2026年7月時点。日銀政策金利1.0%への利上げを反映）
-const BANK_RATE = 0.3;              // メガバンク普通預金金利 0.3%（2026年8月から0.4%へ引き上げ予定）
+// 銀行預金金利・参考利回り（2026年9月20日時点。日銀政策金利は9月18日に1.25%へ引き上げ）
+const BANK_RATE = 0.4;              // メガバンク普通預金金利 0.4%（2026年8月3日改定。11月2日から0.5%へ引き上げ予定 → 適用後に0.5へ更新）
 const GLOBAL_STOCK_RATE = 5;        // 全世界株式平均リターン
-const HIGH_YIELD_BANK_RATE = 0.7;   // ネット銀行（好金利）預金金利（預入上限付きの場合あり）
+const HIGH_YIELD_BANK_RATE = 0.7;   // ネット銀行（好金利）預金金利（2026年9月時点の代表値。預入上限・条件付きの場合あり）
 
 export function calculateNISA(input: SimulationInput): SimulationResult {
     const { monthlyAmount, childAge, expectedReturn } = input;

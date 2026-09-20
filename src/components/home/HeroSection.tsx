@@ -30,7 +30,7 @@ export default function HeroSection() {
                             transition={{ delay: 0.2, duration: 0.6 }}
                             className="text-[var(--color-emerald)] font-semibold tracking-wide mb-4 md:mb-6 text-sm md:text-base"
                         >
-                            2027年スタート予定の新制度
+                            2027年1月スタート確定の新制度
                         </m.p>
 
                         {/* Main Heading */}

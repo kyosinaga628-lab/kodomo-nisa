@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """官公庁RSSからNISA関連の新着を検出し、src/data/news.ts に自動追加するスクリプト。
 
-毎日 GitHub Actions から実行される。LLMは使わず、公式発表のタイトルと
+毎週月曜に GitHub Actions から実行される。LLMは使わず、公式発表のタイトルと
 リンクをそのまま追加するだけなので、レビューなしの自動公開でも
 誤情報リスクがない。
 
@@ -44,9 +44,17 @@ FEEDS = [
     {
         "name": "日本銀行",
         "url": "https://www.boj.or.jp/rss/whatsnew.xml",
-        "keywords": ["金融政策決定会合", "当面の金融政策運営", "政策金利", "経済・物価情勢の展望"],
+        # 会合の決定文と展望レポート（基本的見解）のみ。議事要旨・主な意見・日程等は対象外
+        "keywords": ["当面の金融政策運営について", "金融市場調節方針の変更について", "経済・物価情勢の展望"],
+        "exclude": ["全文", "議事", "主な意見", "日程"],
     },
 ]
+
+
+def norm_link(link: str) -> str:
+    """http/https の違いと末尾スラッシュを無視した重複判定用キー。
+    日銀RSSが http→https に切り替わった際に同じ記事が二重追加されたための対策。"""
+    return re.sub(r"^https?://", "", link.strip()).rstrip("/")
 
 
 def localname(tag: str) -> str:
@@ -145,7 +153,9 @@ def main() -> int:
     first_run = not STATE_FILE.exists()
     seen: set[str] = set()
     if not first_run:
-        seen = set(json.loads(STATE_FILE.read_text(encoding="utf-8"))["seen_links"])
+        seen = {norm_link(l) for l in json.loads(STATE_FILE.read_text(encoding="utf-8"))["seen_links"]}
+    # news.ts に既に載っているリンク（手動追加分を含む）
+    existing = {norm_link(h) for h in re.findall(r'href: "([^"]+)"', news_source)}
 
     max_id = max(int(m) for m in re.findall(r"^\s*id: (\d+),", news_source, re.M))
 
@@ -154,11 +164,15 @@ def main() -> int:
 
     for feed in FEEDS:
         for entry in fetch_feed(feed["url"]):
-            all_links.add(entry["link"])
-            if first_run or entry["link"] in seen or entry["link"] in news_source:
+            key = norm_link(entry["link"])
+            all_links.add(key)
+            if first_run or key in seen or key in existing:
                 continue
             if not any(kw in entry["title"] for kw in feed["keywords"]):
                 continue
+            if any(kw in entry["title"] for kw in feed.get("exclude", [])):
+                continue
+            existing.add(key)
             max_id += 1
             new_blocks.append(render_item(max_id, entry, feed["name"]))
             print(f"ADD: [{feed['name']}] {entry['title']}")

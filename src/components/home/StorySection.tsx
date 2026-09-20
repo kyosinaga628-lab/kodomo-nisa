@@ -61,7 +61,7 @@ export default function StorySection() {
                         <span className="text-[var(--color-royal-blue)]">こどもNISA</span>の基本
                     </h2>
                     <p className="mt-4 text-[var(--color-text-secondary)] max-w-2xl mx-auto text-sm md:text-base">
-                        2027年からスタート予定の新制度。
+                        2027年1月からスタートする新制度（口座受付は2026年10月1日から）。
                         <br className="hidden md:block" />
                         お子様の将来のための資産形成を、税制面から強力にサポートします。
                     </p>

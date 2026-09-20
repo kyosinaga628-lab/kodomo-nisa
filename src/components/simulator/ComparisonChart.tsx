@@ -121,7 +121,7 @@ export default function ComparisonChart({ data }: ComparisonChartProps) {
                         <div className="w-3 h-3 rounded-full bg-gray-400" />
                         <span className="font-semibold text-sm">銀行預金</span>
                     </div>
-                    <p className="text-xs text-gray-600">年利0.3%（メガバンク普通預金、2026年7月時点）</p>
+                    <p className="text-xs text-gray-600">年利0.4%（メガバンク普通預金、2026年8月3日改定。11月2日から0.5%へ）</p>
                 </div>
                 <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
                     <div className="flex items-center gap-2 mb-2">
@@ -135,7 +135,7 @@ export default function ComparisonChart({ data }: ComparisonChartProps) {
                         <div className="w-3 h-3 rounded-full bg-amber-600" />
                         <span className="font-semibold text-sm">ネット銀行（好金利）</span>
                     </div>
-                    <p className="text-xs text-amber-700">年利0.7%想定（一部ネット銀行の優遇金利、預入上限がある場合あり）</p>
+                    <p className="text-xs text-amber-700">年利0.7%想定（一部ネット銀行の優遇金利、2026年9月時点。預入上限・条件がある場合あり）</p>
                 </div>
             </motion.div>
         </div>

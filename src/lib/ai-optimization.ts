@@ -4,8 +4,8 @@
 // シミュレーター計算根拠のメタデータ
 export const CALCULATOR_METADATA = {
     name: "こどもNISAシミュレーター",
-    version: "1.1.0",
-    lastUpdated: "2026-07-07",
+    version: "1.2.0",
+    lastUpdated: "2026-09-18",
 
     // 計算根拠
     calculationBasis: {
@@ -39,6 +39,12 @@ export const CALCULATOR_METADATA = {
             publisher: "国会（参議院本会議可決・成立）",
             publishDate: "2026-03-31",
             note: "こどもNISAの正式名称は「未成年者特定累積投資勘定」。2027年1月1日施行",
+        },
+        {
+            title: "こどもNISA口座開設受付開始に関する各社発表",
+            publisher: "三菱UFJ eスマート証券・松井証券・PayPay証券・SBI証券・楽天証券・マネックス証券",
+            publishDate: "2026-08-14〜2026-09-14",
+            note: "口座開設の（事前）受付は2026年10月1日開始。金融機関・税務署の審査を経て口座開設・取引開始は2027年1月以降",
         },
     ],
 
@@ -132,8 +138,8 @@ export const KODOMO_NISA_FAQ: FAQItem[] = [
             "子供NISA 2027年",
             "こどもNISA いつから",
         ],
-        answer: "こどもNISAは2027年1月1日から始まります。令和8年度（2026年度）税制改正で創設され、2026年3月31日に改正法が成立して開始が確定しました。口座開設の受付は2026年秋頃から各証券会社で開始される見込みです。",
-        answerSummary: "2027年1月1日開始（確定）。口座開設は2026年秋頃から。",
+        answer: "こどもNISAは2027年1月1日から始まります。令和8年度（2026年度）税制改正で創設され、2026年3月31日に改正法が成立して開始が確定しました。口座開設の受付は、SBI証券・楽天証券・マネックス証券・松井証券・三菱UFJ eスマート証券・PayPay証券など主要ネット証券で2026年10月1日から始まります（事前受付）。申込後に金融機関と税務署の審査があり、実際の口座開設・取引開始は2027年1月以降です。",
+        answerSummary: "2027年1月1日開始（確定）。口座開設の事前受付は2026年10月1日から主要ネット証券で開始。",
         sources: ["令和8年度税制改正大綱（2025年12月26日閣議決定）"],
     },
     {
@@ -283,7 +289,7 @@ export function generateHowToSchema() {
         "@context": "https://schema.org",
         "@type": "HowTo",
         "name": "こどもNISA口座の開設方法",
-        "description": "2027年からのこどもNISA制度に向けた口座開設の手順を解説します。",
+        "description": "2027年1月開始のこどもNISA制度に向けた口座開設の手順を解説します。口座開設の事前受付は2026年10月1日から主要ネット証券で始まります。",
         "totalTime": "PT30M",
         "estimatedCost": {
             "@type": "MonetaryAmount",
@@ -301,7 +307,7 @@ export function generateHowToSchema() {
                 "@type": "HowToStep",
                 "position": 1,
                 "name": "証券会社を選ぶ",
-                "text": "SBI証券、楽天証券など、こどもNISAに対応したネット証券を選びます。手数料や使いやすさを比較しましょう。",
+                "text": "SBI証券、楽天証券、マネックス証券、松井証券、三菱UFJ eスマート証券、PayPay証券など、こどもNISAの受付開始を発表したネット証券から選びます。親権者も同じ会社に口座が必要になるのが一般的です。",
             },
             {
                 "@type": "HowToStep",
@@ -313,7 +319,7 @@ export function generateHowToSchema() {
                 "@type": "HowToStep",
                 "position": 3,
                 "name": "お子様名義の口座を開設",
-                "text": "必要書類（マイナンバー、本人確認書類）を準備し、お子様名義のこどもNISA口座を開設申請します。",
+                "text": "必要書類（お子様のマイナンバー確認書類、本人確認書類。楽天証券などはマイナンバー記載の住民票の写し）を準備し、お子様名義の未成年口座とこどもNISA口座を申し込みます。受付は2026年10月1日から。金融機関と税務署の審査を経て、口座は2027年1月以降に開設されます。",
             },
             {
                 "@type": "HowToStep",

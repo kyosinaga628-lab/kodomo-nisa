@@ -12,26 +12,28 @@ const checklistItems = [
     { id: 4, label: "メールアドレス", required: true },
     { id: 5, label: "お子様のマイナンバー", required: true },
     { id: 6, label: "お子様の健康保険証（本人確認用）", required: false },
+    { id: 7, label: "お子様のマイナンバー記載の住民票の写し（楽天証券など提出を求める会社あり）", required: false },
+    { id: 7, label: "お子様のマイナンバー記載の住民票の写し（楽天証券など提出を求める会社あり）", required: false },
 ];
 
 // タイムラインデータ
 const timeline = [
     {
-        date: "2026年 秋頃",
-        title: "口座開設受付開始（予想）",
-        description: "各証券会社でこどもNISA口座の開設受付が始まる見込み",
+        date: "2026年 10月1日",
+        title: "口座開設（事前）受付開始",
+        description: "SBI・楽天・マネックス・松井・三菱UFJ eスマート・PayPayなど主要ネット証券で受付開始。親権者の口座とお子様の未成年口座が必要",
         status: "upcoming",
     },
     {
-        date: "2026年 12月",
-        title: "初期設定・積立設定",
-        description: "積立金額、投資商品の選択、引落口座の設定",
+        date: "2026年 10〜12月",
+        title: "申込・書類提出・税務署審査",
+        description: "マイナンバー確認書類等を提出し、金融機関と税務署の審査へ。積立金額・投資商品・引落口座の設定もこの期間に",
         status: "upcoming",
     },
     {
         date: "2027年 1月",
-        title: "制度開始・初回積立",
-        description: "こどもNISA制度が正式スタート。初回の積立が実行される",
+        title: "制度開始・口座開設完了・初回積立",
+        description: "審査通過後、2027年1月以降にこどもNISA口座が開設され、初回の積立が実行される",
         status: "upcoming",
     },
     {
@@ -123,7 +125,7 @@ export default function QuickActionRoadmap({ variant = "full" }: QuickActionRoad
                     最短3ステップの実行ロードマップ
                 </h2>
                 <p className="text-[var(--color-text-secondary)] text-sm md:text-base max-w-2xl mx-auto">
-                    2027年の制度開始に向けて、今からできる準備を始めましょう。
+                    口座開設の受付は2026年10月1日開始。2027年1月の制度開始に向けて、今からできる準備を始めましょう。
                 </p>
             </div>
 
@@ -142,7 +144,7 @@ export default function QuickActionRoadmap({ variant = "full" }: QuickActionRoad
                         step: 2,
                         icon: "👶",
                         title: "子ども名義の口座を準備",
-                        description: "2026年秋頃からこどもNISA口座の開設受付が開始予定。今のうちに必要書類を揃えておく。",
+                        description: "こどもNISA口座の受付は2026年10月1日から。お子様名義の未成年口座と必要書類を今のうちに準備しておく。",
                         action: "必要書類を確認",
                         link: "#checklist"
                     },

@@ -9,7 +9,7 @@ const investmentCase = {
     disclaimer: "※これは個人の投資事例であり、投資の成果を保証するものではありません。投資は自己責任でお願いします。",
     details: {
         childAge: "0歳（2025年生まれ）",
-        startDate: "2027年1月（制度開始予定）",
+        startDate: "2027年1月（制度開始・確定）",
         monthlyAmount: "50,000円（年間上限の60万円を最大活用）",
         investmentProducts: [
             { name: "eMAXIS Slim 全世界株式（オール・カントリー）", ratio: "50%" },

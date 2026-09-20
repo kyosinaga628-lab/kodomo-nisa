@@ -37,7 +37,8 @@ npm run lint
 
 ## コンテンツの更新手順
 
-- **ホームのニュース欄**: 官公庁の新着は `auto-update-news.yml` が毎日自動追加する。
+- **ホームのニュース欄**: 官公庁の新着は `auto-update-news.yml` が毎週月曜に自動追加する
+  （リンクの http/https・末尾スラッシュの差は同一とみなして重複追加を防ぐ）。
   手動で足す場合は `src/data/news.ts` の配列の先頭に項目を追加する（表示は最新6件のみ）。
 - **記事**: `src/lib/articles.ts` に追加する。`slug` を追加すると
   `/policy-curation/[slug]` の静的ページと sitemap に自動反映される。
