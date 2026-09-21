@@ -15,6 +15,15 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 34,
+        date: "2026.09.18",
+        category: "金融庁",
+        title: "金融経済教育推進機構（J-FLEC）「家計の見える化検討会議」報告書について公表しました。",
+        excerpt: "金融庁の公式発表です。詳細はリンク先をご確認ください。",
+        href: "https://www.fsa.go.jp/news/r8/20260918/20260918.html",
+        isExternal: true,
+    },
+    {
         id: 33,
         date: "2026.09.20",
         category: "解説記事",
