@@ -15,6 +15,33 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 35,
+        date: "2026.10.30",
+        category: "日本銀行",
+        title: "当面の金融政策運営について",
+        excerpt: "日本銀行の公式発表です。詳細はリンク先をご確認ください。",
+        href: "http://www.boj.or.jp/mopo/mpmdeci/mpr_2026/k261030a.pdf",
+        isExternal: true,
+    },
+    {
+        id: 36,
+        date: "2026.10.30",
+        category: "日本銀行",
+        title: "経済・物価情勢の展望（10月、基本的見解）",
+        excerpt: "日本銀行の公式発表です。詳細はリンク先をご確認ください。",
+        href: "http://www.boj.or.jp/mopo/outlook/gor2610a.pdf",
+        isExternal: true,
+    },
+    {
+        id: 37,
+        date: "2026.10.30",
+        category: "日本銀行",
+        title: "（参考）経済・物価情勢の展望と基調的な物価上昇率に関連する各種指標",
+        excerpt: "日本銀行の公式発表です。詳細はリンク先をご確認ください。",
+        href: "http://www.boj.or.jp/mopo/mpmdeci/mpr_2026/k261030b.pdf",
+        isExternal: true,
+    },
+    {
         id: 34,
         date: "2026.09.18",
         category: "金融庁",
