@@ -23,11 +23,11 @@ export default function AlertBanner() {
                             NEW
                         </span>
                         <p className="text-white text-sm font-medium">
-                            <span className="hidden sm:inline">こどもNISA口座の受付が10月1日スタート（主要ネット証券6社） - </span>
-                            <span className="font-normal opacity-90">手続きと必要書類をチェック</span>
+                            <span className="hidden sm:inline">こどもNISAの事前受付が各社で実施中（2027年1月口座開設） - </span>
+                            <span className="font-normal opacity-90">各社キャンペーンと年内の準備をチェック</span>
                         </p>
                         <motion.a
-                            href="/policy-curation/kodomo-nisa-2026-september-update"
+                            href="/policy-curation/kodomo-nisa-2026-november-update"
                             whileHover={{ x: 3 }}
                             className="text-white text-sm font-semibold underline underline-offset-2 hover:no-underline flex items-center gap-1"
                         >

@@ -28,6 +28,113 @@ export type ArticleTag = "速報" | "深掘り" | "政府資料" | "データ分
 
 // サンプル記事データ
 export const articles: Article[] = [
+    // === 2026年11月 事前受付開始から1カ月のまとめ ===
+    {
+        id: 108,
+        slug: "kodomo-nisa-2026-november-update",
+        date: "2026.11.02",
+        category: "口座開設",
+        title: "【2026年11月最新】こどもNISAの事前受付開始から1カ月 — 各社キャンペーン比較と、年内・1月までにやること",
+        excerpt: "10月1日に主要証券各社でこどもNISAの事前受付が始まりました。各社のキャンペーンと手続きの違い、10月30日の日銀会合（政策金利1.25%据え置き）、11月2日から普通預金0.5%となったメガバンク金利、12月の税制改正大綱と2027年1月の口座開設までのスケジュールを整理します。",
+        content: `
+        <p class="lead">2026年10月1日、SBI証券・楽天証券・マネックス証券・松井証券・三菱UFJ eスマート証券・PayPay証券などで<strong>こどもNISAの事前受付</strong>が始まりました。受付開始から1カ月がたった11月2日時点で、各社のキャンペーンと手続きの違い、金利の最新状況、そして<strong>2027年1月の口座開設・積立開始までにやっておくこと</strong>をまとめます。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">1. 10月1日に始まった事前受付のおさらい</h2>
+        <p class="mb-4">事前受付は「申込みの受付」で、その場で口座ができるわけではありません。各社とも、申込み後に金融機関と税務署の審査を経て、<strong>2027年1月以降に口座開設・取引開始</strong>となる流れです。野村證券など対面証券でも受付が始まっていますが、口座開設は1月中旬以降を予定しているところもあります。</p>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+            <li>多くの会社で<strong>親権者も同じ金融機関に口座を持っていること</strong>が条件です。</li>
+            <li>こどもNISA口座は、お子様名義の<strong>未成年口座の中</strong>に作られます。</li>
+            <li>こどもNISAは<strong>金融機関の変更ができない</strong>とされています。最初の1社選びが重要です。</li>
+        </ul>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">2. 各社のキャンペーンと特徴（2026年10月の発表・報道より）</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse my-4 text-sm">
+                <thead>
+                    <tr class="bg-gray-100">
+                        <th class="border border-gray-300 px-3 py-2 text-left font-semibold">証券会社</th>
+                        <th class="border border-gray-300 px-3 py-2 text-left font-semibold">主なキャンペーン・特徴</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="border border-gray-300 px-3 py-2 align-top"><strong>楽天証券</strong></td><td class="border border-gray-300 px-3 py-2 align-top">口座開設で子・親それぞれ1,000円、最大5,000円。楽天銀行でも同様のプレゼントあり</td></tr>
+                    <tr class="bg-gray-50"><td class="border border-gray-300 px-3 py-2 align-top"><strong>SBI証券</strong></td><td class="border border-gray-300 px-3 py-2 align-top">口座開設とクイズ正解、こども口座でのエントリーで現金2,000円など</td></tr>
+                    <tr><td class="border border-gray-300 px-3 py-2 align-top"><strong>マネックス証券</strong></td><td class="border border-gray-300 px-3 py-2 align-top">新規口座開設でdポイント（期間・用途限定）7,000ポイント。一部のドコモショップで対面サポート</td></tr>
+                    <tr class="bg-gray-50"><td class="border border-gray-300 px-3 py-2 align-top"><strong>三菱UFJ eスマート証券</strong></td><td class="border border-gray-300 px-3 py-2 align-top">新規開設とクイズ正解で2,000円。対象取引で最大5万円が当たる抽選</td></tr>
+                    <tr><td class="border border-gray-300 px-3 py-2 align-top"><strong>PayPay証券</strong></td><td class="border border-gray-300 px-3 py-2 align-top">100円から積立可能。12〜17歳はお子様本人が申込み可能</td></tr>
+                    <tr class="bg-gray-50"><td class="border border-gray-300 px-3 py-2 align-top"><strong>松井証券</strong></td><td class="border border-gray-300 px-3 py-2 align-top">口座開設申込の「予約受付」。申込後に郵送される書類の返送が必要</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-sm text-gray-500 mt-2">※各社の発表・報道（2026年10月）に基づく。キャンペーンには期間・条件があり、変更・終了する場合があります。最新の内容は各社のサイトでご確認ください。</p>
+        <p class="mb-4">キャンペーン額の差は数千円程度です。金融機関を変更できない以上、<strong>18年使い続ける前提で、取扱ファンド・最低積立額・親の口座との連携のしやすさ</strong>を優先して選ぶのがおすすめです。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">3. 金利の最新状況 — 日銀は10月会合で据え置き</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse my-4 text-sm">
+                <tbody>
+                    <tr class="bg-gray-100"><th class="border border-gray-300 px-3 py-2 text-left font-semibold">日銀10月会合（10月29〜30日）</th><td class="border border-gray-300 px-3 py-2 align-top">政策金利<strong>1.25%程度で据え置き</strong>（賛成8・反対1。高田委員が1.5%への利上げを提案し否決）</td></tr>
+                    <tr><th class="border border-gray-300 px-3 py-2 text-left font-semibold">物価の判断</th><td class="border border-gray-300 px-3 py-2 align-top">展望リポートで、基調的な物価上昇率が2%目標と整合的な水準に達したとの判断を示す</td></tr>
+                    <tr class="bg-gray-100"><th class="border border-gray-300 px-3 py-2 text-left font-semibold">メガバンク普通預金</th><td class="border border-gray-300 px-3 py-2 align-top">11月2日から<strong>0.5%</strong>（ゆうちょ銀行は11月9日から）</td></tr>
+                    <tr><th class="border border-gray-300 px-3 py-2 text-left font-semibold">次の注目点</th><td class="border border-gray-300 px-3 py-2 align-top">12月の金融政策決定会合。民間の調査では12月に1.5%への利上げを予想する見方が多い</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="mb-4">預金金利は上がりましたが、月3万円を18年間積み立てた場合、普通預金（年0.5%）で<strong>約678万円</strong>、全世界株式（年5%想定）で<strong>約1,047万円</strong>と、長期では差が大きく開きます（元本648万円、税引前。投資は元本割れのリスクがあります）。数年以内に使う教育費は預金、10年以上先の大学費用はこどもNISAで、という使い分けは変わりません。詳しくは<a href="/policy-curation/boj-rate-hike-2026-september-kodomo-nisa" class="text-blue-600 hover:underline">預金と積立の使い分けの記事</a>と<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>をご覧ください。</p>
+
+        <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">4. 2027年1月までのスケジュール</h2>
+        <ol class="list-decimal list-inside space-y-2 mb-6">
+            <li><strong>11月〜12月</strong>：まだの方は金融機関を決めて事前申込み。郵送書類がある会社は早めに返送</li>
+            <li><strong>12月</strong>：与党の令和9年度税制改正大綱が公表予定。NISAの非課税枠の復活時期の見直しなど、金融庁要望の採否が決まります（こどもNISAの年間60万円・総額600万円の枠組みを変える要望は出ていません）</li>
+            <li><strong>2027年1月1日</strong>：こどもNISA制度スタート。税務署の審査を経て、順次口座が開設されます</li>
+            <li><strong>口座開設後</strong>：積立設定が反映され、つみたて投資枠の対象ファンドで積立開始</li>
+        </ol>
+
+        <div class="bg-emerald-50 p-5 rounded-lg my-6 border-l-4 border-emerald-500">
+            <h4 class="font-bold text-emerald-800 mb-2">年内にやっておきたいチェックリスト</h4>
+            <ul class="list-disc list-inside text-emerald-900 text-sm space-y-1">
+                <li>親権者の証券口座と、お子様の未成年口座の開設が済んでいるか</li>
+                <li>こどもNISAの申込みと、必要書類（マイナンバー記載の住民票の写し等）の提出が済んでいるか</li>
+                <li>積立額（年間上限60万円＝月5万円まで）と、引落しに使う口座を決めたか</li>
+                <li>投資先のインデックスファンド（全世界株式など）を決めたか</li>
+                <li>児童手当の振込口座と積立の原資をどうするか、家族で話し合ったか</li>
+            </ul>
+        </div>
+
+        <div class="bg-yellow-50 p-5 rounded-lg my-6 border-l-4 border-yellow-500">
+            <h4 class="font-bold text-yellow-800 mb-2">ご注意</h4>
+            <p class="text-yellow-900 text-sm">本記事は2026年11月2日時点の各社の発表・報道と日本銀行の公表内容に基づいています。キャンペーンの条件や口座開設時期は各社の最新の案内をご確認ください。本記事は特定の金融商品・金融機関の推奨ではありません。</p>
+        </div>
+
+        <hr class="my-8 border-gray-200">
+
+        <h3 class="text-lg font-bold mb-2">参考資料</h3>
+        <ul class="text-sm text-gray-600 space-y-1">
+            <li><a href="https://www.watch.impress.co.jp/docs/news/2144840.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">こどもNISA、口座開設の事前申込が各社でスタート - Impress Watch（2026年10月1日）</a></li>
+            <li><a href="https://info.monex.co.jp/news/2026/20261001_04.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">「こどもNISA」の事前申込受付を開始 - マネックス証券（2026年10月1日）</a></li>
+            <li><a href="https://go.sbisec.co.jp/media/report/nisa_dojo/nisa_dojo_260924.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">こどもNISAのQ&amp;Aまとめ - SBI証券</a></li>
+            <li><a href="https://news.web.nhk/newsweb/na/nd-20261030de68221" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">日銀 政策金利据え置き 物価2％「ひとつの節目」 - NHK（2026年10月30日）</a></li>
+            <li><a href="https://www.dlri.co.jp/report/macro/672292.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">日銀金融政策決定会合（2026年10月） - 第一生命経済研究所</a></li>
+            <li><a href="https://www.boj.or.jp/mopo/mpmdeci/index.htm" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">金融政策決定会合の決定内容 - 日本銀行</a></li>
+        </ul>
+        `,
+        featured: true,
+        importance: 5,
+        tags: ["速報", "口座開設", "実践ガイド"],
+        tldr: "こどもNISAの事前受付は2026年10月1日に主要証券各社で開始。各社キャンペーンは数千円規模（楽天最大5,000円、マネックスdポイント7,000、SBI・三菱UFJ eスマート2,000円など）。金融機関は変更できないため取扱商品と使い勝手で選ぶのが基本。日銀は10月30日に政策金利1.25%を据え置き（8対1）、メガバンク普通預金は11月2日から0.5%。12月に税制改正大綱、2027年1月に口座開設・積立開始。",
+        keyTakeaways: [
+            "事前受付は10月1日から。口座開設・積立開始は税務署審査を経て2027年1月以降",
+            "キャンペーン差は数千円。金融機関は変更できないので18年使う前提で選ぶ",
+            "日銀は10月会合で1.25%据え置き、普通預金は11月2日から0.5%。長期の積立は引き続き投資が有利"
+        ],
+        author: {
+            name: "こどもNISA研究所",
+            title: "編集部"
+        },
+        readTime: 7,
+        thumbnail: "/images/articles/official.png"
+    },
+
     // === 2026年9月 日銀利上げ（1.25%）と預金金利 ===
     {
         id: 107,
@@ -143,7 +250,7 @@ export const articles: Article[] = [
         id: 106,
         slug: "kodomo-nisa-2026-september-update",
         date: "2026.09.18",
-        dateModified: "2026.09.20",
+        dateModified: "2026.11.02",
         category: "口座開設",
         title: "【2026年9月最新】こどもNISAの口座開設受付が10月1日スタート — 主要ネット証券6社の手続きと今やるべき準備",
         excerpt: "SBI証券・楽天証券・マネックス証券・松井証券・三菱UFJ eスマート証券・PayPay証券が2026年10月1日からこどもNISA口座の（事前）受付を開始します。各社の発表内容、必要書類、税務署審査を経て2027年1月に口座が開設されるまでの流れと、金利1.0%時代の預金・投資の考え方を整理します。",
@@ -212,7 +319,7 @@ export const articles: Article[] = [
             </div>
         </div>
         <p class="text-sm text-gray-500 text-center mt-2">※元本648万円。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
-        <p class="mb-4">数年以内に使う教育費は預金に、18歳まで使わない分はこどもNISAで積み立てる、という使い分けが基本です。<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>では最新の金利前提（普通預金0.4%）で預金と投資の差を確認できます。</p>
+        <p class="mb-4">数年以内に使う教育費は預金に、18歳まで使わない分はこどもNISAで積み立てる、という使い分けが基本です。<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>では最新の金利前提（普通預金0.5%）で預金と投資の差を確認できます。受付開始後の各社キャンペーンと年内の準備は<a href="/policy-curation/kodomo-nisa-2026-november-update" class="text-blue-600 hover:underline">11月最新まとめ</a>をご覧ください。</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">5. 金融庁の令和9年度税制改正要望 — こどもNISAの枠組みに変更なし</h2>
         <p class="mb-4">金融庁は8月31日に令和9年度（2027年度）税制改正要望を公表しました。NISA関連では、売却した非課税保有限度額の「当年中の復活」（継続要望）や、つみたて投資枠の対象ETFの拡充が挙げられています。こどもNISAの年間60万円・限度額600万円・2027年1月開始という枠組みを変える要望は含まれておらず、予定どおり準備を進めて問題ありません。採否は2026年12月の与党税制改正大綱で決まります。</p>
@@ -246,7 +353,7 @@ export const articles: Article[] = [
             <li><a href="https://www.boj.or.jp/mopo/mpmdeci/index.htm" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">金融政策決定会合の決定内容 - 日本銀行</a></li>
         </ul>
         `,
-        featured: true,
+        featured: false,
         importance: 5,
         tags: ["速報", "口座開設", "制度解説"],
         tldr: "主要ネット証券6社（SBI・楽天・マネックス・松井・三菱UFJ eスマート・PayPay）が2026年10月1日からこどもNISA口座の（事前）受付を開始。親権者口座→未成年口座→こどもNISA口座の順に申し込み、金融機関と税務署の審査を経て2027年1月以降に開設。市況は日銀政策金利1.25%（9月18日利上げ）、メガバンク普通預金0.4%→11月2日から0.5%。",

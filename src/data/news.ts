@@ -15,6 +15,15 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 38,
+        date: "2026.11.02",
+        category: "解説記事",
+        title: "【2026年11月最新】こどもNISAの事前受付開始から1カ月 — 各社キャンペーン比較と、年内・1月までにやること",
+        excerpt: "10月1日に主要証券各社で始まった事前受付のキャンペーンと手続きの違い、日銀10月会合の据え置き、11月2日から普通預金0.5%となった金利状況、2027年1月の口座開設までのスケジュールを整理しました。",
+        href: "/policy-curation/kodomo-nisa-2026-november-update",
+        isExternal: false,
+    },
+    {
         id: 35,
         date: "2026.10.30",
         category: "日本銀行",

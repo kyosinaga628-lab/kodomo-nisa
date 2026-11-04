@@ -13,7 +13,6 @@ const checklistItems = [
     { id: 5, label: "お子様のマイナンバー", required: true },
     { id: 6, label: "お子様の健康保険証（本人確認用）", required: false },
     { id: 7, label: "お子様のマイナンバー記載の住民票の写し（楽天証券など提出を求める会社あり）", required: false },
-    { id: 7, label: "お子様のマイナンバー記載の住民票の写し（楽天証券など提出を求める会社あり）", required: false },
 ];
 
 // タイムラインデータ
@@ -21,14 +20,14 @@ const timeline = [
     {
         date: "2026年 10月1日",
         title: "口座開設（事前）受付開始",
-        description: "SBI・楽天・マネックス・松井・三菱UFJ eスマート・PayPayなど主要ネット証券で受付開始。親権者の口座とお子様の未成年口座が必要",
-        status: "upcoming",
+        description: "SBI・楽天・マネックス・松井・三菱UFJ eスマート・PayPayなど主要ネット証券で受付開始済み。親権者の口座とお子様の未成年口座が必要",
+        status: "completed",
     },
     {
         date: "2026年 10〜12月",
         title: "申込・書類提出・税務署審査",
         description: "マイナンバー確認書類等を提出し、金融機関と税務署の審査へ。積立金額・投資商品・引落口座の設定もこの期間に",
-        status: "upcoming",
+        status: "current",
     },
     {
         date: "2027年 1月",
@@ -125,7 +124,7 @@ export default function QuickActionRoadmap({ variant = "full" }: QuickActionRoad
                     最短3ステップの実行ロードマップ
                 </h2>
                 <p className="text-[var(--color-text-secondary)] text-sm md:text-base max-w-2xl mx-auto">
-                    口座開設の受付は2026年10月1日開始。2027年1月の制度開始に向けて、今からできる準備を始めましょう。
+                    口座開設の事前受付は2026年10月1日から各社で実施中。2027年1月の制度開始に向けて、年内に申込みを済ませておきましょう。
                 </p>
             </div>
 
@@ -144,7 +143,7 @@ export default function QuickActionRoadmap({ variant = "full" }: QuickActionRoad
                         step: 2,
                         icon: "👶",
                         title: "子ども名義の口座を準備",
-                        description: "こどもNISA口座の受付は2026年10月1日から。お子様名義の未成年口座と必要書類を今のうちに準備しておく。",
+                        description: "こどもNISA口座の事前受付を実施中（2026年10月1日〜）。お子様名義の未成年口座を開設し、必要書類を提出する。",
                         action: "必要書類を確認",
                         link: "#checklist"
                     },

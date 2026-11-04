@@ -34,29 +34,35 @@ export default function ContactForm() {
         setStatus("submitting");
         setErrorMessage("");
 
+        let response: Response;
         try {
-            const response = await fetch("/api/contact", {
+            response = await fetch("/api/contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
             });
+        } catch {
+            setStatus("error");
+            setErrorMessage("通信に失敗しました。インターネット接続をご確認のうえ、再度お試しください。");
+            return;
+        }
 
-            const result = await response.json();
+        // エラー時にHTMLが返ってきても落ちないよう、JSONの解析失敗は許容する
+        const result: { error?: string } = await response.json().catch(() => ({}));
 
-            if (!response.ok) {
-                throw new Error(result.error || "送信に失敗しました");
-            }
-
-            setStatus("success");
-            setFormData({ name: "", email: "", subject: "", message: "" });
-        } catch (error) {
+        if (!response.ok) {
             setStatus("error");
             setErrorMessage(
-                error instanceof Error ? error.message : "送信に失敗しました"
+                result.error ||
+                    "送信に失敗しました。お手数ですが、時間をおいて再度お試しください。"
             );
+            return;
         }
+
+        setStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
     };
 
     const inputClasses =
@@ -125,6 +131,7 @@ export default function ContactForm() {
                                     required
                                     value={formData.name}
                                     onChange={handleChange}
+                                    maxLength={100}
                                     placeholder="山田 太郎"
                                     className={inputClasses}
                                 />
@@ -185,6 +192,7 @@ export default function ContactForm() {
                                 name="message"
                                 required
                                 rows={5}
+                                maxLength={5000}
                                 value={formData.message}
                                 onChange={handleChange}
                                 placeholder="お問い合わせ内容をご記入ください"
