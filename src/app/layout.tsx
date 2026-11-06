@@ -6,7 +6,7 @@ import AlertBanner from "@/components/AlertBanner";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import ConditionalLayout from "@/components/ConditionalLayout";
-import { generateOrganizationSchema } from "@/lib/seo";
+import { generateOrganizationSchema, OG_IMAGE } from "@/lib/seo";
 
 const notoSans = Noto_Sans_JP({
   variable: "--font-noto-sans",
@@ -57,20 +57,11 @@ export const metadata: Metadata = {
     siteName: "こどもNISA研究所",
     type: "website",
     locale: "ja_JP",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "こどもNISA研究所 - 子どもの未来のための資産形成",
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "こども（子供）NISA研究所 | 子どもの未来のための資産形成シミュレーター",
-    description: "2027年1月開始のこども（子供）NISA制度を徹底解説。シミュレーターで将来の資産を可視化。何歳でいくら貯まる？",
-    images: ["/og-image.png"],
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,

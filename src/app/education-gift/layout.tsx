@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
     title: "教育資金ギフト",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
         description: "シミュレーション結果とメッセージをPDFにまとめてプレゼント。",
         url: "https://www.kodomo-nisa.jp/education-gift",
         type: "website",
+        images: [OG_IMAGE],
     },
 };
 

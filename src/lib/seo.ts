@@ -21,6 +21,14 @@ export const SITE_AUTHOR: AuthorInfo = {
     bio: "大手シンクタンク出身の政策専門家が主宰。政府の政策形成プロセスに携わった経験を活かし、子どもの資産形成に関する情報発信を行っています。政府公認ではない民間の立場から、本音の解説を提供。"
 };
 
+// 共有時の画像。子ルートの openGraph は親を丸ごと置き換えるため、各 layout でも指定する
+export const OG_IMAGE = {
+    url: "/og-image.png",
+    width: 1200,
+    height: 630,
+    alt: "こどもNISA研究所",
+};
+
 export const SITE_INFO = {
     name: "こどもNISA研究所",
     alternateName: "KODOMO-NISA.JP",

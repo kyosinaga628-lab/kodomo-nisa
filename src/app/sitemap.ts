@@ -105,8 +105,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ];
 
-    // 記事詳細ページ（articles.ts から自動生成）
-    const articlePages = articles.map((article) => ({
+    // 記事詳細ページ（articles.ts から自動生成。本文のない記事は noindex なので含めない）
+    const articlePages = articles.filter((article) => article.content).map((article) => ({
         url: `${baseUrl}/policy-curation/${article.slug}`,
         lastModified: new Date((article.dateModified ?? article.date).replace(/\./g, '-')),
         changeFrequency: 'monthly' as const,
