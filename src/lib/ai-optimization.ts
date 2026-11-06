@@ -4,8 +4,8 @@
 // シミュレーター計算根拠のメタデータ
 export const CALCULATOR_METADATA = {
     name: "こどもNISAシミュレーター",
-    version: "1.2.0",
-    lastUpdated: "2026-11-02",
+    version: "1.3.0",
+    lastUpdated: "2026-11-06",
 
     // 計算根拠
     calculationBasis: {

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowIcon } from "@/components/common/ui";
 
 // チェックリスト項目
 const checklistItems = [
@@ -43,6 +43,27 @@ const timeline = [
     },
 ];
 
+const steps = [
+    {
+        title: "証券口座を開設",
+        description: "まず親名義の証券口座を開設。SBI証券や楽天証券などネット証券がおすすめ。",
+        action: "口座開設はこちら",
+        link: "#affiliate",
+    },
+    {
+        title: "子ども名義の口座を準備",
+        description: "こどもNISA口座の事前受付を実施中（2026年10月1日〜）。お子様名義の未成年口座を開設し、必要書類を提出する。",
+        action: "必要書類を確認",
+        link: "#checklist",
+    },
+    {
+        title: "積立設定をして開始",
+        description: "月額5万円（年60万円）を目安に積立設定。2027年1月から自動で積立スタート。",
+        action: "シミュレーション",
+        link: "/simulator",
+    },
+];
+
 interface QuickActionRoadmapProps {
     variant?: "full" | "compact";
 }
@@ -58,211 +79,124 @@ export default function QuickActionRoadmap({ variant = "full" }: QuickActionRoad
         );
     };
 
-    const completedCount = checkedItems.length;
     const requiredCount = checklistItems.filter(item => item.required).length;
     const requiredCompleted = checklistItems.filter(item => item.required && checkedItems.includes(item.id)).length;
 
     if (variant === "compact") {
         return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="card-base p-4 md:p-6 bg-gradient-to-br from-[var(--color-emerald)]/5 to-transparent"
-            >
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-[var(--color-emerald)] flex items-center justify-center">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 className="font-semibold text-[var(--color-text-primary)] text-sm md:text-base">
-                            今すぐ始めたい方へ
-                        </h3>
-                        <p className="text-xs text-[var(--color-text-muted)]">
-                            3ステップで準備完了
-                        </p>
-                    </div>
-                </div>
-                <div className="flex gap-2 mb-4">
-                    {[1, 2, 3].map((step) => (
-                        <div key={step} className="flex-1 text-center p-2 bg-white rounded-lg">
-                            <div className="w-6 h-6 rounded-full bg-[var(--color-emerald)]/20 text-[var(--color-emerald)] text-xs font-bold flex items-center justify-center mx-auto mb-1">
-                                {step}
-                            </div>
-                            <p className="text-xs text-[var(--color-text-secondary)]">
-                                {step === 1 ? "口座開設" : step === 2 ? "子ども口座" : "積立開始"}
-                            </p>
-                        </div>
+            <div className="card-base p-5 md:p-6">
+                <h3 className="heading-card">今すぐ始めたい方へ</h3>
+                <p className="note mt-1 mb-4">3ステップで準備完了</p>
+                <ol className="flex gap-4 mb-4 text-[0.875rem]">
+                    {["口座開設", "子ども口座", "積立開始"].map((label, index) => (
+                        <li key={label} className="flex-1">
+                            <span className="figure block text-[1.125rem] text-[var(--color-text-muted)]">{index + 1}</span>
+                            {label}
+                        </li>
                     ))}
-                </div>
-                <Link href="/about#roadmap" className="block">
-                    <button className="w-full py-2 text-sm font-medium text-[var(--color-emerald)] bg-[var(--color-emerald)]/10 rounded-lg hover:bg-[var(--color-emerald)]/20 transition-colors">
-                        詳細を見る →
-                    </button>
+                </ol>
+                <Link href="/about#roadmap" className="link-arrow">
+                    詳細を見る
+                    <ArrowIcon />
                 </Link>
-            </motion.div>
+            </div>
         );
     }
 
     return (
-        <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="card-base p-6 md:p-10"
-            id="roadmap"
-        >
-            {/* Header */}
-            <div className="text-center mb-8 md:mb-10">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-emerald)]/10 text-[var(--color-emerald)] mb-4">
-                    ⚡ 今すぐ始めたい方へ
-                </span>
-                <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] mb-4">
-                    最短3ステップの実行ロードマップ
-                </h2>
-                <p className="text-[var(--color-text-secondary)] text-sm md:text-base max-w-2xl mx-auto">
+        <div id="roadmap">
+            <div className="max-w-[44rem]">
+                <h3 className="text-[1.5rem] md:text-[1.75rem]">最短3ステップの実行ロードマップ</h3>
+                <p className="mt-3 text-[var(--color-text-secondary)]">
                     口座開設の事前受付は2026年10月1日から各社で実施中。2027年1月の制度開始に向けて、年内に申込みを済ませておきましょう。
                 </p>
             </div>
 
             {/* 3 Steps */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10">
-                {[
-                    {
-                        step: 1,
-                        icon: "🏦",
-                        title: "証券口座を開設",
-                        description: "まず親名義の証券口座を開設。SBI証券や楽天証券などネット証券がおすすめ。",
-                        action: "口座開設はこちら",
-                        link: "#affiliate"
-                    },
-                    {
-                        step: 2,
-                        icon: "👶",
-                        title: "子ども名義の口座を準備",
-                        description: "こどもNISA口座の事前受付を実施中（2026年10月1日〜）。お子様名義の未成年口座を開設し、必要書類を提出する。",
-                        action: "必要書類を確認",
-                        link: "#checklist"
-                    },
-                    {
-                        step: 3,
-                        icon: "💹",
-                        title: "積立設定をして開始",
-                        description: "月額5万円（年60万円）を目安に積立設定。2027年1月から自動で積立スタート。",
-                        action: "シミュレーション",
-                        link: "/simulator"
-                    }
-                ].map((item, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="relative bg-white p-5 md:p-6 rounded-xl border border-[var(--glass-border)]"
-                    >
-                        <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-[var(--color-emerald)] text-white font-bold flex items-center justify-center text-sm">
-                            {item.step}
-                        </div>
-                        <div className="text-3xl mb-3">{item.icon}</div>
-                        <h3 className="font-semibold text-[var(--color-text-primary)] mb-2 text-sm md:text-base">
-                            {item.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-[var(--color-text-secondary)] mb-4">
-                            {item.description}
-                        </p>
-                        <Link href={item.link}>
-                            <span className="text-xs md:text-sm font-medium text-[var(--color-emerald)] hover:underline">
-                                {item.action} →
-                            </span>
+            <ol className="mt-8 md:mt-10 grid md:grid-cols-3 md:gap-10 border-t border-[var(--color-line-strong)]">
+                {steps.map((item, index) => (
+                    <li key={item.title} className="py-5 md:py-6 border-b md:border-b-0 border-[var(--color-line)] flex flex-col">
+                        <span className="figure text-[1.75rem] text-[var(--color-text-muted)]" aria-hidden="true">{index + 1}</span>
+                        <h4 className="heading-card mt-1">{item.title}</h4>
+                        <p className="mt-1.5 mb-3 text-[0.9375rem] text-[var(--color-text-secondary)]">{item.description}</p>
+                        <Link href={item.link} className="link-arrow mt-auto">
+                            {item.action}
+                            <ArrowIcon />
                         </Link>
-                    </motion.div>
+                    </li>
                 ))}
-            </div>
+            </ol>
 
-            {/* Checklist */}
-            <div className="mb-10" id="checklist">
-                <h3 className="font-semibold text-[var(--color-text-primary)] mb-4 text-sm md:text-base flex items-center gap-2">
-                    ✅ 準備物チェックリスト
-                    <span className="text-xs font-normal text-[var(--color-text-muted)]">
-                        ({requiredCompleted}/{requiredCount} 必須項目)
-                    </span>
-                </h3>
-                <div className="bg-white rounded-xl border border-[var(--glass-border)] divide-y divide-[var(--glass-border)]">
-                    {checklistItems.map((item) => (
-                        <label
-                            key={item.id}
-                            className="flex items-center gap-3 p-4 cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors"
-                        >
-                            <input
-                                type="checkbox"
-                                checked={checkedItems.includes(item.id)}
-                                onChange={() => toggleCheck(item.id)}
-                                className="w-5 h-5 rounded border-2 border-[var(--color-royal-blue)] text-[var(--color-emerald)] focus:ring-[var(--color-emerald)]"
-                            />
-                            <span className={`flex-1 text-sm ${checkedItems.includes(item.id) ? "text-[var(--color-text-muted)] line-through" : "text-[var(--color-text-primary)]"}`}>
-                                {item.label}
-                            </span>
-                            {item.required && (
-                                <span className="text-xs px-2 py-0.5 bg-red-100 text-red-600 rounded">必須</span>
-                            )}
-                        </label>
-                    ))}
-                </div>
-                {requiredCompleted === requiredCount && (
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="mt-4 p-4 bg-[var(--color-emerald)]/10 rounded-xl text-center"
-                    >
-                        <p className="text-[var(--color-emerald)] font-semibold">
-                            🎉 必須項目すべて準備完了！口座開設の準備ができました。
-                        </p>
-                    </motion.div>
-                )}
-            </div>
-
-            {/* Timeline */}
-            <div>
-                <h3 className="font-semibold text-[var(--color-text-primary)] mb-4 text-sm md:text-base">
-                    📅 2027年制度開始までのスケジュール
-                </h3>
-                <div className="relative">
-                    {/* Timeline line */}
-                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-[var(--color-royal-blue)]/20" />
-
-                    <div className="space-y-4">
+            <div className="mt-10 md:mt-14 grid lg:grid-cols-2 gap-10 lg:gap-14">
+                {/* Timeline */}
+                <div>
+                    <h4 className="heading-card pb-3 border-b border-[var(--color-line-strong)]">2027年制度開始までのスケジュール</h4>
+                    <ol className="mt-5">
                         {timeline.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative pl-10"
-                            >
-                                {/* Timeline dot */}
-                                <div className="absolute left-2 top-1 w-5 h-5 rounded-full bg-[var(--color-royal-blue)] border-4 border-white shadow" />
-
-                                <div className="bg-white p-4 rounded-xl border border-[var(--glass-border)]">
-                                    <p className="text-xs font-medium text-[var(--color-royal-blue)] mb-1">
-                                        {item.date}
-                                    </p>
-                                    <h4 className="font-semibold text-[var(--color-text-primary)] text-sm md:text-base mb-1">
-                                        {item.title}
-                                    </h4>
-                                    <p className="text-xs text-[var(--color-text-secondary)]">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </motion.div>
+                            <li key={item.date} className="relative pl-7 pb-6 last:pb-0">
+                                {index < timeline.length - 1 && (
+                                    <span className="absolute left-[5px] top-3 bottom-0 w-px bg-[var(--color-line-strong)]" aria-hidden="true" />
+                                )}
+                                <span
+                                    className={`absolute left-0 top-[0.45rem] w-[11px] h-[11px] rounded-full border-2 ${item.status === "completed"
+                                        ? "bg-[var(--color-royal-blue)] border-[var(--color-royal-blue)]"
+                                        : item.status === "current"
+                                            ? "bg-[var(--color-accent)] border-[var(--color-accent)]"
+                                            : "bg-[var(--color-bg-secondary)] border-[var(--color-line-strong)]"
+                                        }`}
+                                    aria-hidden="true"
+                                />
+                                <p className="flex items-center gap-2 text-xs font-medium text-[var(--color-text-secondary)]">
+                                    <span className="tnum">{item.date}</span>
+                                    {item.status === "current" && <span className="font-bold text-[var(--color-accent)]">いまここ</span>}
+                                    {item.status === "completed" && <span className="text-[var(--color-text-muted)]">完了</span>}
+                                </p>
+                                <h5 className="font-sans font-semibold text-[0.9375rem] mt-0.5">{item.title}</h5>
+                                <p className="note mt-0.5">{item.description}</p>
+                            </li>
                         ))}
+                    </ol>
+                </div>
+
+                {/* Checklist */}
+                <div id="checklist">
+                    <h4 className="heading-card pb-3 border-b border-[var(--color-line-strong)] flex items-baseline justify-between gap-3">
+                        準備物チェックリスト
+                        <span className="font-sans font-normal text-xs text-[var(--color-text-muted)] tnum flex-shrink-0">
+                            必須 {requiredCompleted}/{requiredCount}
+                        </span>
+                    </h4>
+                    <div>
+                        {checklistItems.map((item) => {
+                            const checked = checkedItems.includes(item.id);
+                            return (
+                                <label
+                                    key={item.id}
+                                    className="flex items-start gap-3 py-3 border-b border-[var(--color-line)] cursor-pointer"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        checked={checked}
+                                        onChange={() => toggleCheck(item.id)}
+                                        className="w-[18px] h-[18px] mt-[3px] flex-shrink-0 accent-[var(--color-royal-blue)]"
+                                    />
+                                    <span className={`flex-1 text-[0.9375rem] leading-relaxed ${checked ? "text-[var(--color-text-muted)] line-through" : ""}`}>
+                                        {item.label}
+                                    </span>
+                                    <span className={`chip flex-shrink-0 mt-0.5 ${item.required ? "" : "chip-outline"}`}>
+                                        {item.required ? "必須" : "任意"}
+                                    </span>
+                                </label>
+                            );
+                        })}
                     </div>
+                    {requiredCompleted === requiredCount && (
+                        <p className="mt-4 text-[0.9375rem] font-semibold text-[var(--color-emerald)]" role="status">
+                            必須項目すべて準備完了。口座開設の準備ができました。
+                        </p>
+                    )}
                 </div>
             </div>
-        </motion.section>
+        </div>
     );
 }

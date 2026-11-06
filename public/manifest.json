@@ -4,8 +4,8 @@
     "description": "こどもNISA制度を徹底解説。シミュレーターで将来の資産を可視化。",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#1E40AF",
+    "background_color": "#FAF9F5",
+    "theme_color": "#14283F",
     "orientation": "portrait-primary",
     "icons": [
         {

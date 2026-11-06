@@ -1,6 +1,8 @@
-"use client";
+import { calculateNISA, formatCurrency } from "@/lib/calculator";
 
-import { motion } from "framer-motion";
+// 2025年生まれ・2027年1月開始（開始時1歳）、月5万円で10年後に600万円の上限へ到達する前提で試算する
+const estimateAtEighteen = (expectedReturn: number) =>
+    formatCurrency(calculateNISA({ monthlyAmount: 50000, childAge: 1, expectedReturn }).finalValue);
 
 // 主催者の実際の投資事例
 const investmentCase = {
@@ -11,13 +13,14 @@ const investmentCase = {
         childAge: "0歳（2025年生まれ）",
         startDate: "2027年1月（制度開始・確定）",
         monthlyAmount: "50,000円（年間上限の60万円を最大活用）",
+        contributionPeriod: "10年間（2027〜2036年）。600万円の非課税保有限度額に到達後は積立せず、18歳まで運用のみ",
         investmentProducts: [
             { name: "eMAXIS Slim 全世界株式（オール・カントリー）", ratio: "50%" },
             { name: "iFreeETF JPXプライム150", ratio: "50%" },
         ],
         strategy: "毎月定額の積立投資（ドルコスト平均法）・2銘柄に1:1で分散",
         expectedReturn: "年5〜7%（長期平均リターン想定）",
-        goal: "18歳時点で約1,500万円〜2,000万円の教育資金形成",
+        goal: `18歳時点で約${estimateAtEighteen(5)}〜${estimateAtEighteen(7)}の教育資金形成（年5〜7%で運用できた場合）`,
     },
     reasoning: [
         {
@@ -30,115 +33,69 @@ const investmentCase = {
         },
         {
             title: "なぜ1:1で分散するか",
-            content: "「オルカン」で世界全体（主に米国中心）の成長を確保しつつ、「JPXプライム150」で日本の優良企業の成長を取り込む。地域分散によりリスクを軽減しながら、日本経済への応援投資も兼ねた18年の長期運用戦略。"
+            content: "「オルカン」で世界全体（主に米国中心）の成長を確保しつつ、「JPXプライム150」で日本の優良企業の成長を取り込む。地域分散によりリスクを軽減しながら、日本経済への応援投資も兼ねた、18歳までの長期運用戦略。"
         },
         {
-            title: "18年後の想定シナリオ",
-            content: "オルカン（年5%）+ JPXプライム150（年6%想定）の平均5.5%で運用した場合、18歳時点で約1,700万円に。大学4年間の学費（約800万円）と留学・大学院などの選択肢を確保。日本経済の復活と世界経済の成長、両方の恩恵を受けられるポートフォリオ。"
+            title: "18歳時点の想定シナリオ",
+            content: `オルカン（年5%）+ JPXプライム150（年6%想定）の平均5.5%で運用した場合、10年目に非課税保有限度額の600万円へ到達し、その後は運用のみを続けて18歳時点で約${estimateAtEighteen(5.5)}に。大学4年間の学費（約800万円）に備えつつ、留学・大学院などの選択肢も検討できる水準です。日本経済の復活と世界経済の成長、両方の恩恵を受けられるポートフォリオ。`
         },
     ]
 };
 
 export default function InvestmentCase() {
+    const { details } = investmentCase;
+    const rows = [
+        ["子どもの年齢", details.childAge],
+        ["投資開始予定", details.startDate],
+        ["月額積立額", details.monthlyAmount],
+        ["積立期間", details.contributionPeriod],
+        ["投資戦略", details.strategy],
+        ["期待リターン", details.expectedReturn],
+        ["18歳時点の目標", details.goal],
+    ];
+
     return (
-        <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="card-base p-6 md:p-10 bg-gradient-to-br from-[var(--color-royal-blue)]/5 to-[var(--color-emerald)]/5"
-        >
-            <div className="flex items-start gap-4 mb-6">
-                <div className="flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-[var(--color-royal-blue)]/10 flex items-center justify-center">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-royal-blue)" strokeWidth="2" className="md:w-8 md:h-8">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
-                    </svg>
-                </div>
+        <section>
+            <h2 className="heading-section !text-[1.375rem] md:!text-[1.625rem]">{investmentCase.title}</h2>
+            <p className="mt-2 text-[0.9375rem] text-[var(--color-text-secondary)] max-w-[42rem]">{investmentCase.description}</p>
+
+            <div className="mt-6 grid lg:grid-cols-2 gap-x-14 gap-y-8">
                 <div>
-                    <h2 className="font-serif text-xl md:text-2xl font-semibold text-[var(--color-text-primary)]">
-                        {investmentCase.title}
-                    </h2>
-                    <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-                        {investmentCase.description}
-                    </p>
-                </div>
-            </div>
-
-            {/* Investment Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="p-4 bg-white rounded-xl border border-[var(--glass-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-1">子どもの年齢</p>
-                    <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{investmentCase.details.childAge}</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-[var(--glass-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-1">投資開始予定</p>
-                    <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{investmentCase.details.startDate}</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-[var(--glass-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-1">月額積立額</p>
-                    <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{investmentCase.details.monthlyAmount}</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-[var(--glass-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-1">投資戦略</p>
-                    <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{investmentCase.details.strategy}</p>
-                </div>
-            </div>
-
-            {/* Investment Products */}
-            <div className="mb-6">
-                <p className="text-xs text-[var(--color-text-muted)] mb-3">投資商品（1:1比率で分散）</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {investmentCase.details.investmentProducts.map((product, index) => (
-                        <div key={index} className="p-4 bg-gradient-to-r from-[var(--color-royal-blue)]/10 to-transparent rounded-xl border border-[var(--color-royal-blue)]/20">
-                            <div className="flex items-center justify-between mb-1">
-                                <span className="text-xs font-semibold text-[var(--color-royal-blue)]">{product.ratio}</span>
+                    <dl className="ledger">
+                        {rows.map(([label, value]) => (
+                            <div key={label} className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-3 py-3">
+                                <dt className="note pt-0.5">{label}</dt>
+                                <dd className="text-[0.9375rem] font-medium leading-relaxed">{value}</dd>
                             </div>
-                            <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{product.name}</p>
+                        ))}
+                    </dl>
+
+                    <h3 className="font-sans font-semibold text-[0.875rem] mt-6 mb-2">投資商品（1:1比率で分散）</h3>
+                    <div className="flex gap-[2px] h-2" aria-hidden="true">
+                        <div className="flex-1 bg-[var(--color-royal-blue)]" />
+                        <div className="flex-1 bg-[var(--chart-principal)]" />
+                    </div>
+                    <ul className="mt-2 grid sm:grid-cols-2 gap-x-4 gap-y-2 text-[0.875rem]">
+                        {details.investmentProducts.map((product) => (
+                            <li key={product.name}>
+                                <span className="tnum font-semibold">{product.ratio}</span>
+                                <span className="block text-[var(--color-text-secondary)]">{product.name}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="space-y-5">
+                    {investmentCase.reasoning.map((reason) => (
+                        <div key={reason.title}>
+                            <h3 className="heading-card">{reason.title}</h3>
+                            <p className="mt-1 text-[0.875rem] leading-relaxed text-[var(--color-text-secondary)]">{reason.content}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Expected Returns */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                <div className="p-4 bg-white rounded-xl border border-[var(--glass-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-1">期待リターン</p>
-                    <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{investmentCase.details.expectedReturn}</p>
-                </div>
-                <div className="p-4 bg-white rounded-xl border border-[var(--glass-border)]">
-                    <p className="text-xs text-[var(--color-text-muted)] mb-1">18歳時点の目標</p>
-                    <p className="text-sm md:text-base font-medium text-[var(--color-text-primary)]">{investmentCase.details.goal}</p>
-                </div>
-            </div>
-
-            {/* Reasoning */}
-            <div className="space-y-4 mb-6">
-                {investmentCase.reasoning.map((reason, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="p-4 bg-white rounded-xl border-l-4 border-[var(--color-royal-blue)]"
-                    >
-                        <h4 className="font-semibold text-[var(--color-royal-blue)] mb-2 text-sm md:text-base">
-                            {reason.title}
-                        </h4>
-                        <p className="text-xs md:text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                            {reason.content}
-                        </p>
-                    </motion.div>
-                ))}
-            </div>
-
-            {/* Disclaimer */}
-            <div className="p-4 bg-yellow-50 rounded-xl border border-yellow-200">
-                <p className="text-xs text-yellow-800">
-                    {investmentCase.disclaimer}
-                </p>
-            </div>
-        </motion.section>
+            <p className="notice-caution mt-7">{investmentCase.disclaimer}</p>
+        </section>
     );
 }

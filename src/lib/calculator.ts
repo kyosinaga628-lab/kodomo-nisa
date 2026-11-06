@@ -9,10 +9,10 @@ export interface SimulationInput {
 
 export interface SimulationResult {
     totalInvestment: number;    // 投資元本
-    finalValue: number;         // 最終評価額
-    totalGain: number;          // 運用益
-    taxSaved: number;           // 節税額（約20%）
-    yearlyData: YearlyData[];   // 年別データ
+    finalValue: number;         // 18歳時点の評価額
+    totalGain: number;          // 18歳時点の運用益
+    taxSaved: number;           // 18歳時点の節税額（約20%）
+    yearlyData: YearlyData[];   // 年別データ（18歳以降も運用を続けた場合の5年分を含む）
     investmentYears: number;    // 実際の投資可能年数
     limitReachedYear: number | null; // 600万円上限到達年
 }
@@ -122,7 +122,12 @@ export function calculateNISA(input: SimulationInput): SimulationResult {
         });
     }
 
-    // 18歳到達後も成人NISAで運用継続（追加で5年分表示）
+    // 結果は積立期間の終わり（18歳到達時点）を基準にする
+    const finalValue = Math.round(currentValue);
+    const totalGain = finalValue - totalInvested;
+    const taxSaved = Math.round(totalGain * TAX_RATE);
+
+    // 18歳到達後も成人NISAで運用継続（グラフ表示用に追加で5年分）
     for (let year = investmentYears + 1; year <= investmentYears + 5; year++) {
         const currentAge = childAge + year - 1;
 
@@ -142,10 +147,6 @@ export function calculateNISA(input: SimulationInput): SimulationResult {
         });
     }
 
-    const finalValue = Math.round(currentValue);
-    const totalGain = finalValue - totalInvested;
-    const taxSaved = Math.round(totalGain * TAX_RATE);
-
     return {
         totalInvestment: Math.round(totalInvested),
         finalValue,
@@ -164,16 +165,22 @@ export function generateComparisonData(monthlyAmount: number, years: number): Co
     let bankValue = 0;
     let globalValue = 0;
     let highYieldValue = 0;
+    let totalInvested = 0;
 
     const bankMonthlyRate = BANK_RATE / 100 / 12;
     const globalMonthlyRate = GLOBAL_STOCK_RATE / 100 / 12;
     const highYieldMonthlyRate = HIGH_YIELD_BANK_RATE / 100 / 12;
 
     for (let year = 1; year <= years; year++) {
+        // calculateNISA と同じく年間・保有の上限を適用し、3つとも同じ元本で比べる
+        const yearlyInvestment = Math.min(monthlyAmount * 12, ANNUAL_LIMIT, TOTAL_LIMIT - totalInvested);
+        const monthlyInvestment = yearlyInvestment / 12;
+        totalInvested += yearlyInvestment;
+
         for (let month = 0; month < 12; month++) {
-            bankValue = (bankValue + monthlyAmount) * (1 + bankMonthlyRate);
-            globalValue = (globalValue + monthlyAmount) * (1 + globalMonthlyRate);
-            highYieldValue = (highYieldValue + monthlyAmount) * (1 + highYieldMonthlyRate);
+            bankValue = (bankValue + monthlyInvestment) * (1 + bankMonthlyRate);
+            globalValue = (globalValue + monthlyInvestment) * (1 + globalMonthlyRate);
+            highYieldValue = (highYieldValue + monthlyInvestment) * (1 + highYieldMonthlyRate);
         }
 
         data.push({
@@ -212,7 +219,7 @@ export function getExpertComment(expectedReturn: number): {
         return {
             title: "世界経済の標準成長シナリオ",
             comment: "この利回りは、全世界株式インデックスファンドの長期平均リターンに相当します。",
-            context: "過去30年の全世界株式の平均リターンは年率約5〜7%です。こどもNISAで最も多く選ばれる「オルカン」などのインデックスファンドが該当します。",
+            context: "過去30年の全世界株式の平均リターンは年率約5〜7%です。「オルカン」などの全世界株式インデックスファンドが該当します。",
             riskLevel: "medium"
         };
     } else if (expectedReturn <= 8) {

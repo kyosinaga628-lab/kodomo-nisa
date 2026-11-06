@@ -79,29 +79,30 @@ export default function Home() {
 
       <HeroSection />
 
+      <StorySection />
+
       {/* Persona-based Navigation */}
       <PersonaSelector />
 
-      <StorySection />
-
       {/* Future Prediction Section */}
-      <div className="py-16 md:py-24 bg-[var(--color-bg)]">
-        <div className="container-width px-4">
+      <section className="section bg-[var(--color-bg)]">
+        <div className="container-width">
           <FuturePrediction />
         </div>
-      </div>
+      </section>
+
+      <NewsSection />
 
       {/* FAQ Section */}
       <FAQSection />
 
       {/* Affiliate Section */}
-      <div className="py-16 md:py-24 bg-[var(--color-bg-secondary)]">
-        <div className="container-width px-4">
+      <section className="py-14 md:py-20 bg-[var(--color-bg-secondary)]">
+        <div className="container-width">
           <AffiliateBanner />
         </div>
-      </div>
+      </section>
 
-      <NewsSection />
       <CTASection />
     </>
   );

@@ -2,172 +2,856 @@
 
 /* ===================================
    こどもNISA研究所 - Design System
-   Sophisticated & Trustworthy
+   「研究所の年次報告書」: 紙・藍・常磐・罫線
    =================================== */
 
 :root {
-  /* Primary Colors */
-  --color-bg: #FDFBF7;
-  --color-bg-secondary: #F7F5F0;
-  --color-royal-blue: #1E3A8A;
-  --color-royal-blue-light: #3B5CB8;
-  --color-royal-blue-dark: #152a66;
-  --color-emerald: #059669;
-  --color-emerald-light: #10B981;
-  --color-emerald-dark: #047857;
+  /* Surfaces */
+  --color-bg: #FAF9F5;
+  --color-bg-secondary: #F2F0E9;
+  --color-surface: #FFFFFF;
 
-  /* Text Colors */
-  --color-text-primary: #1F2937;
-  --color-text-secondary: #6B7280;
-  --color-text-muted: #9CA3AF;
+  /* Brand: 藍（信頼・構造）/ 常磐（増えるもの）/ 朱（要点のみ・ごく少量） */
+  --color-royal-blue: #1E3A5F;
+  --color-royal-blue-light: #2F5583;
+  --color-royal-blue-dark: #14283F;
+  --color-emerald: #0B6E55;
+  --color-emerald-light: #2B9377;
+  --color-emerald-dark: #085440;
+  --color-accent: #B8432A;
+
+  /* Text */
+  --color-text-primary: #17202C;
+  --color-text-secondary: #465162;
+  --color-text-muted: #667080;
   --color-text-inverse: #FFFFFF;
 
-  /* Shadows - Physically Correct & Atmospheric */
-  --shadow-sm: 0 1px 2px 0 rgba(30, 58, 138, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(30, 58, 138, 0.08), 0 2px 4px -2px rgba(30, 58, 138, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(30, 58, 138, 0.1), 0 4px 6px -4px rgba(30, 58, 138, 0.06);
-  --shadow-xl: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 8px 10px -6px rgba(30, 58, 138, 0.05);
-  --shadow-card: 0 1px 3px 0 rgba(30, 58, 138, 0.08), 0 1px 2px -1px rgba(30, 58, 138, 0.08);
+  /* Lines */
+  --color-line: #E3DFD5;
+  --color-line-strong: #C9C4B6;
 
-  /* Glassmorphism Refined */
-  --glass-bg: rgba(253, 251, 247, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-shine: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  /* Notice */
+  --color-caution-bg: #FBF4E2;
+  --color-caution-line: #E6D5A8;
+  --color-caution-text: #6E4A00;
 
-  /* Transitions */
+  /* Chart series (validated, see chart components) */
+  --chart-principal: #5C8AC8;
+  --chart-gain: #00795B;
+  --chart-grid: #ECE9E1;
+
+  /* Shadows: 紙の上に一枚置いた程度 */
+  --shadow-sm: 0 1px 2px rgba(23, 32, 44, 0.04);
+  --shadow-md: 0 2px 8px -2px rgba(23, 32, 44, 0.08);
+  --shadow-lg: 0 12px 28px -12px rgba(23, 32, 44, 0.16);
+  --shadow-xl: 0 24px 48px -24px rgba(23, 32, 44, 0.22);
+  --shadow-card: 0 1px 2px rgba(23, 32, 44, 0.03);
+
+  /* Legacy aliases used across components */
+  --glass-bg: rgba(250, 249, 245, 0.92);
+  --glass-border: var(--color-line);
+
+  /* Motion */
   --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 200ms;
-  --duration-normal: 400ms;
-  --duration-slow: 700ms;
+  --duration-fast: 160ms;
+  --duration-normal: 280ms;
+  --duration-slow: 600ms;
 
-  /* Spacing */
-  --header-height: 72px;
-  --banner-height: 44px;
+  /* Layout */
+  --header-height: 64px;
+  --banner-height: 38px;
+
+  /* next/font が設定する前の既定値（読み込み失敗時も書体を維持する） */
+  --font-noto-sans: 'Noto Sans JP';
+  --font-noto-serif: 'Noto Serif JP';
 }
 
 @theme inline {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text-primary);
-  --font-sans: var(--font-noto-sans);
-  --font-serif: var(--font-noto-serif);
+  --font-sans: var(--font-noto-sans), 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --font-serif: var(--font-noto-serif), 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  /* 日本語の 12px は読みにくいため、最小サイズを 13px にする */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.6;
 }
 
 /* ===================================
-   Base Styles
+   Base
+   utilities が必ず勝つよう @layer base に置く
    =================================== */
 
-* {
-  box-sizing: border-box;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-height) + var(--banner-height) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+    font-feature-settings: "palt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+    color: var(--color-text-primary);
+    text-wrap: balance;
+    word-break: auto-phrase;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a,
+  button,
+  summary,
+  [role="tab"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-royal-blue-light);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: rgba(30, 58, 95, 0.16);
+    color: var(--color-text-primary);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-body {
-  background: var(--color-bg);
-  color: var(--color-text-primary);
-  font-family: var(--font-noto-sans), 'Noto Sans JP', sans-serif;
-  line-height: 1.8;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "palt" 1;
-  /* Typography refinement */
-  letter-spacing: 0.03em;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ===================================
-   Typography
+   Components
    =================================== */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
-  font-weight: 600;
-  line-height: 1.4;
+@layer components {
+
+  /* --- Layout --- */
+  .container-width {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .section {
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .section-rule {
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* 見出しを左、本文を右に置く報告書型の 2 カラム */
+  .split {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 960px) {
+    .split {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: 4rem;
+    }
+
+    .split-sticky {
+      position: sticky;
+      top: calc(var(--header-height) + var(--banner-height) + 2rem);
+      align-self: start;
+    }
+  }
+
+  .page-top {
+    padding-top: calc(var(--header-height) + var(--banner-height) + clamp(2rem, 5vw, 4rem));
+    padding-bottom: clamp(4rem, 8vw, 6rem);
+  }
+
+  /* --- Typography --- */
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .kicker::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .heading-hero {
+    font-size: clamp(2.25rem, 1.35rem + 3.4vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.28;
+    letter-spacing: 0.005em;
+  }
+
+  .heading-section {
+    font-size: clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .heading-card {
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .text-body,
+  .lead {
+    font-size: 1.0625rem;
+    line-height: 1.9;
+    color: var(--color-text-secondary);
+  }
+
+  .text-caption {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .note {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  /* 金額・数値: 明朝 + 等幅数字 */
+  .figure {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: 0;
+    line-height: 1.15;
+  }
+
+  .figure-unit {
+    font-size: 0.5em;
+    font-weight: 500;
+    margin-left: 0.1em;
+  }
+
+  .tnum {
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* --- Surfaces --- */
+  .card-base {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .panel-tint {
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+  }
+
+  .notice-caution {
+    background: var(--color-caution-bg);
+    border: 1px solid var(--color-caution-line);
+    border-radius: 8px;
+    color: var(--color-caution-text);
+    font-size: 0.875rem;
+    line-height: 1.75;
+    padding: 0.875rem 1rem;
+  }
+
+  /* 引用・要約などの左罫 */
+  .rule-left {
+    border-left: 2px solid var(--color-royal-blue);
+    padding-left: 1.25rem;
+  }
+
+  /* --- Lists: 罫線で区切る台帳 --- */
+  .ledger > * {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .ledger > *:last-child {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .data-table th {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-align: left;
+    padding: 0.625rem 0.75rem 0.625rem 0;
+    border-bottom: 1px solid var(--color-line-strong);
+  }
+
+  .data-table td {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    border-bottom: 1px solid var(--color-line);
+    vertical-align: top;
+  }
+
+  .data-table .num {
+    text-align: right;
+    white-space: nowrap;
+    padding-right: 0;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .data-table tfoot td {
+    font-weight: 600;
+    border-top: 1px solid var(--color-line-strong);
+    border-bottom: none;
+  }
+
+  /* --- Buttons --- */
+  .btn-primary,
+  .btn-secondary,
+  .btn-inverse,
+  .btn-ghost-inverse {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.625rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease, color var(--duration-fast) ease;
+  }
+
+  .btn-primary {
+    background: var(--color-royal-blue);
+    color: var(--color-text-inverse);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-royal-blue-dark);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-royal-blue);
+    border-color: var(--color-line-strong);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-royal-blue);
+    background: var(--color-surface);
+  }
+
+  .btn-inverse {
+    background: var(--color-bg);
+    color: var(--color-royal-blue-dark);
+  }
+
+  .btn-inverse:hover {
+    background: #FFFFFF;
+  }
+
+  .btn-ghost-inverse {
+    color: var(--color-text-inverse);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .btn-ghost-inverse:hover {
+    border-color: #FFFFFF;
+  }
+
+  .btn-sm {
+    min-height: 2.5rem;
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  /* 矢印付きのテキストリンク */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-royal-blue);
+    text-underline-offset: 0.25em;
+  }
+
+  .link-arrow:hover {
+    text-decoration: underline;
+  }
+
+  .link-arrow svg {
+    transition: transform var(--duration-fast) ease;
+  }
+
+  .link-arrow:hover svg {
+    transform: translateX(2px);
+  }
+
+  /* --- Chips: 色数を増やさないラベル --- */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.0625rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.6;
+    white-space: nowrap;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    border-radius: 3px;
+  }
+
+  .chip-outline {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px var(--color-line-strong);
+  }
+
+  /* --- Tabs: 下線式 --- */
+  .tabs {
+    display: flex;
+    gap: 1.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--color-line-strong);
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    position: relative;
+    flex-shrink: 0;
+    padding: 0.75rem 0 0.875rem;
+    text-align: left;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .tab:hover {
+    color: var(--color-text-primary);
+  }
+
+  .tab[aria-selected="true"],
+  .tab[aria-pressed="true"] {
+    color: var(--color-royal-blue);
+    font-weight: 600;
+  }
+
+  .tab[aria-selected="true"]::after,
+  .tab[aria-pressed="true"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--color-royal-blue);
+  }
+
+  /* --- Segmented presets --- */
+  .preset {
+    min-height: 2.25rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 4px;
+    transition: all var(--duration-fast) ease;
+  }
+
+  .preset:hover {
+    border-color: var(--color-royal-blue);
+    color: var(--color-royal-blue);
+  }
+
+  .preset[aria-pressed="true"] {
+    background: var(--color-royal-blue);
+    border-color: var(--color-royal-blue);
+    color: var(--color-text-inverse);
+  }
+
+  /* --- Range: 塗りつぶし幅は --fill で渡す --- */
+  .range {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 28px;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    --fill: 0%;
+  }
+
+  .range::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--color-royal-blue) var(--fill), var(--color-line-strong) var(--fill));
+  }
+
+  .range::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-line-strong);
+  }
+
+  .range::-moz-range-progress {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-royal-blue);
+  }
+
+  .range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    margin-top: -9px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--color-royal-blue);
+    box-shadow: var(--shadow-md);
+    transition: box-shadow var(--duration-fast) ease;
+  }
+
+  .range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--color-royal-blue);
+    box-shadow: var(--shadow-md);
+  }
+
+  .range:hover::-webkit-slider-thumb,
+  .range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 6px rgba(30, 58, 95, 0.12);
+  }
+
+  .range:focus-visible {
+    outline: none;
+  }
+
+  /* --- Forms --- */
+  .input-field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.625rem 0.875rem;
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+  }
+
+  .input-field::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .input-field:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  .input-field:focus {
+    border-color: var(--color-royal-blue);
+    box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+  }
+
+  .input-label {
+    display: block;
+    margin-bottom: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  /* --- 方眼紙の背景 --- */
+  .graph-paper {
+    background-image:
+      linear-gradient(to right, rgba(30, 58, 95, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 58, 95, 0.045) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 92%);
+  }
+
+  /* --- Editorial (legacy names kept for shared use) --- */
+  .editorial-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.625rem, 1.25rem + 1.6vw, 2.375rem);
+    font-weight: 600;
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+
+  .editorial-subhead {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .editorial-caption {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  /* アコーディオンの開閉 */
+  .collapsible {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows var(--duration-normal) var(--ease-smooth), visibility var(--duration-normal);
+  }
+
+  .collapsible[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+
+  .collapsible > * {
+    overflow: hidden;
+    min-height: 0;
+  }
+}
+
+/* ===================================
+   Article body
+   本文 HTML は articles.ts 内で Tailwind クラス付きの文字列として持っているため、
+   記事ごとの揺れをここで吸収する（レイヤー外なので utilities より優先される）
+   =================================== */
+
+.article-body {
+  font-size: 1.0625rem;
+  line-height: 2;
   color: var(--color-text-primary);
-  font-feature-settings: "palt" 1;
-  text-wrap: balance;
-  /* Balance refinement */
 }
 
-.heading-hero {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.article-body > * + * {
+  margin-top: 1.25rem;
 }
 
-.heading-section {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.heading-card {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.text-body {
+.article-body .lead {
   font-size: 1.125rem;
-  line-height: 1.8;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 }
 
-.text-caption {
-  font-size: 0.875rem;
+.article-body h2 {
+  font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.625rem) !important;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-text-primary) !important;
+  margin-top: 3.5rem !important;
+  margin-bottom: 1rem !important;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-line-strong);
+}
+
+.article-body h3 {
+  font-size: 1.1875rem !important;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--color-text-primary) !important;
+  margin-top: 2.25rem !important;
+  margin-bottom: 0.625rem !important;
+}
+
+.article-body h4 {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.article-body a {
+  color: var(--color-royal-blue-light) !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+.article-body a:hover {
+  color: var(--color-royal-blue-dark) !important;
+}
+
+.article-body strong {
+  font-weight: 700;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.25em;
+  list-style-position: outside !important;
+}
+
+.article-body ul {
+  list-style-type: disc;
+}
+
+.article-body ol {
+  list-style-type: decimal;
+}
+
+.article-body li + li {
+  margin-top: 0.5rem;
+}
+
+.article-body li::marker {
   color: var(--color-text-muted);
 }
 
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--color-line);
+  margin-block: 2.5rem;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  background: transparent;
+}
+
+.article-body th,
+.article-body td {
+  border: none !important;
+  border-bottom: 1px solid var(--color-line) !important;
+  padding: 0.75rem 1rem 0.75rem 0 !important;
+  text-align: left;
+  vertical-align: top;
+  min-width: 6em;
+}
+
+.article-body table tr,
+.article-body table tr[class] {
+  background: transparent !important;
+}
+
+.article-body th {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-line-strong) !important;
+}
+
+/* 記事内の注意・補足ボックスを、色を抑えた 3 種に揃える */
+.article-body [class*="border-l-4"] {
+  border-width: 0 0 0 2px !important;
+  border-radius: 0 6px 6px 0 !important;
+  padding: 1rem 1.25rem !important;
+  font-size: 0.9875rem;
+  line-height: 1.85;
+}
+
+.article-body [class*="bg-yellow-50"] {
+  background: var(--color-caution-bg) !important;
+  border-color: #B98A1F !important;
+}
+
+.article-body [class*="bg-emerald-50"] {
+  background: #EEF5F1 !important;
+  border-color: var(--color-emerald) !important;
+}
+
+.article-body [class*="bg-blue-50"] {
+  background: #EEF2F6 !important;
+  border-color: var(--color-royal-blue) !important;
+}
+
+.article-body [class*="bg-gray-50"] {
+  background: var(--color-bg-secondary) !important;
+  border-color: transparent !important;
+  border-radius: 8px;
+}
+
+.article-body [class*="text-yellow-"],
+.article-body [class*="text-emerald-"],
+.article-body [class*="text-blue-8"],
+.article-body [class*="text-blue-9"] {
+  color: var(--color-text-primary) !important;
+}
+
+/* html2canvas は 1px の GIF を文字に並べて基準線を測る。Tailwind の img { display: block } で
+   GIF が次の行に落ちるとギフトPDFの文字がすべて下にずれるため、インラインに戻す */
+img[src^="data:image/gif"] {
+  display: inline;
+}
+
 /* ===================================
-   Animations
+   Animations (kids pages use these)
    =================================== */
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse-subtle {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
-}
-
-@keyframes countUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(16px);
   }
 
   to {
@@ -177,203 +861,7 @@ h6 {
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s var(--ease-smooth) forwards;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.4s var(--ease-smooth) forwards;
-}
-
-@keyframes aurora {
-  0% {
-    transform: rotate(0deg) scale(1.5);
-  }
-
-  50% {
-    transform: rotate(180deg) scale(1.2);
-  }
-
-  100% {
-    transform: rotate(360deg) scale(1.5);
-  }
-}
-
-@keyframes aurora-reverse {
-  0% {
-    transform: rotate(0deg) scale(1.2);
-  }
-
-  50% {
-    transform: rotate(-180deg) scale(1.5);
-  }
-
-  100% {
-    transform: rotate(-360deg) scale(1.2);
-  }
-}
-
-.animate-aurora {
-  animation: aurora 20s linear infinite;
-}
-
-.animate-aurora-reverse {
-  animation: aurora-reverse 25s linear infinite;
-}
-
-/* ===================================
-   Utility Classes
-   =================================== */
-
-.container-width {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.glass-effect {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.card-base {
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
-  border: 1px solid rgba(31, 41, 55, 0.06);
-  transition: all var(--duration-normal) var(--ease-smooth);
-}
-
-.card-base:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: var(--color-royal-blue);
-  color: var(--color-text-inverse);
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-smooth);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-  background: var(--color-royal-blue-light);
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-1px);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-sm);
-}
-
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: transparent;
-  color: var(--color-royal-blue);
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: 12px;
-  border: 2px solid var(--color-royal-blue);
-  cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-smooth);
-}
-
-.btn-secondary:hover {
-  background: var(--color-royal-blue);
-  color: var(--color-text-inverse);
-}
-
-/* ===================================
-   Form Elements (Stripe-like)
-   =================================== */
-
-.input-field {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-size: 1rem;
-  background: #FFFFFF;
-  border: 2px solid #E5E7EB;
-  border-radius: 10px;
-  transition: all var(--duration-fast) var(--ease-smooth);
-  outline: none;
-}
-
-.input-field:hover {
-  border-color: #D1D5DB;
-}
-
-.input-field:focus {
-  border-color: var(--color-royal-blue);
-  box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
-}
-
-.input-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-/* ===================================
-   Editorial Typography (NYT/FT-like)
-   =================================== */
-
-.editorial-heading {
-  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
-.editorial-subhead {
-  font-family: var(--font-noto-sans), 'Noto Sans JP', sans-serif;
-  font-size: 1.125rem;
-  font-weight: 400;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
-
-.editorial-body {
-  font-family: var(--font-noto-serif), 'Noto Serif JP', serif;
-  font-size: 1.125rem;
-  line-height: 1.9;
-  color: var(--color-text-primary);
-}
-
-.editorial-caption {
-  font-family: var(--font-noto-sans), 'Noto Sans JP', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-text-muted);
-}
-
-/* ===================================
-   Selection
-   =================================== */
-
-::selection {
-  background: rgba(30, 58, 138, 0.15);
-  color: var(--color-text-primary);
+  animation: fadeInUp 0.5s var(--ease-smooth) forwards;
 }
 
 /* ===================================
@@ -381,18 +869,20 @@ h6 {
    =================================== */
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
-  border-radius: 4px;
+  background: var(--color-line-strong);
+  border: 2px solid var(--color-bg);
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: var(--color-text-muted);
 }

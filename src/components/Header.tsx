@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
-import { div as MotionDiv, span as MotionSpan } from "framer-motion/client";
+import { usePathname } from "next/navigation";
 import AuthorityBadge from "@/components/common/AuthorityBadge";
+import { LogoMark } from "@/components/common/ui";
 
 interface NavGroup {
     label: string;
@@ -25,25 +25,52 @@ const navGroups: NavGroup[] = [
         items: [
             { href: "/guide", label: "こどもNISAとは", description: "制度の概要を解説" },
             { href: "/policy-curation", label: "記事・ガイド", description: "政策解説・おすすめ記事" },
-            { href: "/kids", label: "🎓 キッズページ", description: "小学生向けの学習コンテンツ" },
+            { href: "/kids", label: "キッズページ", description: "小学生向けの学習コンテンツ" },
             { href: "/about", label: "私たちについて", description: "サイトの紹介" },
         ],
     },
 ];
 
+const navLinkClass =
+    "px-3 py-2 text-[0.9375rem] font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors";
+
+// /fear-greed/ は Next のルートではない静的アプリなので通常のリンクにする
+function NavLink({ href, ...props }: React.ComponentProps<"a"> & { href: string }) {
+    return href.startsWith("/fear-greed") ? <a href={href} {...props} /> : <Link href={href} {...props} />;
+}
+
 export default function Header() {
+    const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener("scroll", handleScroll);
+        const handleScroll = () => setScrolled(window.scrollY > 8);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    useEffect(() => {
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setOpenDropdown(null);
+                setMobileMenuOpen(false);
+            }
+        };
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, []);
+
+    // メニュー表示中は背面をスクロールさせない
+    useEffect(() => {
+        document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [mobileMenuOpen]);
 
     const handleMouseEnter = (label: string) => {
         if (dropdownTimeoutRef.current) {
@@ -58,81 +85,31 @@ export default function Header() {
         }, 150);
     };
 
+    const closeMenus = () => {
+        setOpenDropdown(null);
+        setMobileMenuOpen(false);
+    };
+
+    const isSolid = scrolled || mobileMenuOpen;
+
     return (
         <header
-            className={`fixed top-[var(--banner-height)] left-0 right-0 z-40 transition-all duration-500 ease-smooth ${scrolled
-                ? "glass-effect shadow-md"
-                : "bg-transparent"
+            className={`fixed top-[var(--banner-height)] left-0 right-0 z-40 border-b transition-colors duration-200 ${isSolid
+                ? "bg-[var(--color-bg)] border-[var(--color-line)]"
+                : "bg-transparent border-transparent"
                 }`}
-            style={{
-                height: "var(--header-height)",
-                background: scrolled ? "var(--glass-bg)" : "transparent",
-                backdropFilter: scrolled ? "blur(12px) saturate(180%)" : "none",
-                borderBottom: scrolled ? "1px solid var(--glass-border)" : "none",
-            }}
+            style={{ height: "var(--header-height)" }}
         >
-            <div className="absolute inset-0 pointer-events-none opacity-50 mix-blend-overlay noise-bg"></div>
-            <div className="container-width h-full flex items-center justify-between relative z-10">
-                {/* Logo + Authority Badge */}
-                <div className="flex items-center gap-4">
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <MotionDiv
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--color-royal-blue)] to-[var(--color-emerald)] flex items-center justify-center">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    className="text-white"
-                                >
-                                    <path
-                                        d="M12 2L2 7L12 12L22 7L12 2Z"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M2 17L12 22L22 17"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M2 12L12 17L22 12"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </div>
-                            <span className="font-serif font-bold text-xl tracking-tight text-[var(--color-text-primary)]">
-                                こどもNISA研究所
-                            </span>
-                        </MotionDiv>
-                    </Link>
-                    <div className="hidden lg:block">
-                        <AuthorityBadge />
-                    </div>
-                </div>
+            <div className="container-width h-full flex items-center justify-between">
+                <Link href="/" className="flex items-center gap-2.5" onClick={closeMenus}>
+                    <LogoMark />
+                    <span className="font-serif font-semibold text-[1.125rem] md:text-[1.1875rem] tracking-[0.02em] text-[var(--color-text-primary)]">
+                        こどもNISA研究所
+                    </span>
+                </Link>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-1 lg:gap-2 whitespace-nowrap">
-                    {/* Home Link */}
-                    <Link
-                        href="/"
-                        className="px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-royal-blue)]/5 transition-all duration-300"
-                    >
-                        ホーム
-                    </Link>
-
-                    {/* Dropdown Menus */}
+                <nav className="hidden md:flex items-center gap-0.5 lg:gap-1 whitespace-nowrap" aria-label="メインメニュー">
                     {navGroups.map((group) => (
                         <div
                             key={group.label}
@@ -141,10 +118,10 @@ export default function Header() {
                             onMouseLeave={handleMouseLeave}
                         >
                             <button
-                                className={`flex items-center gap-1 px-3 lg:px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${openDropdown === group.label
-                                    ? "text-[var(--color-text-primary)] bg-[var(--color-royal-blue)]/5"
-                                    : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
-                                    }`}
+                                aria-expanded={openDropdown === group.label}
+                                aria-haspopup="true"
+                                onClick={() => setOpenDropdown(openDropdown === group.label ? null : group.label)}
+                                className={`${navLinkClass} flex items-center gap-1 ${openDropdown === group.label ? "!text-[var(--color-text-primary)]" : ""}`}
                             >
                                 {group.label}
                                 <svg
@@ -154,177 +131,98 @@ export default function Header() {
                                     fill="none"
                                     stroke="currentColor"
                                     strokeWidth="2"
-                                    className={`transition-transform duration-200 ${openDropdown === group.label ? "rotate-180" : ""
-                                        }`}
+                                    aria-hidden="true"
+                                    className={`transition-transform duration-150 ${openDropdown === group.label ? "rotate-180" : ""}`}
                                 >
                                     <path d="M6 9l6 6 6-6" />
                                 </svg>
                             </button>
 
-                            <AnimatePresence>
-                                {openDropdown === group.label && (
-                                    <MotionDiv
-                                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                                        transition={{ duration: 0.15 }}
-                                        className="absolute top-full left-0 mt-2 py-2 w-56 bg-white rounded-xl shadow-xl border border-[var(--glass-border)] overflow-hidden"
-                                    >
+                            {openDropdown === group.label && (
+                                <div className="absolute top-full left-0 pt-2">
+                                    <div className="py-2 w-64 bg-[var(--color-surface)] rounded-lg shadow-[var(--shadow-lg)] border border-[var(--color-line)]">
                                         {group.items.map((item) => (
-                                            <Link
+                                            <NavLink
                                                 key={item.href}
                                                 href={item.href}
-                                                className="block px-4 py-3 hover:bg-[var(--color-bg-secondary)] transition-colors"
+                                                onClick={closeMenus}
+                                                className="block px-4 py-2.5 hover:bg-[var(--color-bg)] transition-colors"
                                             >
-                                                <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                                                <span className="block text-[0.9375rem] font-medium leading-snug text-[var(--color-text-primary)]">
                                                     {item.label}
-                                                </p>
+                                                </span>
                                                 {item.description && (
-                                                    <p className="text-xs text-[var(--color-text-muted)] mt-0.5">
+                                                    <span className="block text-xs text-[var(--color-text-muted)] mt-0.5">
                                                         {item.description}
-                                                    </p>
+                                                    </span>
                                                 )}
-                                            </Link>
+                                            </NavLink>
                                         ))}
-                                    </MotionDiv>
-                                )}
-                            </AnimatePresence>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ))}
 
-                    {/* Contact Link */}
-                    <Link
-                        href="/contact"
-                        className="px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-royal-blue)]/5 transition-all duration-300"
-                    >
+                    <Link href="/contact" className={navLinkClass}>
                         お問い合わせ
                     </Link>
 
-                    {/* CTA Buttons */}
-                    <div className="flex items-center gap-2 ml-1 lg:ml-2">
-                        <Link href="/kids">
-                            <MotionDiv
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="flex items-center justify-center h-10 px-3 lg:px-4 rounded-full bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 shadow-md cursor-pointer"
-                                title="キッズページへ"
-                            >
-                                <span className="text-white font-bold text-sm tracking-wide">キッズ</span>
-                            </MotionDiv>
-                        </Link>
-                        <Link href="/simulator">
-                            <MotionSpan
-                                whileHover={{ scale: 1.02, boxShadow: "0 10px 20px -5px rgba(30, 58, 138, 0.2)" }}
-                                whileTap={{ scale: 0.98 }}
-                                className="btn-primary py-2.5 px-4 lg:px-6 text-sm inline-block whitespace-nowrap"
-                            >
-                                シミュレーション開始
-                            </MotionSpan>
-                        </Link>
-                    </div>
+                    <Link href="/simulator" className="btn-primary btn-sm ml-2 lg:ml-3">
+                        シミュレーター
+                    </Link>
                 </nav>
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden p-2 rounded-lg hover:bg-[var(--color-bg-secondary)] transition-colors"
+                    className="md:hidden w-11 h-11 -mr-2 flex items-center justify-center"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    aria-label="メニューを開く"
+                    aria-label={mobileMenuOpen ? "メニューを閉じる" : "メニューを開く"}
+                    aria-expanded={mobileMenuOpen}
                 >
-                    <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                    >
-                        {mobileMenuOpen ? (
-                            <path d="M18 6L6 18M6 6l12 12" />
-                        ) : (
-                            <path d="M3 12h18M3 6h18M3 18h18" />
-                        )}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" aria-hidden="true">
+                        {mobileMenuOpen ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M4 8h16M4 16h16" />}
                     </svg>
                 </button>
             </div>
 
             {/* Mobile Menu */}
-            <AnimatePresence>
-                {mobileMenuOpen && (
-                    <MotionDiv
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden glass-effect border-t border-[var(--glass-border)]"
-                    >
-                        <nav className="container-width py-4 flex flex-col gap-1">
-                            {/* Home */}
-                            <Link
-                                href="/"
-                                className="px-4 py-3 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] font-medium transition-all"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                ホーム
-                            </Link>
-
-                            {/* Groups */}
-                            {navGroups.map((group) => (
-                                <div key={group.label} className="py-2">
-                                    <p className="px-4 py-2 text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">
-                                        {group.label}
-                                    </p>
+            {mobileMenuOpen && (
+                <div
+                    key={pathname}
+                    className="md:hidden fixed inset-x-0 bottom-0 top-[calc(var(--banner-height)+var(--header-height))] bg-[var(--color-bg)] overflow-y-auto border-t border-[var(--color-line)]"
+                >
+                    <nav className="container-width py-5" aria-label="モバイルメニュー">
+                        {navGroups.map((group) => (
+                            <div key={group.label} className="mb-6">
+                                <p className="note font-medium mb-1">{group.label}</p>
+                                <div className="ledger">
                                     {group.items.map((item) => (
-                                        <Link
-                                            key={item.href}
-                                            href={item.href}
-                                            className="px-4 py-3 pl-6 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] font-medium transition-all block"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                        >
-                                            {item.label}
+                                        <NavLink key={item.href} href={item.href} onClick={closeMenus} className="block py-3">
+                                            <span className="block font-medium leading-snug">{item.label}</span>
                                             {item.description && (
-                                                <span className="text-xs text-[var(--color-text-muted)] ml-2">
-                                                    {item.description}
-                                                </span>
+                                                <span className="block text-xs text-[var(--color-text-muted)] mt-0.5">{item.description}</span>
                                             )}
-                                        </Link>
+                                        </NavLink>
                                     ))}
                                 </div>
-                            ))}
-
-                            {/* Contact */}
-                            <Link
-                                href="/contact"
-                                className="px-4 py-3 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] font-medium transition-all"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                お問い合わせ
-                            </Link>
-
-                            {/* CTA */}
-                            <div className="flex gap-2 mt-3 px-4">
-                                <Link
-                                    href="/kids"
-                                    className="flex-1 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 text-white font-bold py-3 rounded-xl text-center shadow-md flex items-center justify-center gap-2"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    <span className="text-xl">🎓</span> キッズ
-                                </Link>
-                                <Link
-                                    href="/simulator"
-                                    className="flex-[2] btn-primary py-3 text-center"
-                                    onClick={() => setMobileMenuOpen(false)}
-                                >
-                                    シミュレーション
-                                </Link>
                             </div>
+                        ))}
 
-                            {/* Authority Badge */}
-                            <div className="mt-4 pt-4 border-t border-[var(--glass-border)] flex justify-center">
-                                <AuthorityBadge />
-                            </div>
-                        </nav>
-                    </MotionDiv>
-                )}
-            </AnimatePresence>
+                        <Link href="/contact" onClick={closeMenus} className="block py-3 font-medium">
+                            お問い合わせ
+                        </Link>
+
+                        <Link href="/simulator" onClick={closeMenus} className="btn-primary w-full mt-4">
+                            シミュレーターを試す
+                        </Link>
+
+                        <div className="mt-6">
+                            <AuthorityBadge />
+                        </div>
+                    </nav>
+                </div>
+            )}
         </header>
     );
 }

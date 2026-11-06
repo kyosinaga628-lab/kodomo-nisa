@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { useId } from "react";
 import { SimulationInput, KODOMO_NISA_INFO } from "@/lib/calculator";
 
 interface Props {
@@ -9,19 +8,48 @@ interface Props {
     onChange: (values: SimulationInput) => void;
 }
 
-export default function SimulatorForm({ values, onChange }: Props) {
-    const [useMonths, setUseMonths] = useState(false);
-    const [months, setMonths] = useState(0);
+interface RangeFieldProps {
+    label: string;
+    display: string;
+    min: number;
+    max: number;
+    step: number;
+    value: number;
+    minLabel: string;
+    maxLabel: string;
+    onChange: (value: number) => void;
+}
 
+function RangeField({ label, display, min, max, step, value, minLabel, maxLabel, onChange }: RangeFieldProps) {
+    const id = useId();
+    return (
+        <div>
+            <label htmlFor={id} className="flex items-baseline justify-between gap-3 text-[0.9375rem] font-medium">
+                {label}
+                <span className="figure text-[1.375rem] text-[var(--color-royal-blue)]">{display}</span>
+            </label>
+            <input
+                id={id}
+                type="range"
+                className="range mt-1"
+                min={min}
+                max={max}
+                step={step}
+                value={value}
+                onChange={(e) => onChange(Number(e.target.value))}
+                style={{ "--fill": `${((value - min) / (max - min)) * 100}%` } as React.CSSProperties}
+            />
+            <div className="flex justify-between note">
+                <span>{minLabel}</span>
+                <span>{maxLabel}</span>
+            </div>
+        </div>
+    );
+}
+
+export default function SimulatorForm({ values, onChange }: Props) {
     const handleChange = (field: keyof SimulationInput, value: number) => {
         onChange({ ...values, [field]: value });
-    };
-
-    const handleMonthsChange = (newMonths: number) => {
-        setMonths(newMonths);
-        // 月齢を年齢に変換（小数点以下も考慮）
-        const ageWithMonths = values.childAge + (newMonths / 12);
-        // calculator側では整数年齢を使うが、表示用に保持
     };
 
     // 投資可能年数を計算（現在年齢から17歳まで）
@@ -29,230 +57,97 @@ export default function SimulatorForm({ values, onChange }: Props) {
     const maxInvestment = Math.min(investmentYears * 600000, KODOMO_NISA_INFO.totalLimit);
 
     return (
-        <div className="space-y-6 md:space-y-8">
-            {/* Child Age */}
-            <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05 }}
-            >
-                <label className="input-label flex items-center justify-between">
-                    <span className="text-sm md:text-base">お子様の投資開始時の年齢</span>
-                    <span className="text-[var(--color-royal-blue)] font-bold">
-                        {values.childAge}歳{useMonths && months > 0 ? `${months}ヶ月` : ""}
-                    </span>
-                </label>
-                <div className="relative">
-                    <input
-                        type="range"
-                        min="0"
-                        max="17"
-                        step="1"
-                        value={values.childAge}
-                        onChange={(e) => handleChange("childAge", Number(e.target.value))}
-                        className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb"
-                    />
-                    <div className="flex justify-between mt-2 text-xs text-[var(--color-text-muted)]">
-                        <span>0歳</span>
-                        <span>17歳</span>
-                    </div>
-                </div>
+        <div className="space-y-7">
+            <RangeField
+                label="お子様の投資開始時の年齢"
+                display={`${values.childAge}歳`}
+                min={0}
+                max={17}
+                step={1}
+                value={values.childAge}
+                minLabel="0歳"
+                maxLabel="17歳"
+                onChange={(v) => handleChange("childAge", v)}
+            />
 
-                {/* Month Option Toggle */}
-                <div className="mt-3">
-                    <button
-                        onClick={() => setUseMonths(!useMonths)}
-                        className="text-xs text-[var(--color-royal-blue)] hover:underline flex items-center gap-1"
-                    >
-                        {useMonths ? "▼ 月齢を非表示" : "▶ 月齢も指定する"}
-                    </button>
-
-                    {useMonths && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            className="mt-3 p-3 bg-[var(--color-bg-secondary)] rounded-lg"
-                        >
-                            <label className="text-xs text-[var(--color-text-muted)] block mb-2">
-                                月齢（0〜11ヶ月）
-                            </label>
-                            <div className="flex gap-2 flex-wrap">
-                                {[0, 3, 6, 9].map((m) => (
-                                    <button
-                                        key={m}
-                                        onClick={() => setMonths(m)}
-                                        className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${months === m
-                                            ? "bg-[var(--color-royal-blue)] text-white"
-                                            : "bg-white text-[var(--color-text-secondary)] hover:bg-[var(--color-royal-blue)]/10"
-                                            }`}
-                                    >
-                                        {m}ヶ月
-                                    </button>
-                                ))}
-                            </div>
-                        </motion.div>
-                    )}
-                </div>
-
-                <div className="mt-3 p-3 bg-[var(--color-bg-secondary)] rounded-lg">
-                    <p className="text-xs text-[var(--color-text-secondary)]">
-                        <span className="font-semibold text-[var(--color-royal-blue)]">投資可能期間: {investmentYears}年間</span>
-                        <br />
-                        <span className="text-[var(--color-text-muted)]">（18歳で成人NISAへ自動移行）</span>
-                    </p>
-                </div>
-            </motion.div>
-
-            {/* Monthly Amount */}
-            <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 }}
-            >
-                <label className="input-label flex items-center justify-between">
-                    <span className="text-sm md:text-base">月額積立額</span>
-                    <span className="text-[var(--color-royal-blue)] font-bold">
-                        {values.monthlyAmount.toLocaleString()}円
-                    </span>
-                </label>
-                <div className="relative">
-                    <input
-                        type="range"
-                        min="5000"
-                        max="50000"
-                        step="1000"
-                        value={values.monthlyAmount}
-                        onChange={(e) => handleChange("monthlyAmount", Number(e.target.value))}
-                        className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb"
-                    />
-                    <div className="flex justify-between mt-2 text-xs text-[var(--color-text-muted)]">
-                        <span>5,000円</span>
-                        <span>50,000円</span>
-                    </div>
-                </div>
-                <div className="mt-2 text-xs text-[var(--color-text-muted)] space-y-1">
-                    <p>※年間上限: 60万円（月額50,000円）</p>
-                    <p>※非課税保有限度額: 600万円</p>
-                </div>
-                {/* Quick Select Buttons */}
-                <div className="mt-3 flex flex-wrap gap-2">
+            <div>
+                <RangeField
+                    label="月額積立額"
+                    display={`${values.monthlyAmount.toLocaleString()}円`}
+                    min={5000}
+                    max={50000}
+                    step={1000}
+                    value={values.monthlyAmount}
+                    minLabel="5,000円"
+                    maxLabel="50,000円"
+                    onChange={(v) => handleChange("monthlyAmount", v)}
+                />
+                <div className="mt-2.5 flex flex-wrap gap-2">
                     {[10000, 20000, 30000, 50000].map((amount) => (
-                        <motion.button
+                        <button
                             key={amount}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            type="button"
+                            aria-pressed={values.monthlyAmount === amount}
                             onClick={() => handleChange("monthlyAmount", amount)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${values.monthlyAmount === amount
-                                ? "bg-[var(--color-royal-blue)] text-white"
-                                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-royal-blue)]/10"
-                                }`}
+                            className="preset tnum"
                         >
                             {(amount / 10000).toFixed(0)}万円
-                        </motion.button>
+                        </button>
                     ))}
                 </div>
-            </motion.div>
+            </div>
 
-            {/* Expected Return */}
-            <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-            >
-                <label className="input-label flex items-center justify-between">
-                    <span className="text-sm md:text-base">期待リターン（年率）</span>
-                    <span className="text-[var(--color-royal-blue)] font-bold">
-                        {values.expectedReturn}%
-                    </span>
-                </label>
-                <div className="relative">
-                    <input
-                        type="range"
-                        min="1"
-                        max="10"
-                        step="0.5"
-                        value={values.expectedReturn}
-                        onChange={(e) => handleChange("expectedReturn", Number(e.target.value))}
-                        className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb"
-                    />
-                    <div className="flex justify-between mt-2 text-xs text-[var(--color-text-muted)]">
-                        <span>1%（保守的）</span>
-                        <span>10%（積極的）</span>
-                    </div>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-2">
+            <div>
+                <RangeField
+                    label="期待リターン（年率）"
+                    display={`${values.expectedReturn}%`}
+                    min={1}
+                    max={10}
+                    step={0.5}
+                    value={values.expectedReturn}
+                    minLabel="1%（保守的）"
+                    maxLabel="10%（積極的）"
+                    onChange={(v) => handleChange("expectedReturn", v)}
+                />
+                <div className="mt-2.5 flex flex-wrap gap-2">
                     {[
                         { rate: 3, label: "3% 保守的" },
                         { rate: 5, label: "5% 標準" },
                         { rate: 7, label: "7% 積極的" },
                     ].map(({ rate, label }) => (
-                        <motion.button
+                        <button
                             key={rate}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            type="button"
+                            aria-pressed={values.expectedReturn === rate}
                             onClick={() => handleChange("expectedReturn", rate)}
-                            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${values.expectedReturn === rate
-                                ? "bg-[var(--color-royal-blue)] text-white"
-                                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-royal-blue)]/10"
-                                }`}
+                            className="preset"
                         >
                             {label}
-                        </motion.button>
+                        </button>
                     ))}
                 </div>
-            </motion.div>
+            </div>
 
-            {/* Investment Summary */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="p-4 bg-gradient-to-br from-[var(--color-royal-blue)]/5 to-[var(--color-emerald)]/5 rounded-xl border border-[var(--glass-border)]"
-            >
-                <h4 className="text-sm font-semibold text-[var(--color-text-primary)] mb-2">
-                    投資プラン概要
-                </h4>
-                <div className="space-y-1 text-xs text-[var(--color-text-secondary)]">
-                    <p>• 年間投資額: <span className="font-semibold">{(values.monthlyAmount * 12).toLocaleString()}円</span></p>
-                    <p>• 投資可能年数: <span className="font-semibold">{investmentYears}年</span></p>
-                    <p>• 最大投資可能額: <span className="font-semibold">{(maxInvestment / 10000).toLocaleString()}万円</span></p>
-                </div>
-            </motion.div>
-
-            <style jsx>{`
-                .slider-thumb {
-                    -webkit-appearance: none;
-                    appearance: none;
-                    background: transparent;
-                }
-                .slider-thumb::-webkit-slider-thumb {
-                    -webkit-appearance: none;
-                    appearance: none;
-                    width: 24px;
-                    height: 24px;
-                    border-radius: 50%;
-                    background: #FFFFFF;
-                    border: 2px solid var(--color-royal-blue);
-                    cursor: pointer;
-                    box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2);
-                    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-                    margin-top: -8px;
-                }
-                .slider-thumb::-webkit-slider-thumb:hover {
-                    transform: scale(1.1);
-                    box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1), 0 8px 15px rgba(30, 58, 138, 0.2);
-                }
-                .slider-thumb::-webkit-slider-runnable-track {
-                    width: 100%;
-                    height: 8px;
-                    cursor: pointer;
-                    background: #E5E7EB;
-                    border-radius: 4px;
-                }
-                .slider-thumb:focus::-webkit-slider-thumb {
-                    box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.15), 0 8px 15px rgba(30, 58, 138, 0.25);
-                }
-            `}</style>
+            <div className="border-t border-[var(--color-line)] pt-4">
+                <h3 className="font-sans text-[0.875rem] font-semibold mb-2">投資プラン概要</h3>
+                <dl className="space-y-1 text-[0.875rem] text-[var(--color-text-secondary)]">
+                    {[
+                        ["年間投資額", `${(values.monthlyAmount * 12).toLocaleString()}円`],
+                        ["投資可能期間", `${investmentYears}年間`],
+                        ["最大投資可能額", `${(maxInvestment / 10000).toLocaleString()}万円`],
+                    ].map(([label, value]) => (
+                        <div key={label} className="flex justify-between gap-3">
+                            <dt>{label}</dt>
+                            <dd className="tnum font-semibold text-[var(--color-text-primary)]">{value}</dd>
+                        </div>
+                    ))}
+                </dl>
+                <ul className="note mt-3 space-y-0.5">
+                    <li>※18歳で成人NISAへ自動移行</li>
+                    <li>※年間上限: 60万円（月額50,000円）</li>
+                    <li>※非課税保有限度額: 600万円</li>
+                </ul>
+            </div>
         </div>
     );
 }

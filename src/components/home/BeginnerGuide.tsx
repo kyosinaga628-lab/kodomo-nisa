@@ -1,128 +1,81 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowIcon } from "@/components/common/ui";
+import { calculateNISA, formatCurrency } from "@/lib/calculator";
+
+const points = [
+    {
+        title: "税金がかからない",
+        description: "増えたお金はまるごとお子様のもの。国に払う分がゼロに。",
+    },
+    {
+        title: "長く続けるほどお得",
+        description: "0歳から始めれば最大18年間。お金がお金を生む「複利」の力を最大限活用。",
+    },
+    {
+        title: "18歳で自由に使える",
+        description: "大学の入学金、留学、起業資金など、お子様の夢を後押し。",
+    },
+];
+
+// 例示の金額はシミュレーターと同じ計算から出す（18歳時点）
+const example = calculateNISA({ monthlyAmount: 50000, childAge: 0, expectedReturn: 5 });
 
 export default function BeginnerGuide() {
     return (
-        <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="card-base p-6 md:p-10"
-        >
-            {/* Header */}
-            <div className="text-center mb-8 md:mb-10">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-emerald)]/10 text-[var(--color-emerald)] mb-4">
-                    🔰 NISAをまだ知らない方へ
-                </span>
-                <h2 className="font-serif text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] mb-4">
-                    30秒でわかる「こどもNISA」
-                </h2>
-                <p className="text-[var(--color-text-secondary)] text-sm md:text-base max-w-2xl mx-auto">
-                    難しい言葉は一切使いません。<br className="md:hidden" />
-                    まずは「結論」からお伝えします。
-                </p>
-            </div>
-
-            {/* Conclusion First - The Main Point */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-br from-[var(--color-emerald)] to-[var(--color-emerald-dark)] text-white rounded-2xl p-6 md:p-8 text-center mb-8"
-            >
-                <p className="text-lg md:text-xl font-bold mb-2">
-                    結論
-                </p>
-                <p className="text-2xl md:text-3xl font-bold mb-4">
-                    お金が増えても<br className="md:hidden" />
-                    税金がかからない制度
-                </p>
-                <p className="text-white/80 text-sm md:text-base">
-                    普通は投資で増えたお金の約20%が税金で取られますが、
-                    <br className="hidden md:block" />
-                    こどもNISAなら、その税金が0円になります。
-                </p>
-            </motion.div>
-
-            {/* 3 Simple Points */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
-                {[
-                    {
-                        icon: "💰",
-                        title: "税金がかからない",
-                        description: "増えたお金はまるごとお子様のもの。国に払う分がゼロに。"
-                    },
-                    {
-                        icon: "📈",
-                        title: "長く続けるほどお得",
-                        description: "0歳から始めれば最大18年間。お金がお金を生む「複利」の力を最大限活用。"
-                    },
-                    {
-                        icon: "🎓",
-                        title: "18歳で自由に使える",
-                        description: "大学の入学金、留学、起業資金など、お子様の夢を後押し。"
-                    }
-                ].map((point, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="bg-white p-5 md:p-6 rounded-xl border border-[var(--glass-border)] text-center"
-                    >
-                        <div className="text-3xl md:text-4xl mb-3">{point.icon}</div>
-                        <h3 className="font-semibold text-[var(--color-text-primary)] mb-2 text-sm md:text-base">
-                            {point.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-[var(--color-text-secondary)]">
-                            {point.description}
-                        </p>
-                    </motion.div>
-                ))}
-            </div>
-
-            {/* Simple Example */}
-            <div className="bg-[var(--color-bg-secondary)] rounded-xl p-5 md:p-6 mb-8">
-                <h3 className="font-semibold text-[var(--color-text-primary)] mb-4 text-center text-sm md:text-base">
-                    📊 例えば、こうなります
-                </h3>
-                <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
-                    <div className="text-center">
-                        <p className="text-xs text-[var(--color-text-muted)] mb-1">毎月の積立額</p>
-                        <p className="text-2xl md:text-3xl font-bold text-[var(--color-royal-blue)]">5万円</p>
-                    </div>
-                    <div className="hidden md:block text-3xl text-[var(--color-text-muted)]">→</div>
-                    <div className="md:hidden text-2xl text-[var(--color-text-muted)]">↓</div>
-                    <div className="text-center">
-                        <p className="text-xs text-[var(--color-text-muted)] mb-1">18年後には...</p>
-                        <p className="text-2xl md:text-3xl font-bold text-[var(--color-emerald)]">約1,000万円</p>
-                        <p className="text-xs text-[var(--color-text-muted)]">（年5%成長の場合）</p>
-                    </div>
+        <div>
+            <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-14">
+                {/* 結論 */}
+                <div className="bg-[var(--color-royal-blue)] text-white rounded-[10px] p-6 sm:p-9 flex flex-col">
+                    <p className="text-[0.8125rem] font-medium tracking-[0.06em] text-white/70">30秒でわかる「こどもNISA」の結論</p>
+                    <h3 className="text-white text-[1.625rem] sm:text-[2rem] leading-[1.45] mt-3">
+                        お金が増えても
+                        <br />
+                        税金がかからない制度
+                    </h3>
+                    <p className="text-white/80 text-[0.9375rem] mt-4">
+                        普通は投資で増えたお金の約20%が税金で取られますが、こどもNISAなら、その税金が0円になります。
+                    </p>
+                    <p className="text-white/70 text-xs mt-auto pt-6">難しい言葉は一切使いません。まずは「結論」からお伝えします。</p>
                 </div>
-                <p className="text-center text-xs text-[var(--color-text-muted)] mt-4">
-                    ※投資元本は600万円（非課税保有上限）。約400万円の利益が非課税に！
-                </p>
+
+                {/* 3つの要点 */}
+                <ol className="ledger self-start w-full">
+                    {points.map((point, index) => (
+                        <li key={point.title} className="grid grid-cols-[2.25rem_minmax(0,1fr)] py-5">
+                            <span className="figure text-[1.25rem] text-[var(--color-text-muted)]" aria-hidden="true">{index + 1}</span>
+                            <div>
+                                <h3 className="heading-card">{point.title}</h3>
+                                <p className="mt-1 text-[0.9375rem] text-[var(--color-text-secondary)]">{point.description}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ol>
             </div>
 
-            {/* CTA */}
-            <div className="text-center">
-                <Link href="/simulator">
-                    <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="btn-primary inline-flex items-center gap-2"
-                    >
-                        あなたの場合をシミュレーション
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </motion.button>
+            {/* 例 */}
+            <div className="mt-10 md:mt-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <div>
+                    <h3 className="heading-card mb-4">例えば、こうなります</h3>
+                    <div className="flex flex-wrap items-end gap-x-5 gap-y-3">
+                        <div>
+                            <p className="note mb-1">毎月の積立額</p>
+                            <p className="figure text-[2rem] md:text-[2.5rem]">5<span className="figure-unit">万円</span></p>
+                        </div>
+                        <span className="pb-2 text-[var(--color-text-muted)]" aria-hidden="true"><ArrowIcon size={22} /></span>
+                        <div>
+                            <p className="note mb-1">18歳時点では（年5%成長の場合）</p>
+                            <p className="figure text-[2rem] md:text-[2.5rem] text-[var(--color-emerald)]">約{formatCurrency(example.finalValue).replace("万円", "")}<span className="figure-unit">万円</span></p>
+                        </div>
+                    </div>
+                    <p className="note mt-3">
+                        ※投資元本は{formatCurrency(example.totalInvestment)}（非課税保有上限）。約{formatCurrency(example.totalGain)}の利益が非課税に。将来の成果を保証するものではありません。
+                    </p>
+                </div>
+                <Link href="/simulator" className="btn-primary flex-shrink-0">
+                    あなたの場合をシミュレーション
+                    <ArrowIcon />
                 </Link>
             </div>
-        </motion.section>
+        </div>
     );
 }
