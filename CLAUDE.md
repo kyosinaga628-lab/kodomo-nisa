@@ -69,7 +69,8 @@ purpose: Next then fills them from each page's `openGraph`. Article metadata com
 `title` in a layout ends the root title template for its children, so layouts with child routes (`kids`,
 `policy-curation`) set their own `title.template`.
 
-[og-image.png](public/og-image.png) is a real 1200×630 PNG. The favicon and app icons are drawn from the same
+[og-image.png](public/og-image.png) is a real 1200×630 PNG; bump the `?v=` in `OG_IMAGE` whenever it is replaced,
+because social networks cache images by URL. The favicon and app icons are drawn from the same
 bars as `LogoMark` in [ui.tsx](src/components/common/ui.tsx); the 192/512 icons are full-bleed so they stay valid
 as `maskable`.
 
