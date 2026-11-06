@@ -1,7 +1,11 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
-    title: "政策キュレーション",
+    title: {
+        default: "政策キュレーション",
+        template: "%s | こども（子供）NISA研究所",
+    },
     description: "こどもNISAに関する最新の政策動向、税制改正情報、専門家の見解をキュレーション。2026年度税制改正大綱の解説など、信頼できる情報源からの情報をお届けします。",
     alternates: {
         canonical: "/policy-curation",
@@ -11,6 +15,7 @@ export const metadata: Metadata = {
         description: "こどもNISAに関する最新の政策動向、税制改正情報をキュレーション。",
         url: "https://www.kodomo-nisa.jp/policy-curation",
         type: "website",
+        images: [OG_IMAGE],
     },
 };
 

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
     title: "お問い合わせ",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
         description: "こどもNISA研究所へのお問い合わせ。ご質問やご相談をお送りください。",
         url: "https://www.kodomo-nisa.jp/contact",
         type: "website",
+        images: [OG_IMAGE],
     },
     robots: {
         index: false,

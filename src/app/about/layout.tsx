@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
     title: "このサイトについて",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
         description: "大手シンクタンク出身の政策専門家が主宰。子どもの資産形成に関する信頼できる情報を提供。",
         url: "https://www.kodomo-nisa.jp/about",
         type: "website",
+        images: [OG_IMAGE],
     },
 };
 

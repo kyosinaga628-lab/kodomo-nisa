@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
     title: "こども（子供）NISAシミュレーション：何歳でいくら貯まる？",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
         description: "子供（子ども/こども）NISA計算シミュレーター。積立額と年齢を入力するだけで18歳時点の資産額を即座に試算。",
         url: "https://www.kodomo-nisa.jp/simulator",
         type: "website",
+        images: [OG_IMAGE],
     },
 };
 

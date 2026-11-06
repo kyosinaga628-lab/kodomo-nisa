@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
     title: "こどもNISAとは",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
         description: "2027年1月開始（確定）のこどもNISA制度を詳しく解説。年間60万円・最大600万円の非課税投資の仕組みを説明。",
         url: "https://www.kodomo-nisa.jp/guide",
         type: "article",
+        images: [OG_IMAGE],
     },
 };
 
