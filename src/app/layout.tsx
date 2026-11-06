@@ -42,6 +42,7 @@ export const metadata: Metadata = {
   authors: [{ name: "こどもNISA研究所 編集部" }],
   creator: "こどもNISA研究所",
   publisher: "こどもNISA研究所",
+  manifest: "/manifest.json",
   formatDetection: {
     email: false,
     address: false,

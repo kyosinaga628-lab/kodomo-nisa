@@ -22,8 +22,9 @@ export const SITE_AUTHOR: AuthorInfo = {
 };
 
 // 共有時の画像。子ルートの openGraph は親を丸ごと置き換えるため、各 layout でも指定する
+// SNS は画像を URL ごとにキャッシュするので、画像を差し替えたら v を上げる
 export const OG_IMAGE = {
-    url: "/og-image.png",
+    url: "/og-image.png?v=2",
     width: 1200,
     height: 630,
     alt: "こどもNISA研究所",
