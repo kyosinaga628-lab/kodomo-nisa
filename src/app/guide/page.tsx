@@ -1,405 +1,203 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { KODOMO_NISA_INFO } from "@/lib/calculator";
+import AgeRuler from "@/components/common/AgeRuler";
 import InvestmentCase from "@/components/common/InvestmentCase";
 import AffiliateBanner from "@/components/common/AffiliateBanner";
 import SourcesReference from "@/components/common/SourcesReference";
+import { ArrowIcon, ExternalIcon, Fact, PageHeader } from "@/components/common/ui";
+
+const featuredLinks = [
+    {
+        href: "https://www.mof.go.jp/tax_policy/tax_reform/outline/index.html",
+        publisher: "財務省",
+        title: "令和8年度税制改正",
+        description: "こどもNISA創設を含む税制改正の全容。正式な制度設計の根拠資料（2026年3月31日改正法成立）。",
+    },
+    {
+        href: "https://www.fsa.go.jp/policy/nisa2/about/index.html",
+        publisher: "金融庁",
+        title: "NISA特設サイト",
+        description: "新しいNISA制度の公式情報ページ。こどもNISA情報も順次更新予定。",
+    },
+    {
+        href: "https://www.fsa.go.jp/policy/nisa2/know/index.html",
+        publisher: "金融庁",
+        title: "つみたてNISA対象商品について",
+        description: "こどもNISAでも投資可能なつみたて投資枠対象商品の解説。",
+    },
+    {
+        href: "https://www.j-flec.go.jp/",
+        publisher: "J-FLEC",
+        title: "金融経済教育推進機構",
+        description: "子どもから大人まで、金融リテラシーを高めるための情報。",
+    },
+];
+
+const sectionTitle = "heading-section !text-[1.375rem] md:!text-[1.75rem]";
 
 export default function GuidePage() {
     return (
-        <div className="min-h-screen bg-[var(--color-bg)] pt-[calc(var(--header-height)+var(--banner-height)+1rem)] md:pt-[calc(var(--header-height)+var(--banner-height)+3rem)] pb-24">
-            <div className="container-width px-4">
-                {/* Hero */}
-                <motion.header
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="text-center mb-12 md:mb-20"
-                >
-                    <p className="text-[var(--color-emerald)] font-semibold tracking-wide mb-2 md:mb-4 text-sm md:text-base">
-                        ABOUT KODOMO NISA
-                    </p>
-                    <h1 className="heading-section mb-4 md:mb-6 text-2xl md:text-4xl">
-                        こどもNISAとは
-                    </h1>
-                    <p className="text-body max-w-2xl mx-auto text-sm md:text-base">
-                        2027年から始まる、お子様のための非課税投資制度を
-                        <br className="hidden sm:block" />
-                        わかりやすく解説します。
-                    </p>
-                </motion.header>
+        <div className="min-h-screen bg-[var(--color-bg)] page-top">
+            <div className="container-width">
+                <PageHeader
+                    kicker="制度ガイド"
+                    title="こどもNISAとは"
+                    lead="2027年から始まる、お子様のための非課税投資制度をわかりやすく解説します。"
+                />
 
                 {/* Quick Summary */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="card-base p-6 md:p-12 bg-gradient-to-br from-[var(--color-royal-blue)]/5 to-[var(--color-emerald)]/5">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
-                            <div className="text-center p-4 bg-white/50 rounded-xl">
-                                <p className="text-2xl md:text-3xl font-bold text-[var(--color-royal-blue)]">60万円</p>
-                                <p className="text-xs md:text-sm text-[var(--color-text-muted)]">年間投資上限</p>
-                            </div>
-                            <div className="text-center p-4 bg-white/50 rounded-xl">
-                                <p className="text-2xl md:text-3xl font-bold text-[var(--color-royal-blue)]">600万円</p>
-                                <p className="text-xs md:text-sm text-[var(--color-text-muted)]">非課税保有限度額</p>
-                            </div>
-                            <div className="text-center p-4 bg-white/50 rounded-xl">
-                                <p className="text-2xl md:text-3xl font-bold text-[var(--color-royal-blue)]">0〜17歳</p>
-                                <p className="text-xs md:text-sm text-[var(--color-text-muted)]">対象年齢</p>
-                            </div>
-                            <div className="text-center p-4 bg-white/50 rounded-xl">
-                                <p className="text-2xl md:text-3xl font-bold text-[var(--color-emerald)]">非課税</p>
-                                <p className="text-xs md:text-sm text-[var(--color-text-muted)]">運用益・配当金</p>
-                            </div>
-                        </div>
-                        <p className="text-center text-[var(--color-text-secondary)] text-sm md:text-base">
-                            ※2026年3月31日成立の令和8年度税制改正法に基づく情報です。制度開始は2027年1月1日（確定）。口座開設の受付は2026年10月1日から主要ネット証券で始まります。
-                        </p>
+                <section className="mb-14 md:mb-24">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-7">
+                        <Fact value={<>60<span className="figure-unit">万円</span></>} label="年間投資上限" />
+                        <Fact value={<>600<span className="figure-unit">万円</span></>} label="非課税保有限度額" />
+                        <Fact value={<>0〜17<span className="figure-unit">歳</span></>} label="対象年齢" />
+                        <Fact value="非課税" label="運用益・配当金" tone="gain" />
                     </div>
-                </motion.section>
+                    <p className="note mt-6 max-w-[48rem]">
+                        ※2026年3月31日成立の令和8年度税制改正法に基づく情報です。制度開始は2027年1月1日（確定）。口座開設の受付は2026年10月1日から主要ネット証券で始まります。
+                    </p>
+                </section>
 
-                {/* What is Kodomo NISA */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="text-center mb-8 md:mb-12">
-                        <h2 className="editorial-caption mb-2 md:mb-4 text-xs md:text-sm">OVERVIEW</h2>
-                        <h3 className="font-serif text-2xl md:text-3xl font-semibold">制度の概要</h3>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                        <div className="card-base p-6 md:p-8">
-                            <h4 className="font-semibold text-lg mb-4 flex items-center gap-2 text-[var(--color-royal-blue)]">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 16v-4M12 8h.01" />
-                                </svg>
-                                こどもNISAとは？
-                            </h4>
-                            <p className="text-[var(--color-text-secondary)] text-sm md:text-base leading-relaxed">
-                                こどもNISA（正式名称：未成年者特定累積投資勘定）は、
-                                2027年から始まる0〜17歳のお子様を対象とした非課税投資制度です。
-                                親権者等が代理で口座を開設し、お子様名義で投資信託を積み立てることができます。
+                {/* Overview */}
+                <section className="mb-14 md:mb-24 split">
+                    <h2 className={sectionTitle}>制度の概要</h2>
+                    <div className="grid md:grid-cols-2 gap-x-10 gap-y-6">
+                        <div>
+                            <h3 className="heading-card">こどもNISAとは？</h3>
+                            <p className="mt-2 text-[var(--color-text-secondary)]">
+                                こどもNISA（正式名称：未成年者特定累積投資勘定）は、2027年から始まる0〜17歳のお子様を対象とした非課税投資制度です。親権者等が代理で口座を開設し、お子様名義で投資信託を積み立てることができます。
                             </p>
                         </div>
-                        <div className="card-base p-6 md:p-8">
-                            <h4 className="font-semibold text-lg mb-4 flex items-center gap-2 text-[var(--color-emerald)]">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
-                                </svg>
-                                非課税のメリット
-                            </h4>
-                            <p className="text-[var(--color-text-secondary)] text-sm md:text-base leading-relaxed">
-                                通常、投資で得た利益（運用益・配当金）には約20%の税金がかかります。
-                                こどもNISAなら、この税金がすべて非課税になります。
-                                長期運用するほど、節税効果は大きくなります。
+                        <div>
+                            <h3 className="heading-card">非課税のメリット</h3>
+                            <p className="mt-2 text-[var(--color-text-secondary)]">
+                                通常、投資で得た利益（運用益・配当金）には約20%の税金がかかります。こどもNISAなら、この税金がすべて非課税になります。長期運用するほど、節税効果は大きくなります。
                             </p>
                         </div>
                     </div>
-                </motion.section>
+                </section>
+
+                {/* How it works */}
+                <section className="mb-14 md:mb-24 split">
+                    <h2 className={sectionTitle}>制度の仕組み</h2>
+                    <ol className="ledger">
+                        <li className="grid grid-cols-[2.5rem_minmax(0,1fr)] py-6">
+                            <span className="figure text-[1.5rem] text-[var(--color-text-muted)]" aria-hidden="true">1</span>
+                            <div>
+                                <h3 className="heading-card">親・祖父母からの資金贈与</h3>
+                                <p className="mt-1.5 text-[0.9375rem] text-[var(--color-text-secondary)]">
+                                    年間110万円まで非課税（暦年贈与）。こどもNISAの上限60万円は枠内で収まります。
+                                </p>
+                            </div>
+                        </li>
+                        <li className="grid grid-cols-[2.5rem_minmax(0,1fr)] py-6">
+                            <span className="figure text-[1.5rem] text-[var(--color-text-muted)]" aria-hidden="true">2</span>
+                            <div>
+                                <h3 className="heading-card">こどもNISA口座で非課税運用</h3>
+                                <p className="mt-1.5 text-[0.9375rem] text-[var(--color-text-secondary)]">
+                                    つみたて投資枠と同様の投資信託で長期運用。運用益・配当金は非課税。最大18年間の非課税運用が可能です。
+                                </p>
+                                <dl className="mt-3 flex flex-wrap gap-x-8 gap-y-2 text-[0.875rem]">
+                                    {[
+                                        ["年間上限", "60万円"],
+                                        ["保有限度", "600万円"],
+                                        ["対象年齢", "0〜17歳"],
+                                        ["運用益", "非課税"],
+                                    ].map(([label, value]) => (
+                                        <div key={label} className="flex items-baseline gap-2">
+                                            <dt className="note">{label}</dt>
+                                            <dd className="tnum font-semibold">{value}</dd>
+                                        </div>
+                                    ))}
+                                </dl>
+                            </div>
+                        </li>
+                        <li className="grid grid-cols-[2.5rem_minmax(0,1fr)] py-6">
+                            <span className="figure text-[1.5rem] text-[var(--color-text-muted)]" aria-hidden="true">3</span>
+                            <div>
+                                <h3 className="heading-card">18歳で成人NISAへ自動移行</h3>
+                                <p className="mt-1.5 text-[0.9375rem] text-[var(--color-text-secondary)]">
+                                    非課税のまま運用継続が可能。成人NISAの新規枠（年360万円/限度1,800万円）も追加で利用可能に。
+                                </p>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
 
                 {/* Withdrawal Rules */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="text-center mb-8 md:mb-12">
-                        <h2 className="editorial-caption mb-2 md:mb-4 text-xs md:text-sm">WITHDRAWAL RULES</h2>
-                        <h3 className="font-serif text-2xl md:text-3xl font-semibold">払出しルール</h3>
-                    </div>
-                    <div className="space-y-4 md:space-y-6">
-                        {KODOMO_NISA_INFO.withdrawalRules.map((rule, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="card-base p-4 md:p-6"
-                            >
-                                <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-                                    <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-[var(--color-royal-blue)]/10 text-[var(--color-royal-blue)] w-fit">
-                                        {rule.ageRange}
-                                    </span>
-                                    <div className="flex-1">
-                                        <p className="font-semibold text-[var(--color-text-primary)] mb-1">{rule.rule}</p>
-                                        <p className="text-sm text-[var(--color-text-muted)]">{rule.detail}</p>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </motion.section>
+                <section className="mb-14 md:mb-24">
+                    <h2 className={`${sectionTitle} mb-6 md:mb-8`}>払出しルール</h2>
+                    <AgeRuler />
+                </section>
 
                 {/* Eligible Products */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="text-center mb-8 md:mb-12">
-                        <h2 className="editorial-caption mb-2 md:mb-4 text-xs md:text-sm">ELIGIBLE PRODUCTS</h2>
-                        <h3 className="font-serif text-2xl md:text-3xl font-semibold">対象商品</h3>
-                    </div>
-                    <div className="card-base p-6 md:p-8">
-                        <ul className="space-y-4">
-                            {KODOMO_NISA_INFO.eligibleProducts.map((product, index) => (
-                                <li key={index} className="flex items-start gap-3">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-emerald)" strokeWidth="2" className="flex-shrink-0 mt-1">
-                                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                                        <path d="M22 4L12 14.01l-3-3" />
+                <section className="mb-14 md:mb-24 split">
+                    <h2 className={sectionTitle}>対象商品</h2>
+                    <div>
+                        <ul className="ledger">
+                            {KODOMO_NISA_INFO.eligibleProducts.map((product) => (
+                                <li key={product} className="flex items-start gap-3 py-3.5">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-emerald)" strokeWidth="2.5" className="flex-shrink-0 mt-1.5" aria-hidden="true">
+                                        <path d="M5 12l5 5L20 7" />
                                     </svg>
-                                    <span className="text-[var(--color-text-secondary)] text-sm md:text-base">{product}</span>
+                                    <span>{product}</span>
                                 </li>
                             ))}
                         </ul>
-                        <div className="mt-6 p-4 bg-[var(--color-bg-secondary)] rounded-lg">
-                            <p className="text-xs md:text-sm text-[var(--color-text-muted)]">
-                                ※つみたて投資枠と同様の商品が対象です。個別株式は対象外となります。
-                            </p>
-                        </div>
+                        <p className="note mt-3">※つみたて投資枠と同様の商品が対象です。個別株式は対象外となります。</p>
                     </div>
-                </motion.section>
-
-                {/* System Diagram */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="text-center mb-8 md:mb-12">
-                        <h2 className="editorial-caption mb-2 md:mb-4 text-xs md:text-sm">SYSTEM OVERVIEW</h2>
-                        <h3 className="font-serif text-2xl md:text-3xl font-semibold">制度の仕組み</h3>
-                    </div>
-                    <div className="card-base p-4 md:p-8 bg-white">
-                        <div className="max-w-3xl mx-auto space-y-6">
-                            {/* Step 1 */}
-                            <div className="flex flex-col md:flex-row items-center gap-4">
-                                <div className="flex-1 bg-gradient-to-r from-[var(--color-royal-blue)]/10 to-transparent rounded-xl p-5 border border-[var(--glass-border)]">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <div className="w-8 h-8 rounded-full bg-[var(--color-royal-blue)] text-white flex items-center justify-center font-bold text-sm">1</div>
-                                        <h4 className="font-semibold text-[var(--color-text-primary)]">親・祖父母からの資金贈与</h4>
-                                    </div>
-                                    <p className="text-xs md:text-sm text-[var(--color-text-secondary)] ml-11">
-                                        年間110万円まで非課税（暦年贈与）。<br />
-                                        こどもNISAの上限60万円は枠内で収まります。
-                                    </p>
-                                </div>
-                                <div className="hidden md:flex items-center justify-center w-10">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-royal-blue)" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                                </div>
-                                <div className="md:hidden flex items-center justify-center h-6">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-royal-blue)" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
-                                </div>
-                            </div>
-
-                            {/* Step 2 */}
-                            <div className="bg-gradient-to-br from-[var(--color-royal-blue)]/10 to-[var(--color-emerald)]/10 rounded-xl p-5 border-2 border-[var(--color-royal-blue)]/20">
-                                <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-8 h-8 rounded-full bg-[var(--color-emerald)] text-white flex items-center justify-center font-bold text-sm">2</div>
-                                    <h4 className="font-semibold text-[var(--color-text-primary)]">こどもNISA口座で非課税運用</h4>
-                                </div>
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3 ml-11">
-                                    <div className="text-center p-2 bg-white rounded-lg">
-                                        <p className="text-[10px] text-[var(--color-text-muted)]">年間上限</p>
-                                        <p className="text-lg font-bold text-[var(--color-royal-blue)]">60万円</p>
-                                    </div>
-                                    <div className="text-center p-2 bg-white rounded-lg">
-                                        <p className="text-[10px] text-[var(--color-text-muted)]">保有限度</p>
-                                        <p className="text-lg font-bold text-[var(--color-emerald)]">600万円</p>
-                                    </div>
-                                    <div className="text-center p-2 bg-white rounded-lg">
-                                        <p className="text-[10px] text-[var(--color-text-muted)]">対象年齢</p>
-                                        <p className="text-lg font-bold text-[var(--color-text-primary)]">0〜17歳</p>
-                                    </div>
-                                    <div className="text-center p-2 bg-white rounded-lg">
-                                        <p className="text-[10px] text-[var(--color-text-muted)]">運用益</p>
-                                        <p className="text-lg font-bold text-[var(--color-emerald)]">非課税</p>
-                                    </div>
-                                </div>
-                                <p className="text-xs text-[var(--color-text-secondary)] ml-11">
-                                    つみたて投資枠と同様の投資信託で長期運用。運用益・配当金は非課税。
-                                </p>
-                            </div>
-
-                            {/* Timeline */}
-                            <div className="relative py-4">
-                                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[var(--color-royal-blue)]/20 -translate-x-1/2"></div>
-                                <div className="relative flex items-center justify-center">
-                                    <div className="bg-white px-4 py-1.5 rounded-full border border-[var(--glass-border)] text-xs font-medium text-[var(--color-text-secondary)]">
-                                        最大18年間の非課税運用
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Step 3 */}
-                            <div className="flex flex-col md:flex-row items-center gap-4">
-                                <div className="flex-1 bg-gradient-to-r from-transparent to-[var(--color-emerald)]/10 rounded-xl p-5 border border-[var(--glass-border)]">
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <div className="w-8 h-8 rounded-full bg-[var(--color-royal-blue)] text-white flex items-center justify-center font-bold text-sm">3</div>
-                                        <h4 className="font-semibold text-[var(--color-text-primary)]">18歳で成人NISAへ自動移行</h4>
-                                    </div>
-                                    <p className="text-xs md:text-sm text-[var(--color-text-secondary)] ml-11">
-                                        非課税のまま運用継続が可能。<br />
-                                        成人NISAの新規枠（年360万円/限度1,800万円）も追加で利用可能に。
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.section>
+                </section>
 
                 {/* CTA */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="card-base p-8 md:p-12 text-center bg-gradient-to-br from-[var(--color-royal-blue)]/5 to-[var(--color-emerald)]/5">
-                        <h3 className="font-serif text-xl md:text-2xl font-semibold mb-4">
-                            シミュレーションで試してみましょう
-                        </h3>
-                        <p className="text-[var(--color-text-secondary)] mb-6 text-sm md:text-base">
-                            積立額と期間を設定して、将来の資産額をシミュレーション
-                        </p>
-                        <Link href="/simulator" className="btn-primary inline-block">
-                            シミュレーションを始める →
-                        </Link>
+                <section className="mb-14 md:mb-24 bg-[var(--color-royal-blue)] rounded-[10px] p-7 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div>
+                        <h2 className="text-white text-[1.375rem] md:text-[1.625rem]">シミュレーションで試してみましょう</h2>
+                        <p className="text-white/80 text-[0.9375rem] mt-1">積立額と期間を設定して、将来の資産額をシミュレーション</p>
                     </div>
-                </motion.section>
-
-                {/* Featured Articles - 注目記事 */}
-                <motion.section
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-12 md:mb-24"
-                >
-                    <div className="text-center mb-8 md:mb-12">
-                        <h2 className="editorial-caption mb-2 md:mb-4 text-xs md:text-sm">FEATURED ARTICLES</h2>
-                        <h3 className="font-serif text-2xl md:text-3xl font-semibold">注目記事</h3>
-                        <p className="text-[var(--color-text-secondary)] text-sm mt-2">こどもNISAに関連する最新情報</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Article 1 - 財務省 */}
-                        <a
-                            href="https://www.mof.go.jp/tax_policy/tax_reform/outline/index.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="card-base p-6 group hover:shadow-lg transition-all"
-                        >
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                    財務省
-                                </span>
-                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
-                            </div>
-                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
-                                令和8年度税制改正
-                            </h4>
-                            <p className="text-sm text-[var(--color-text-secondary)]">
-                                こどもNISA創設を含む税制改正の全容。正式な制度設計の根拠資料（2026年3月31日改正法成立）。
-                            </p>
-                        </a>
-
-                        {/* Article 2 - 金融庁 */}
-                        <a
-                            href="https://www.fsa.go.jp/policy/nisa2/about/index.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="card-base p-6 group hover:shadow-lg transition-all"
-                        >
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                    金融庁
-                                </span>
-                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
-                            </div>
-                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
-                                NISA特設サイト
-                            </h4>
-                            <p className="text-sm text-[var(--color-text-secondary)]">
-                                新しいNISA制度の公式情報ページ。こどもNISA情報も順次更新予定。
-                            </p>
-                        </a>
-
-                        {/* Article 3 - 金融庁つみたてNISA */}
-                        <a
-                            href="https://www.fsa.go.jp/policy/nisa2/know/index.html"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="card-base p-6 group hover:shadow-lg transition-all"
-                        >
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    金融庁
-                                </span>
-                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
-                            </div>
-                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
-                                つみたてNISA対象商品について
-                            </h4>
-                            <p className="text-sm text-[var(--color-text-secondary)]">
-                                こどもNISAでも投資可能なつみたて投資枠対象商品の解説。
-                            </p>
-                        </a>
-
-                        {/* Article 4 - J-FLEC */}
-                        <a
-                            href="https://www.j-flec.go.jp/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="card-base p-6 group hover:shadow-lg transition-all"
-                        >
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                    J-FLEC
-                                </span>
-                                <span className="text-xs text-[var(--color-text-muted)]">↗外部リンク</span>
-                            </div>
-                            <h4 className="font-semibold text-lg mb-2 group-hover:text-[var(--color-royal-blue)] transition-colors">
-                                金融経済教育推進機構
-                            </h4>
-                            <p className="text-sm text-[var(--color-text-secondary)]">
-                                子どもから大人まで、金融リテラシーを高めるための情報。
-                            </p>
-                        </a>
-                    </div>
-                </motion.section>
-
-                {/* Sources Reference */}
-                <div className="mb-12 md:mb-24">
-                    <SourcesReference categories={['policy', 'legislation', 'guideline']} />
-                </div>
+                    <Link href="/simulator" className="btn-inverse flex-shrink-0">
+                        シミュレーションを始める
+                        <ArrowIcon />
+                    </Link>
+                </section>
 
                 {/* Investment Case */}
-                <div className="mb-12 md:mb-24">
+                <div className="mb-14 md:mb-24">
                     <InvestmentCase />
                 </div>
 
-                {/* Affiliate Banner */}
-                <div className="mb-12 md:mb-24">
-                    <AffiliateBanner />
+                {/* Featured Links */}
+                <section className="mb-14 md:mb-24">
+                    <h2 className={sectionTitle}>注目記事</h2>
+                    <p className="note mt-1 mb-5">こどもNISAに関連する最新情報（外部サイト）</p>
+                    <div className="grid md:grid-cols-2 md:gap-x-10 border-t border-[var(--color-line-strong)]">
+                        {featuredLinks.map((link) => (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group block py-4 border-b border-[var(--color-line)]"
+                            >
+                                <span className="note flex items-center gap-1.5">
+                                    {link.publisher}
+                                    <ExternalIcon size={12} />
+                                </span>
+                                <span className="block heading-card font-serif mt-1 group-hover:text-[var(--color-royal-blue-light)] group-hover:underline underline-offset-4 decoration-1">
+                                    {link.title}
+                                </span>
+                                <span className="block mt-1 text-[0.875rem] leading-relaxed text-[var(--color-text-secondary)]">{link.description}</span>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Sources Reference */}
+                <div className="mb-14 md:mb-24">
+                    <SourcesReference categories={['policy', 'legislation', 'guideline']} />
                 </div>
+
+                {/* Affiliate Banner */}
+                <AffiliateBanner />
             </div>
         </div>
     );

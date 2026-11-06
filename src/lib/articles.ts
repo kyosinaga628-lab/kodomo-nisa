@@ -33,6 +33,7 @@ export const articles: Article[] = [
         id: 108,
         slug: "kodomo-nisa-2026-november-update",
         date: "2026.11.02",
+        dateModified: "2026.11.06",
         category: "口座開設",
         title: "【2026年11月最新】こどもNISAの事前受付開始から1カ月 — 各社キャンペーン比較と、年内・1月までにやること",
         excerpt: "10月1日に主要証券各社でこどもNISAの事前受付が始まりました。各社のキャンペーンと手続きの違い、10月30日の日銀会合（政策金利1.25%据え置き）、11月2日から普通預金0.5%となったメガバンク金利、12月の税制改正大綱と2027年1月の口座開設までのスケジュールを整理します。",
@@ -80,7 +81,7 @@ export const articles: Article[] = [
                 </tbody>
             </table>
         </div>
-        <p class="mb-4">預金金利は上がりましたが、月3万円を18年間積み立てた場合、普通預金（年0.5%）で<strong>約678万円</strong>、全世界株式（年5%想定）で<strong>約1,047万円</strong>と、長期では差が大きく開きます（元本648万円、税引前。投資は元本割れのリスクがあります）。数年以内に使う教育費は預金、10年以上先の大学費用はこどもNISAで、という使い分けは変わりません。詳しくは<a href="/policy-curation/boj-rate-hike-2026-september-kodomo-nisa" class="text-blue-600 hover:underline">預金と積立の使い分けの記事</a>と<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>をご覧ください。</p>
+        <p class="mb-4">預金金利は上がりましたが、月3万円を18年間積み立てた場合、普通預金（年0.5%）で<strong>約630万円</strong>、全世界株式（年5%想定）で<strong>約1,002万円</strong>と、長期では差が大きく開きます（元本は非課税保有限度額の600万円で、17年目に到達した後は運用のみ。税引前。投資は元本割れのリスクがあります）。数年以内に使う教育費は預金、10年以上先の大学費用はこどもNISAで、という使い分けは変わりません。詳しくは<a href="/policy-curation/boj-rate-hike-2026-september-kodomo-nisa" class="text-blue-600 hover:underline">預金と積立の使い分けの記事</a>と<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>をご覧ください。</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">4. 2027年1月までのスケジュール</h2>
         <ol class="list-decimal list-inside space-y-2 mb-6">
@@ -140,6 +141,7 @@ export const articles: Article[] = [
         id: 107,
         slug: "boj-rate-hike-2026-september-kodomo-nisa",
         date: "2026.09.20",
+        dateModified: "2026.11.06",
         category: "経済分析",
         title: "日銀1.25%利上げとメガバンク預金0.5% — こどもNISA準備中の家庭は「預金と積立」をどう分ける？",
         excerpt: "2026年9月18日、日本銀行は政策金利を1.0%から1.25%へ引き上げました。メガバンク3行は11月2日から普通預金金利を0.5%へ。上がった預金金利と、月3万円を18年積み立てた場合の預金・投資の差、10月1日に受付が始まるこどもNISAに向けた家計の考え方を整理します。",
@@ -191,14 +193,14 @@ export const articles: Article[] = [
         <div class="grid grid-cols-2 gap-4 my-6">
             <div class="bg-blue-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-blue-600 mb-1">普通預金（年0.5%）</p>
-                <p class="text-2xl font-bold text-blue-800">約678万円</p>
+                <p class="text-2xl font-bold text-blue-800">約630万円</p>
             </div>
             <div class="bg-emerald-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-emerald-600 mb-1">全世界株式（年5%想定）</p>
-                <p class="text-2xl font-bold text-emerald-800">約1,047万円</p>
+                <p class="text-2xl font-bold text-emerald-800">約1,002万円</p>
             </div>
         </div>
-        <p class="text-sm text-gray-500 text-center mt-2">※元本648万円。預金利息には約20%の税金がかかりますが上記は税引前。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
+        <p class="text-sm text-gray-500 text-center mt-2">※元本600万円（月3万円だと17年目に非課税保有限度額へ到達し、以降は積立せず運用のみ）。預金利息には約20%の税金がかかりますが上記は税引前。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
         <p class="mb-4">預金金利が0.4%から0.5%に上がっても18年後の差は約6万円で、運用益の差（約370万円）とは桁が違います。金利上昇で変わるのは「投資をやめるかどうか」ではなく、<strong>「使う時期が近いお金をどこに置くか」</strong>です。</p>
 
         <div class="bg-emerald-50 p-5 rounded-lg my-6 border-l-4 border-emerald-500">
@@ -231,7 +233,7 @@ export const articles: Article[] = [
         featured: false,
         importance: 4,
         tags: ["速報", "リスク管理", "初心者向け"],
-        tldr: "2026年9月18日、日銀は政策金利を1.0%から1.25%へ引き上げ（31年ぶりの水準、反対2名）。メガバンク3行は11月2日から普通預金0.5%、ゆうちょは11月9日、ネット銀行は最大0.8〜1.2%の優遇金利。月3万円×18年では預金0.5%で約678万円、年5%運用で約1,047万円と差は大きいまま。5年以内に使う教育費は預金、10年以上先はこどもNISAで積立、という使い分けが基本。",
+        tldr: "2026年9月18日、日銀は政策金利を1.0%から1.25%へ引き上げ（31年ぶりの水準、反対2名）。メガバンク3行は11月2日から普通預金0.5%、ゆうちょは11月9日、ネット銀行は最大0.8〜1.2%の優遇金利。月3万円×18年では預金0.5%で約630万円、年5%運用で約1,002万円と差は大きいまま。5年以内に使う教育費は預金、10年以上先はこどもNISAで積立、という使い分けが基本。",
         keyTakeaways: [
             "政策金利は1.25%へ。メガバンク普通預金は11月2日から0.5%（現在0.4%）",
             "預金金利が0.1%上がっても18年後の差は約6万円。長期の積立は引き続き投資が有利",
@@ -250,7 +252,7 @@ export const articles: Article[] = [
         id: 106,
         slug: "kodomo-nisa-2026-september-update",
         date: "2026.09.18",
-        dateModified: "2026.11.02",
+        dateModified: "2026.11.06",
         category: "口座開設",
         title: "【2026年9月最新】こどもNISAの口座開設受付が10月1日スタート — 主要ネット証券6社の手続きと今やるべき準備",
         excerpt: "SBI証券・楽天証券・マネックス証券・松井証券・三菱UFJ eスマート証券・PayPay証券が2026年10月1日からこどもNISA口座の（事前）受付を開始します。各社の発表内容、必要書類、税務署審査を経て2027年1月に口座が開設されるまでの流れと、金利1.0%時代の預金・投資の考え方を整理します。",
@@ -311,14 +313,14 @@ export const articles: Article[] = [
         <div class="grid grid-cols-2 gap-4 my-6">
             <div class="bg-blue-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-blue-600 mb-1">普通預金（年0.5%、11月2日〜）</p>
-                <p class="text-2xl font-bold text-blue-800">約678万円</p>
+                <p class="text-2xl font-bold text-blue-800">約630万円</p>
             </div>
             <div class="bg-emerald-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-emerald-600 mb-1">全世界株式（年5%想定）</p>
-                <p class="text-2xl font-bold text-emerald-800">約1,047万円</p>
+                <p class="text-2xl font-bold text-emerald-800">約1,002万円</p>
             </div>
         </div>
-        <p class="text-sm text-gray-500 text-center mt-2">※元本648万円。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
+        <p class="text-sm text-gray-500 text-center mt-2">※元本600万円（月3万円だと17年目に非課税保有限度額へ到達し、以降は積立せず運用のみ）。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
         <p class="mb-4">数年以内に使う教育費は預金に、18歳まで使わない分はこどもNISAで積み立てる、という使い分けが基本です。<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>では最新の金利前提（普通預金0.5%）で預金と投資の差を確認できます。受付開始後の各社キャンペーンと年内の準備は<a href="/policy-curation/kodomo-nisa-2026-november-update" class="text-blue-600 hover:underline">11月最新まとめ</a>をご覧ください。</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">5. 金融庁の令和9年度税制改正要望 — こどもNISAの枠組みに変更なし</h2>
@@ -375,7 +377,7 @@ export const articles: Article[] = [
         id: 105,
         slug: "kodomo-nisa-2026-july-update",
         date: "2026.07.07",
-        dateModified: "2026.09.18",
+        dateModified: "2026.11.06",
         category: "制度解説",
         title: "【2026年7月最新】こどもNISAは2027年1月開始が確定 — 成立した制度内容と今からの準備",
         excerpt: "2026年3月31日に令和8年度税制改正法が成立し、こどもNISAの2027年1月開始が法律上確定しました。確定した制度スペック、払出しルール、口座開設までのスケジュールを整理します。",
@@ -445,14 +447,14 @@ export const articles: Article[] = [
         <div class="grid grid-cols-2 gap-4 my-6">
             <div class="bg-blue-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-blue-600 mb-1">普通預金（年0.4%）</p>
-                <p class="text-2xl font-bold text-blue-800">約672万円</p>
+                <p class="text-2xl font-bold text-blue-800">約624万円</p>
             </div>
             <div class="bg-emerald-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-emerald-600 mb-1">全世界株式（年5%想定）</p>
-                <p class="text-2xl font-bold text-emerald-800">約1,047万円</p>
+                <p class="text-2xl font-bold text-emerald-800">約1,002万円</p>
             </div>
         </div>
-        <p class="text-sm text-gray-500 text-center mt-2">※元本648万円。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
+        <p class="text-sm text-gray-500 text-center mt-2">※元本600万円（月3万円だと17年目に非課税保有限度額へ到達し、以降は積立せず運用のみ）。投資は元本割れのリスクがあり、将来のリターンを保証するものではありません。</p>
         <p class="mb-4">一方で、金利上昇により「当面使う予定のあるお金は預金に置く」合理性も高まっています。教育資金の時期と金額を整理した上で、<a href="/simulator" class="text-blue-600 hover:underline">シミュレーター</a>で預金と投資の比較を確認してみてください。</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">5. 2026年後半にやっておくべきこと</h2>
@@ -500,7 +502,7 @@ export const articles: Article[] = [
         id: 100,
         slug: "kodomo-nisa-overview",
         date: "2025.12.01",
-        dateModified: "2026.09.18",
+        dateModified: "2026.11.06",
         category: "制度解説",
         title: "こどもNISAとは？2027年1月スタートの新制度を徹底解説",
         excerpt: "子どもの資産形成を支援する新NISA制度「こどもNISA」の概要と活用ポイントを詳しく解説します。",
@@ -556,7 +558,7 @@ export const articles: Article[] = [
         </div>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">シミュレーション例</h2>
-        <p class="mb-4">月5万円を10年間（非課税枠上限600万円）、その後も年利5%で運用した場合の試算：</p>
+        <p class="mb-4">0歳から月5万円を10年間（非課税枠上限600万円）、その後も年利5%で18歳まで運用した場合の試算：</p>
         
         <div class="grid grid-cols-2 gap-4 my-6">
             <div class="bg-blue-50 p-4 rounded-lg text-center">
@@ -565,10 +567,10 @@ export const articles: Article[] = [
             </div>
             <div class="bg-emerald-50 p-4 rounded-lg text-center">
                 <p class="text-sm text-emerald-600 mb-1">18歳時の予想資産</p>
-                <p class="text-2xl font-bold text-emerald-800">約940万円</p>
+                <p class="text-2xl font-bold text-emerald-800">約1,162万円</p>
             </div>
         </div>
-        <p class="text-center font-bold text-lg">運用益：約340万円（非課税）</p>
+        <p class="text-center font-bold text-lg">運用益：約562万円（非課税）</p>
         <p class="text-sm text-gray-500 text-center mt-2">※あくまでシミュレーションであり、将来のリターンを保証するものではありません。</p>
 
         <h2 class="text-2xl font-bold mt-8 mb-4 text-[var(--color-royal-blue)]">今から準備できること</h2>

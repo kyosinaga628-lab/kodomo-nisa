@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { KODOMO_NISA_FAQ } from "@/lib/ai-optimization";
+import { SectionHeading } from "@/components/common/ui";
 
 export default function FAQSection() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -12,98 +12,69 @@ export default function FAQSection() {
     };
 
     return (
-        <section className="py-16 md:py-24 bg-[var(--color-bg)]">
-            <div className="container-width px-4">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-8 md:mb-12"
-                >
-                    <p className="text-[var(--color-emerald)] font-semibold tracking-wide mb-2 md:mb-4 text-sm md:text-base">
-                        FREQUENTLY ASKED QUESTIONS
-                    </p>
-                    <h2 className="heading-section text-2xl md:text-4xl mb-4">
-                        よくある質問
-                    </h2>
-                    <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-sm md:text-base">
-                        こどもNISAに関するよくある質問をまとめました。
-                    </p>
-                </motion.div>
+        <section className="section section-rule bg-[var(--color-bg)]">
+            <div className="container-width split">
+                <SectionHeading
+                    className="split-sticky"
+                    kicker="Q&A"
+                    title="よくある質問"
+                    lead="こどもNISAに関するよくある質問をまとめました。"
+                />
 
-                {/* FAQ List */}
-                <div className="max-w-3xl mx-auto space-y-3 md:space-y-4">
-                    {KODOMO_NISA_FAQ.map((faq, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.05 }}
-                            className="card-base overflow-hidden"
-                        >
-                            {/* Question */}
-                            <button
-                                onClick={() => toggleQuestion(index)}
-                                className="w-full flex items-center justify-between p-4 md:p-6 text-left hover:bg-[var(--color-bg-secondary)] transition-colors"
-                            >
-                                <h3 className="font-semibold text-[var(--color-text-primary)] text-sm md:text-base pr-4">
-                                    {faq.question}
-                                </h3>
-                                <motion.div
-                                    animate={{ rotate: openIndex === index ? 180 : 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="flex-shrink-0"
-                                >
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-royal-blue)" strokeWidth="2">
-                                        <path d="M6 9l6 6 6-6" />
-                                    </svg>
-                                </motion.div>
-                            </button>
-
-                            {/* Answer */}
-                            <AnimatePresence>
-                                {openIndex === index && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
+                <div className="ledger">
+                    {KODOMO_NISA_FAQ.map((faq, index) => {
+                        const isOpen = openIndex === index;
+                        return (
+                            <div key={faq.question}>
+                                <h3 className="font-sans">
+                                    <button
+                                        onClick={() => toggleQuestion(index)}
+                                        aria-expanded={isOpen}
+                                        aria-controls={`faq-answer-${index}`}
+                                        className="w-full flex items-start justify-between gap-5 py-4 md:py-5 text-left font-semibold text-[1rem] leading-relaxed hover:text-[var(--color-royal-blue)] transition-colors"
                                     >
-                                        <div className="px-4 md:px-6 pb-4 md:pb-6">
-                                            <div className="pt-2 border-t border-[var(--glass-border)]">
-                                                <p className="text-[var(--color-text-secondary)] text-sm md:text-base leading-relaxed mt-4">
-                                                    {faq.answer}
-                                                </p>
+                                        {faq.question}
+                                        <svg
+                                            width="18"
+                                            height="18"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="1.75"
+                                            aria-hidden="true"
+                                            className="flex-shrink-0 mt-1 text-[var(--color-text-muted)]"
+                                        >
+                                            <path d="M5 12h14" />
+                                            <path d="M12 5v14" className={`origin-center transition-transform duration-200 ${isOpen ? "scale-y-0" : ""}`} />
+                                        </svg>
+                                    </button>
+                                </h3>
 
-                                                {/* Technical Terms */}
-                                                {faq.technicalTerms && faq.technicalTerms.length > 0 && (
-                                                    <div className="mt-4 p-3 bg-[var(--color-bg-secondary)] rounded-lg">
-                                                        <p className="text-xs font-semibold text-[var(--color-text-muted)] mb-2">用語解説</p>
-                                                        <div className="space-y-1">
-                                                            {faq.technicalTerms.map((term, i) => (
-                                                                <p key={i} className="text-xs text-[var(--color-text-secondary)]">
-                                                                    <span className="font-medium text-[var(--color-royal-blue)]">{term.term}</span>: {term.explanation}
-                                                                </p>
-                                                            ))}
+                                <div id={`faq-answer-${index}`} className="collapsible" data-open={isOpen}>
+                                    <div>
+                                        <div className="pb-6 pr-8">
+                                            <p className="text-[var(--color-text-secondary)] text-[0.9375rem]">{faq.answer}</p>
+
+                                            {faq.technicalTerms && faq.technicalTerms.length > 0 && (
+                                                <dl className="mt-4 panel-tint p-4">
+                                                    {faq.technicalTerms.map((term) => (
+                                                        <div key={term.term} className="text-xs leading-relaxed text-[var(--color-text-secondary)] [&+&]:mt-1.5">
+                                                            <dt className="inline font-semibold text-[var(--color-text-primary)]">{term.term}：</dt>
+                                                            <dd className="inline">{term.explanation}</dd>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    ))}
+                                                </dl>
+                                            )}
 
-                                                {/* Sources */}
-                                                {faq.sources && faq.sources.length > 0 && (
-                                                    <p className="mt-3 text-xs text-[var(--color-text-muted)]">
-                                                        出典: {faq.sources.join("、")}
-                                                    </p>
-                                                )}
-                                            </div>
+                                            {faq.sources && faq.sources.length > 0 && (
+                                                <p className="note mt-3">出典: {faq.sources.join("、")}</p>
+                                            )}
                                         </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    ))}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

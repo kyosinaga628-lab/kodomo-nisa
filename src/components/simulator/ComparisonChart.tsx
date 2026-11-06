@@ -1,15 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
-    AreaChart,
-    Area,
+    LineChart,
+    Line,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
-    Legend,
 } from "recharts";
 import { ComparisonData, formatCurrency } from "@/lib/calculator";
 
@@ -17,127 +15,105 @@ interface ComparisonChartProps {
     data: ComparisonData[];
 }
 
-const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-        return (
-            <div className="bg-white p-4 rounded-lg shadow-lg border border-[var(--glass-border)]">
-                <p className="font-semibold mb-2">
-                    {payload[0].payload.year}年後
-                </p>
-                {payload.reverse().map((entry: any, index: number) => (
-                    <p key={index} className="text-sm" style={{ color: entry.color }}>
-                        {entry.name}: {formatCurrency(entry.value)}
-                    </p>
+// 表示順はグラフ上の高い順。色はシリーズに固定（検証済みの組み合わせ）
+const SERIES = [
+    {
+        key: "nisaGlobal" as const,
+        name: "NISA（全世界株）",
+        color: "#00795B",
+        note: "年利5%想定（長期平均リターン）",
+    },
+    {
+        key: "highYieldBank" as const,
+        name: "ネット銀行（好金利）",
+        color: "#B5791C",
+        note: "年利0.7%想定（一部ネット銀行の優遇金利、2026年11月時点。預入上限・条件がある場合あり）",
+    },
+    {
+        key: "bankDeposit" as const,
+        name: "銀行預金",
+        color: "#5C8AC8",
+        note: "年利0.5%（メガバンク普通預金、2026年11月2日改定）",
+    },
+];
+
+function CustomTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload: ComparisonData }> }) {
+    if (!active || !payload || payload.length === 0) return null;
+    const row = payload[0].payload;
+    return (
+        <div className="bg-[var(--color-surface)] px-3.5 py-3 rounded-md shadow-[var(--shadow-lg)] border border-[var(--color-line)] text-xs">
+            <p className="font-semibold text-[0.875rem] mb-1.5">{row.year}年後</p>
+            <dl className="space-y-0.5 tnum">
+                {SERIES.map((series) => (
+                    <div key={series.key} className="flex items-center justify-between gap-5">
+                        <dt className="flex items-center gap-1.5">
+                            <span className="w-2 h-0.5" style={{ background: series.color }} aria-hidden="true" />
+                            {series.name}
+                        </dt>
+                        <dd className="font-semibold">{formatCurrency(row[series.key])}</dd>
+                    </div>
                 ))}
-            </div>
-        );
-    }
-    return null;
-};
+            </dl>
+        </div>
+    );
+}
 
 export default function ComparisonChart({ data }: ComparisonChartProps) {
+    const last = data[data.length - 1];
+
     return (
         <div className="w-full">
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-            >
-                <ResponsiveContainer width="100%" height={280} className="md:!h-[400px]">
-                    <AreaChart
-                        data={data}
-                        margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
-                    >
-                        <defs>
-                            <linearGradient id="colorBank" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#9CA3AF" stopOpacity={0.3} />
-                                <stop offset="95%" stopColor="#9CA3AF" stopOpacity={0} />
-                            </linearGradient>
-                            <linearGradient id="colorGlobal" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#1E3A8A" stopOpacity={0.3} />
-                                <stop offset="95%" stopColor="#1E3A8A" stopOpacity={0} />
-                            </linearGradient>
-                            <linearGradient id="colorHighYield" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#D97706" stopOpacity={0.4} />
-                                <stop offset="95%" stopColor="#D97706" stopOpacity={0} />
-                            </linearGradient>
-                        </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <div className="h-[260px] md:h-[340px]">
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={data} margin={{ top: 10, right: 8, left: 0, bottom: 0 }}>
+                        <CartesianGrid vertical={false} stroke="#ECE9E1" />
                         <XAxis
                             dataKey="year"
-                            stroke="#6B7280"
-                            tick={{ fontSize: 12 }}
+                            tick={{ fontSize: 12, fill: "#667080" }}
+                            axisLine={{ stroke: "#C9C4B6" }}
                             tickLine={false}
-                            label={{ value: "年数", position: "insideBottom", offset: -5, style: { fontSize: 12 } }}
+                            tickFormatter={(year) => `${year}年`}
+                            interval="preserveStartEnd"
+                            minTickGap={24}
                         />
                         <YAxis
-                            stroke="#6B7280"
-                            tick={{ fontSize: 12 }}
+                            tick={{ fontSize: 12, fill: "#667080" }}
+                            axisLine={false}
                             tickLine={false}
+                            width={64}
                             tickFormatter={(value) => formatCurrency(value)}
                         />
-                        <Tooltip content={<CustomTooltip />} />
-                        <Legend
-                            wrapperStyle={{ paddingTop: "20px" }}
-                            iconType="line"
-                        />
-                        <Area
-                            type="monotone"
-                            dataKey="bankDeposit"
-                            name="銀行預金"
-                            stroke="#9CA3AF"
-                            strokeWidth={2}
-                            fill="url(#colorBank)"
-                        />
-                        <Area
-                            type="monotone"
-                            dataKey="nisaGlobal"
-                            name="NISA（全世界株）"
-                            stroke="#1E3A8A"
-                            strokeWidth={2}
-                            fill="url(#colorGlobal)"
-                        />
-                        <Area
-                            type="monotone"
-                            dataKey="highYieldBank"
-                            name="ネット銀行（好金利）"
-                            stroke="#D97706"
-                            strokeWidth={3}
-                            fill="url(#colorHighYield)"
-                        />
-                    </AreaChart>
+                        <Tooltip content={<CustomTooltip />} cursor={{ stroke: "#17202C", strokeOpacity: 0.3 }} />
+                        {SERIES.map((series) => (
+                            <Line
+                                key={series.key}
+                                type="monotone"
+                                dataKey={series.key}
+                                name={series.name}
+                                stroke={series.color}
+                                strokeWidth={2}
+                                dot={false}
+                                activeDot={{ r: 4, strokeWidth: 2, stroke: "#FFFFFF" }}
+                                isAnimationActive={false}
+                            />
+                        ))}
+                    </LineChart>
                 </ResponsiveContainer>
-            </motion.div>
+            </div>
 
-            {/* Comparison Legend */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"
-            >
-                <div className="p-4 rounded-xl bg-gray-50 border border-gray-200">
-                    <div className="flex items-center gap-2 mb-2">
-                        <div className="w-3 h-3 rounded-full bg-gray-400" />
-                        <span className="font-semibold text-sm">銀行預金</span>
+            {/* 凡例兼、最終年の値 */}
+            <dl className="mt-5 grid md:grid-cols-3 gap-x-8 gap-y-4 border-t border-[var(--color-line)] pt-4">
+                {SERIES.map((series) => (
+                    <div key={series.key}>
+                        <dt className="flex items-center gap-2 text-[0.875rem] font-semibold">
+                            <span className="w-3 h-0.5 flex-shrink-0" style={{ background: series.color }} aria-hidden="true" />
+                            {series.name}
+                        </dt>
+                        {last && <dd className="figure text-[1.375rem] mt-1">{formatCurrency(last[series.key])}</dd>}
+                        <dd className="note mt-1">{series.note}</dd>
                     </div>
-                    <p className="text-xs text-gray-600">年利0.5%（メガバンク普通預金、2026年11月2日改定）</p>
-                </div>
-                <div className="p-4 rounded-xl bg-blue-50 border border-blue-200">
-                    <div className="flex items-center gap-2 mb-2">
-                        <div className="w-3 h-3 rounded-full bg-[var(--color-royal-blue)]" />
-                        <span className="font-semibold text-sm">NISA（全世界株）</span>
-                    </div>
-                    <p className="text-xs text-[var(--color-royal-blue)]">年利5%想定（長期平均リターン）</p>
-                </div>
-                <div className="p-4 rounded-xl bg-amber-50 border border-amber-200">
-                    <div className="flex items-center gap-2 mb-2">
-                        <div className="w-3 h-3 rounded-full bg-amber-600" />
-                        <span className="font-semibold text-sm">ネット銀行（好金利）</span>
-                    </div>
-                    <p className="text-xs text-amber-700">年利0.7%想定（一部ネット銀行の優遇金利、2026年11月時点。預入上限・条件がある場合あり）</p>
-                </div>
-            </motion.div>
+                ))}
+            </dl>
         </div>
     );
 }

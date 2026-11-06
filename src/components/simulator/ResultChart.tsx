@@ -9,7 +9,6 @@ import {
     CartesianGrid,
     Tooltip,
     ResponsiveContainer,
-    Legend,
     ReferenceLine,
 } from "recharts";
 import { YearlyData, formatCurrency } from "@/lib/calculator";
@@ -18,113 +17,75 @@ interface Props {
     data: YearlyData[];
 }
 
+const COLORS = {
+    principal: "#5C8AC8",
+    value: "#00795B",
+    grid: "#ECE9E1",
+    axis: "#667080",
+};
+
+type ChartDatum = YearlyData & { name: string };
+
+function CustomTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload: ChartDatum }> }) {
+    if (!active || !payload || payload.length === 0) return null;
+    const data = payload[0].payload;
+    return (
+        <div className="bg-[var(--color-surface)] px-3.5 py-3 rounded-md shadow-[var(--shadow-lg)] border border-[var(--color-line)] text-xs max-w-[220px]">
+            <p className="font-semibold text-[0.875rem] mb-1.5">{data.name}時点</p>
+            <dl className="space-y-0.5 tnum">
+                <div className="flex justify-between gap-5"><dt>評価額</dt><dd className="font-semibold">{formatCurrency(data.value)}</dd></div>
+                <div className="flex justify-between gap-5"><dt>投資元本</dt><dd>{formatCurrency(data.invested)}</dd></div>
+                <div className="flex justify-between gap-5"><dt>運用益</dt><dd>{formatCurrency(data.gain)}</dd></div>
+            </dl>
+            <p className="mt-2 pt-2 border-t border-[var(--color-line)] text-[var(--color-text-muted)]">{data.withdrawReason}</p>
+        </div>
+    );
+}
+
 export default function ResultChart({ data }: Props) {
-    const chartData = useMemo(() => {
-        return data.map((item) => ({
-            ...item,
-            name: `${item.age}歳`,
-        }));
-    }, [data]);
-
-    // 18歳の位置を見つける（成人NISA移行ライン）
-    const adultTransitionIndex = chartData.findIndex(d => d.age === 18);
-
-    const CustomTooltip = ({ active, payload }: {
-        active?: boolean;
-        payload?: Array<{ value: number; dataKey: string; color: string; payload: YearlyData & { name: string } }>;
-    }) => {
-        if (active && payload && payload.length) {
-            const data = payload[0].payload;
-            return (
-                <div className="bg-white p-3 md:p-4 rounded-xl shadow-lg border border-[var(--glass-border)] max-w-[200px]">
-                    <p className="font-semibold text-[var(--color-text-primary)] mb-2 text-sm">{data.name}</p>
-                    <div className="space-y-1">
-                        <p className="text-xs text-gray-500">
-                            投資元本: {formatCurrency(data.invested)}
-                        </p>
-                        <p className="text-xs text-[var(--color-royal-blue)]">
-                            評価額: {formatCurrency(data.value)}
-                        </p>
-                        <p className="text-xs text-[var(--color-emerald)] font-medium">
-                            運用益: {formatCurrency(data.gain)}
-                        </p>
-                    </div>
-                    {data.canWithdraw && (
-                        <p className="text-xs text-[var(--color-text-muted)] mt-2 pt-2 border-t border-gray-100">
-                            {data.withdrawReason}
-                        </p>
-                    )}
-                </div>
-            );
-        }
-        return null;
-    };
+    // 各行は「その年の終わり」の値なので、到達する年齢をラベルにする
+    const chartData = useMemo<ChartDatum[]>(
+        () => data.map((item) => ({ ...item, name: `${item.age + 1}歳` })),
+        [data]
+    );
 
     return (
-        <div className="w-full h-64 md:h-80">
-            <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                    data={chartData}
-                    margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
-                >
-                    <defs>
-                        <linearGradient id="colorInvested" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#6B7280" stopOpacity={0.3} />
-                            <stop offset="95%" stopColor="#6B7280" stopOpacity={0} />
-                        </linearGradient>
-                        <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#1E3A8A" stopOpacity={0.4} />
-                            <stop offset="95%" stopColor="#1E3A8A" stopOpacity={0.05} />
-                        </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                    <XAxis
-                        dataKey="name"
-                        tick={{ fontSize: 10, fill: "#6B7280" }}
-                        axisLine={{ stroke: "#E5E7EB" }}
-                        tickLine={{ stroke: "#E5E7EB" }}
-                        interval="preserveStartEnd"
-                    />
-                    <YAxis
-                        tickFormatter={(value) => formatCurrency(value)}
-                        tick={{ fontSize: 10, fill: "#6B7280" }}
-                        axisLine={{ stroke: "#E5E7EB" }}
-                        tickLine={{ stroke: "#E5E7EB" }}
-                        width={60}
-                    />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend
-                        formatter={(value) => (value === "invested" ? "投資元本" : "評価額")}
-                        wrapperStyle={{ fontSize: 12 }}
-                    />
-                    {adultTransitionIndex >= 0 && (
+        <div>
+            <div className="flex flex-wrap gap-x-5 gap-y-1 mb-3 note">
+                <span className="flex items-center gap-2"><span className="w-2.5 h-2.5" style={{ background: COLORS.value }} aria-hidden="true" />評価額</span>
+                <span className="flex items-center gap-2"><span className="w-2.5 h-2.5" style={{ background: COLORS.principal }} aria-hidden="true" />投資元本</span>
+            </div>
+            <div className="w-full h-64 md:h-80">
+                <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={chartData} margin={{ top: 22, right: 8, left: 0, bottom: 0 }}>
+                        <CartesianGrid vertical={false} stroke={COLORS.grid} />
+                        <XAxis
+                            dataKey="name"
+                            tick={{ fontSize: 12, fill: COLORS.axis }}
+                            axisLine={{ stroke: "#C9C4B6" }}
+                            tickLine={false}
+                            interval="preserveStartEnd"
+                            minTickGap={24}
+                        />
+                        <YAxis
+                            tickFormatter={(value) => formatCurrency(value)}
+                            tick={{ fontSize: 12, fill: COLORS.axis }}
+                            axisLine={false}
+                            tickLine={false}
+                            width={64}
+                        />
+                        <Tooltip content={<CustomTooltip />} cursor={{ stroke: "#17202C", strokeOpacity: 0.3 }} />
                         <ReferenceLine
                             x="18歳"
-                            stroke="#059669"
-                            strokeDasharray="5 5"
-                            label={{ value: "成人NISA移行", position: "top", fontSize: 10, fill: "#059669" }}
+                            stroke="#465162"
+                            strokeDasharray="3 3"
+                            label={{ value: "18歳 成人NISAへ移行", position: "top", fontSize: 12, fill: "#465162" }}
                         />
-                    )}
-                    <Area
-                        type="monotone"
-                        dataKey="invested"
-                        stroke="#6B7280"
-                        strokeWidth={2}
-                        fillOpacity={1}
-                        fill="url(#colorInvested)"
-                        animationDuration={1000}
-                    />
-                    <Area
-                        type="monotone"
-                        dataKey="value"
-                        stroke="#1E3A8A"
-                        strokeWidth={2}
-                        fillOpacity={1}
-                        fill="url(#colorValue)"
-                        animationDuration={1200}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
+                        <Area type="monotone" dataKey="value" stroke={COLORS.value} strokeWidth={2} fill={COLORS.value} fillOpacity={0.14} isAnimationActive={false} />
+                        <Area type="monotone" dataKey="invested" stroke={COLORS.principal} strokeWidth={2} fill={COLORS.principal} fillOpacity={0.28} isAnimationActive={false} />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
         </div>
     );
 }
