@@ -15,6 +15,15 @@ export interface NewsItem {
 
 export const newsItems: NewsItem[] = [
     {
+        id: 39,
+        date: "2026.11.20",
+        category: "金融庁",
+        title: "金融経済教育イベント「ワニーサと学ぶ 未来のためのお金の教室 in広島」の開催について更新しました。",
+        excerpt: "金融経済教育イベント「ワニーサと学ぶ 未来のためのお金の教室 in広島」の開催について公表しました。詳しくは特設サイトをご覧ください。",
+        href: "https://www.fsa.go.jp/news/r8/sonota/20261020/20261020.html",
+        isExternal: true,
+    },
+    {
         id: 38,
         date: "2026.11.02",
         category: "解説記事",
